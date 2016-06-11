@@ -9,6 +9,7 @@
 
   AboutComponent.annotations = [
     new ng.core.Component({
+      selector: 'about',
       template: `
 <h1>About</h1>
       `

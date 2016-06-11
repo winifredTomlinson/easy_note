@@ -2,11 +2,23 @@
 
 </header>
 <aside id="left-panel">
-  <a [routerLink]="['/home']">Home</a>
-  <a [routerLink]="['/about']">About</a>
+  <div class="minifyme">
+    <div>
+      <i class="fa fa-angle-left" style="margin-top: 12px;"></i>
+    </div>
+  </div>
+  <div class="menu-search">
+    <input type="text" placeholder="Search menu...">
+    <i class="fa fa-search"></i>
+  </div>
+  <div class="menu-content">
+    <nk-menu></nk-menu>
+  </div>
 </aside>
 <div id="main" role="main">
   <div id="ribbon">
+    <i class="fa fa-refresh nk-refresh"></i>
+    <span>Home</span> <i class="fa fa-angle-right"></i> <span>Dashboard</span>
   </div>
   <div id="content">
     <router-outlet></router-outlet>

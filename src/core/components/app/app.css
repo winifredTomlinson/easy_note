@@ -1,13 +1,21 @@
-#header{
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+}
+
+#header {
   position: fixed;
   top: 0;
   width: 100%;
   height: 50px;
   z-index: 905;
-  background: lightcoral;
+  background: #2dc3e8;
 }
 
-#left-panel{
+#left-panel {
   position: fixed;
   top: 0;
   left: 0;
@@ -15,10 +23,11 @@
   width: 220px;
   height: 100%;
   z-index: 904;
-  background: forestgreen;
+  /*background: forestgreen;*/
+  border-right: 1px solid #E3E5E8;
 }
 
-#main{
+#main {
   position: relative;
   margin-left: 220px;
   margin-top: 50px;
@@ -26,18 +35,140 @@
   min-height: 320px;
 }
 
-#main #ribbon{
+#main #ribbon {
   position: fixed;
   top: 50px;
   left: 220px;
   right: 0;
   z-index: 901;
   padding: 0 10px;
-  min-height: 40px;
-  background: aquamarine;
+  height: 40px;
+  background-image: linear-gradient(to right, #eee, #f3f3f3);
+  border-bottom: 1px solid #E3E5E8;
+  line-height: 40px;
 }
 
-#main #content{
+#main #content {
   padding: 10px;
   padding-top: 50px;
+}
+
+.minifyme {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+}
+
+.minifyme >div {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  background: #E3E5E8;
+  height: 40px;
+  cursor: pointer;
+}
+
+.menu-search {
+  height: 40px;
+  width: 100%;
+  position: relative;
+  background: white;
+  border-bottom: 1px solid #E3E5E8;
+}
+
+.menu-search input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 30px 0 10px;
+}
+
+.menu-search i {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  cursor: pointer;
+  color: #2dc3e8;
+}
+
+.menu-content {
+  /*margin-right: 5px;*/
+}
+
+.menu-data, .menu-data ul {
+  margin: 0;
+  padding: 0;
+}
+
+.menu-data li {
+  list-style: none;
+}
+
+.menu-data li > a {
+  display: inline-block;
+  width: 100%;
+  min-height: 34px;
+  line-height: 34px;
+  text-decoration: none;
+}
+
+.menu-data li a {
+  padding-left: 15px;
+  color: black;
+  cursor: pointer;
+}
+
+.menu-data li.active > a {
+  background: #eee;
+}
+
+.menu-data li a:hover {
+  background: #E3E5E8;
+}
+
+.menu-data .level1 li a {
+  padding-left: 30px;
+}
+
+.menu-data .level2 li a {
+  padding-left: 45px;
+}
+
+.menu-data .level3 li a {
+  padding-left: 60px;
+}
+
+.nk-refresh {
+  cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+
+.nk-refresh:hover {
+  background: lightgray;
+}
+
+.menu-data .collapse ul {
+  display: none;
+}
+
+.menu-data b {
+  cursor: pointer;
+  border: 1px solid gray;
+}
+
+.menu-data b.fa-angle-right {
+  padding: 0 5px;
+}
+
+.menu-data b.fa-angle-down {
+  padding: 0 3px;
+}
+
+.menu-data a.router-link-active{
+  background: orange;
 }

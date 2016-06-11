@@ -9,9 +9,9 @@
 
   HomeComponent.annotations = [
     new ng.core.Component({
-      template: `
-<h1>Home</h1>
-      `
+      selector: 'home',
+      templateUrl: '/src/core/components/home/home.html',
+      directives: [app.AboutComponent]
     })
   ];
 

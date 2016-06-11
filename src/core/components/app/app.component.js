@@ -3,6 +3,7 @@
 
   let ROUTER_DIRECTIVES = ng.router.ROUTER_DIRECTIVES;
   let ROUTER_PROVIDERS = ng.router.ROUTER_PROVIDERS;
+  let MenuComponent = app.MenuComponent;
 
   class AppComponent {
     constructor() {
@@ -12,9 +13,9 @@
 
   AppComponent.annotations = [
     new ng.core.Component({
-      selector: 'newkit-app',
+      selector: 'nk-app',
       templateUrl: '/src/core/components/app/app.html',
-      directives: [ROUTER_DIRECTIVES],
+      directives: [ROUTER_DIRECTIVES, MenuComponent],
       providers: [ROUTER_PROVIDERS]
     }),
     new ng.router.Routes([{
