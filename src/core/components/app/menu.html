@@ -23,7 +23,7 @@
                 style="float:right;margin-top: 9px; margin-right: 10px;"></b>
             </a>
             <ul class="level3" *ngIf="m2.children && m2.children.length > 0">
-              <li *ngFor="let m3 of m2.children" [ngClass]="{'collapse': !m3.open}">
+              <li *ngFor="let m3 of m2.children" [ngClass]="{'collapse': !m3.open, 'active': m3.active}">
                 <a (click)="menuClick(m3)">
                   <i [ngClass]="m3.icon"></i>
                   <span>{{m3.name}}</span>

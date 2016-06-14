@@ -17,10 +17,11 @@
 </aside>
 <div id="main" role="main">
   <div id="ribbon">
-    <i class="fa fa-refresh nk-refresh"></i>
+    <i class="fa fa-refresh nk-refresh" (click)="test()"></i>
     <span>Home</span> <i class="fa fa-angle-right"></i> <span>Dashboard</span>
   </div>
   <div id="content">
     <router-outlet></router-outlet>
+    <child id="component-container"></child>
   </div>
 </div>

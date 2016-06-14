@@ -4,6 +4,7 @@
 
 body {
   font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+  font-size: 14px;
 }
 
 #header {
@@ -171,4 +172,8 @@ body {
 
 .menu-data a.router-link-active{
   background: orange;
+}
+
+.menu-data li.active a{
+  background: lightblue;
 }

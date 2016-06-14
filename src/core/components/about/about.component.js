@@ -4,6 +4,7 @@
   class AboutComponent {
     constructor() {
       console.log('home init');
+      this.aaaa = 'abc';
     }
   }
 
@@ -12,6 +13,7 @@
       selector: 'about',
       template: `
 <h1>About</h1>
+{{aaaa}}
       `
     })
   ];

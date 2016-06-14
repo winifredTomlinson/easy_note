@@ -3,11 +3,15 @@
 
   let ROUTER_DIRECTIVES = ng.router.ROUTER_DIRECTIVES;
   let Router = ng.router.Router;
+  let DynamicComponentLoader = ng.core.DynamicComponentLoader;
 
   class MenuComponent {
-    constructor(router) {
+    constructor(router, dynamicComponentLoader, viewContainerRef, injector) {
+      this.dynamicComponentLoader = dynamicComponentLoader;
       this.router = router;
-      console.log('app init');
+      this.viewContainerRef = viewContainerRef;
+      this.injector = injector;
+      console.log('menu init');
       this.initMenuData();
     }
 
@@ -25,6 +29,7 @@
       }
       let url = menu.url;
       if (url) {
+        menu.active = true;
         this.router.navigate([url]);
       }
     }
@@ -45,7 +50,8 @@
             children: [{
               icon: 'fa fa-file',
               name: '第四级菜单很长很长很长很长行阿萨德发送发到发发到',
-              url: '/home'
+              url: '/home',
+              active: true
             }]
           }]
         }]
@@ -59,7 +65,10 @@
   }
 
   MenuComponent.parameters = [
-    Router
+    Router,
+    DynamicComponentLoader,
+    ng.core.ViewContainerRef,
+    ng.core.Injector
   ];
 
   MenuComponent.annotations = [

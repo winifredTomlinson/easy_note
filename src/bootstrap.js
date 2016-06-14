@@ -12,3 +12,10 @@
   ]);
 
 })(window.ng, window.NewkitApp);
+
+jQuery(function () {
+  jQuery('html').niceScroll({
+    autohidemode: false,
+    cursorcolor: '#2dc3e8'
+  });
+});
