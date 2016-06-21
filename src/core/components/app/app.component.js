@@ -3,7 +3,7 @@
 
   let ROUTER_DIRECTIVES = ng.router.ROUTER_DIRECTIVES;
   let ROUTER_PROVIDERS = ng.router.ROUTER_PROVIDERS;
-  let MenuComponent = app.MenuComponent;
+  let MenuComponent = app.MenuComponent; // app.moduleName.componentName;
 
   class AppComponent {
     constructor(dynamicComponentLoader, viewContainerRef, injector) {
