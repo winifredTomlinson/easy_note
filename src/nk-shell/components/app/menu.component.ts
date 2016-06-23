@@ -1,15 +1,19 @@
 import {Component, Injectable, Inject} from '@angular/core';
-import {ROUTER_DIRECTIVES, Router} from '@angular/router';
+// import {ROUTER_DIRECTIVES, Router} from '@angular/router';
+import {UIRouter} from 'ui-router-ng2';
 
 @Component({
   selector: 'nk-menu',
   template: require('./menu.html'),
-  directives: [ROUTER_DIRECTIVES],
+  // directives: [ROUTER_DIRECTIVES],
   styles: [require('./menu.css')]
 })
 export class MenuComponent {
   private menuData: Array<any>;
-  constructor( @Inject(Router) private router: Router) {
+  constructor(
+    // @Inject(Router) private router: Router,
+    @Inject(UIRouter) private uiRouter: UIRouter
+  ) {
     this.initMenuData();
   }
 
@@ -28,7 +32,8 @@ export class MenuComponent {
       let url = menu.url;
       if (url) {
         menu.active = true;
-        this.router.navigate([url]);
+        this.uiRouter.stateService.go(url, null, null);
+        // this.router.navigate([url]);
       }
     }
   }
@@ -49,7 +54,7 @@ export class MenuComponent {
           children: [{
             icon: 'fa fa-file',
             name: '第四级菜单很长很长很长很长行阿萨德发送发到发发到',
-            url: '/home',
+            url: 'nkShell.home',
             active: true
           }]
         }]
@@ -57,8 +62,12 @@ export class MenuComponent {
     }, {
         icon: 'fa fa-link',
         name: 'About',
-        url: '/about',
+        url: 'nkShell.about',
         children: []
+      }, {
+        icon: 'fa fa-plus',
+        name: 'Comp1',
+        url: 'nkCommon.comp1'
       }];
   }
 }

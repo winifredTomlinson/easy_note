@@ -1,5 +1,5 @@
 import {Component, Injectable, DynamicComponentLoader, ViewContainerRef, Injector, Inject} from '@angular/core';
-import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Routes} from '@angular/router';
+// import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Routes} from '@angular/router';
 
 import {MenuComponent} from './menu.component';
 
@@ -9,15 +9,14 @@ import {AboutComponent} from './../about/about.component';
 @Component({
   selector: 'nk-shell',
   template: require('./app.html'),
-  directives: [ROUTER_DIRECTIVES, MenuComponent],
+  directives: [MenuComponent],
   styles: [require('./app.css')],
-  providers: [ROUTER_PROVIDERS]
 })
 
-@Routes([
-  { path: '/home', component: HomeComponent },
-  { path: '/about', component: AboutComponent }
-])
+// @Routes([
+//   { path: '/home', component: HomeComponent },
+//   { path: '/about', component: AboutComponent }
+// ])
 
 @Injectable()
 export class AppComponent {
