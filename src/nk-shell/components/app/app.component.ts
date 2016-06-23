@@ -1,5 +1,5 @@
 import {Component, Injectable, DynamicComponentLoader, ViewContainerRef, Injector, Inject} from '@angular/core';
-// import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Routes} from '@angular/router';
+import {CrossDomainMessage} from './../../services/crossDomainMessage';
 
 import {MenuComponent} from './menu.component';
 
@@ -11,6 +11,7 @@ import {AboutComponent} from './../about/about.component';
   template: require('./app.html'),
   directives: [MenuComponent],
   styles: [require('./app.css')],
+  providers: [CrossDomainMessage]
 })
 
 // @Routes([
@@ -23,9 +24,10 @@ export class AppComponent {
   constructor(
     @Inject(DynamicComponentLoader) private dynamicComponentLoader: DynamicComponentLoader,
     @Inject(ViewContainerRef) private viewContainerRef: ViewContainerRef,
-    @Inject(Injector) private injector: Injector
+    @Inject(Injector) private injector: Injector,
+    @Inject(CrossDomainMessage) private crossDomainMessage: CrossDomainMessage
   ) {
-
+    crossDomainMessage.init();
   }
 
   loadComponent(component: any) {
