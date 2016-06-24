@@ -28,6 +28,9 @@ export class AppComponent {
     @Inject(CrossDomainMessage) private crossDomainMessage: CrossDomainMessage
   ) {
     crossDomainMessage.init();
+    crossDomainMessage.register('iframe', (evt)=>{
+      alert('abc');
+    });
   }
 
   loadComponent(component: any) {

@@ -68,6 +68,10 @@ export class MenuComponent {
         icon: 'fa fa-plus',
         name: 'Comp1',
         url: 'nkCommon.comp1'
+      }, {
+        icon: 'fa fa-plus',
+        name: 'Not Found',
+        url: 'nkCommon.test'
       }];
   }
 }

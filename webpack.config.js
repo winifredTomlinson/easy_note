@@ -15,6 +15,7 @@ module.exports = {
   },
   output: {
     path: 'dist/assets/js',
+    publicPath: '/assets/js/',
     filename: '[name].js'
   },
   resolve: {
@@ -24,8 +25,8 @@ module.exports = {
     loaders: [
       { test: /\.tsx?$/, loader: 'ts-loader' },
       { test: /\.html$/, loader: 'html-loader' },
-      { test: /\.css$/, include: path.join(__dirname, '/src/nk-shell'), loader: 'raw-loader'},
-      { test: /\.css$/, include:  path.join(__dirname, '/node_modules'), loader: 'style!css'}
+      { test: /\.css$/, include: path.join(__dirname, '/src/nk-shell'), loader: 'raw-loader' },
+      { test: /\.css$/, include: path.join(__dirname, '/node_modules'), loader: 'style!css' }
     ]
   },
   plugins: [

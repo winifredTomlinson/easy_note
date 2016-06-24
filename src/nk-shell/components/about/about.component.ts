@@ -1,13 +1,20 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
+
+import {CrossDomainMessage} from './../../services/crossDomainMessage';
 
 @Component({
   selector: 'nk-about',
-  template: 'html-template - About {{aaaa}}'
+  template: require('./about.html')
 })
 export class AboutComponent {
   private aaaa: string;
-  constructor() {
+  constructor(
+    @Inject(CrossDomainMessage) private crossDomainMessage: CrossDomainMessage
+  ) {
     console.log('about init');
     this.aaaa = 'abc';
+  }
+  postMsg() {
+    this.crossDomainMessage.emit('test', 'good');
   }
 }

@@ -1,3 +1,6 @@
+import {Injectable} from '@angular/core'
+
+@Injectable()
 export class CrossDomainMessage {
   private evtQueueMap: Map<string, Set<Function>> = new Map<string, Set<Function>>();
   constructor() {
@@ -6,12 +9,16 @@ export class CrossDomainMessage {
 
   init() {
     window.addEventListener('message', (evt) => {
-      //todo: 校验evt.data合法性
-      if (this.evtQueueMap.has(evt.data.eventName)) {
-        let eventHandlerSet = this.evtQueueMap.get(evt.data.eventName);
-        for (let i = 0; i < eventHandlerSet.size; i++) {
-          eventHandlerSet[i].apply(null, evt.data);
-        }
+      let data = evt.data;
+      if (typeof data !== 'object' || !data.eventName || !data.data) {
+        console.log('eventName or data not found.');
+        return;
+      }
+      if (this.evtQueueMap.has(data.eventName)) {
+        let eventHandlerSet = this.evtQueueMap.get(data.eventName);
+        eventHandlerSet.forEach((hanlder) => {
+          hanlder.apply(null, [data.data]);
+        });
       }
     }, false);
   }
@@ -34,5 +41,13 @@ export class CrossDomainMessage {
       return true;
     }
     return false;
+  }
+
+  emit(eventName, data) {
+    let postMsg = {
+      eventName: eventName,
+      data: data
+    };
+    window.frames[0].postMessage(postMsg, '*');
   }
 } 
