@@ -16,7 +16,8 @@ module.exports = {
   output: {
     path: 'dist/assets/js',
     publicPath: '/assets/js/',
-    filename: '[name].js'
+    filename: '[name].js',
+    chunkName: '[name].[hash].js'
   },
   resolve: {
     extensions: ['', '.ts', '.js', '.css', '.html']

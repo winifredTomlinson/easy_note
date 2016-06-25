@@ -12,12 +12,16 @@ export class NkUIRouterConfig implements UIRouterConfig {
       .forEach(state => {
         uiRouter.stateRegistry.register(state);
       });
-    require.ensure([], function(require){
-      let mod = require('./../modules/nk-common/app.state');
-      mod.APP_STATES.forEach(state => {
-        uiRouter.stateRegistry.register(state);
+    let modules = ['nk-common'];
+    require.ensure([], function (require) {
+      let mod;
+      modules.forEach(item => {
+        mod = require(`./../modules/${item}/app.state`);
+        mod.APP_STATES.forEach(state => {
+          uiRouter.stateRegistry.register(state);
+        });
       });
-    }); 
+    });
     console.log('abc');
     uiRouter.transitionService.onBefore({}, () => {
       console.log('onBefore');
