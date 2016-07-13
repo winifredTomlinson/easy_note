@@ -1,3 +1,5 @@
+import '!style!css!./css/layout.css';
+
 import {LayoutComponent} from './components/layout/layout.component';
 import {HomeComponent} from './components/home/home.component';
 import {AboutComponent} from './components/about/about.component';

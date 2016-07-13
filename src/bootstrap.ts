@@ -4,8 +4,8 @@ import {bootstrap} from '@angular/platform-browser-dynamic';
 import {BrowserPlatformLocation} from '@angular/platform-browser';
 import {UIRouterConfig, UIROUTER_PROVIDERS, UIROUTER_DIRECTIVES} from 'ui-router-ng2';
 
-import {NkUIRouterConfig} from './nk-shell/uiRouterConfig';
-import {AppComponent} from './nk-shell/components/app/app.component';
+import {NkUIRouterConfig} from './uiRouterConfig';
+import {AppComponent} from './modules/nk-shell/components/app/app.component';
 
 
 // enableProdMode();

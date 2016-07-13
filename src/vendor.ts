@@ -1,5 +1,4 @@
 import 'normalize.css';
-import '!style!css!./nk-shell/css/layout.css';
 import 'jquery';
 
 // Angular 2

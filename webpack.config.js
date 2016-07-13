@@ -20,13 +20,14 @@ module.exports = {
     chunkName: '[name].[hash].js'
   },
   resolve: {
+    root: [path.resolve(__dirname)],
     extensions: ['', '.ts', '.js', '.css', '.html']
   },
   module: {
     loaders: [
       { test: /\.tsx?$/, loader: 'ts-loader' },
       { test: /\.html$/, loader: 'html-loader' },
-      { test: /\.css$/, include: path.join(__dirname, '/src/nk-shell'), loader: 'raw-loader' },
+      { test: /\.css$/, include: path.join(__dirname, '/src/modules/nk-shell'), loader: 'raw-loader' },
       { test: /\.css$/, include: path.join(__dirname, '/node_modules'), loader: 'style!css' }
     ]
   },
