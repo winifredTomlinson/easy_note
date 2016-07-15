@@ -1,44 +1,52 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import {UIRouter, UIRouterConfig} from 'ui-router-ng2';
 
 import {NkShellStates} from './modules/nk-shell/app.state.ts';
-// import {NkCommonStates} from './../modules/nk-common/app.state';
+
+import {NegModuleLoader} from './newkit/services/negModuleLoader';
 
 @Injectable()
 export class NkUIRouterConfig implements UIRouterConfig {
+  constructor( @Inject(NegModuleLoader) private negModuleLoader: NegModuleLoader) {
+  }
+
   configure(uiRouter: UIRouter) {
+    this.negModuleLoader.setRouter(uiRouter);
     NkShellStates
-      // .concat(NkCommonStates)
       .forEach(state => {
         uiRouter.stateRegistry.register(state);
       });
-    console.log('abc');
-    let modules = ['nk-common'];
-    require.ensure([], function (require) {
-      let mod;
-      modules.forEach(item => {
-        mod = require(`./modules/${item}/app.state`);
-        mod.APP_STATES.forEach(state => {
-          uiRouter.stateRegistry.register(state);
-        });
-      });
-    });
 
-    uiRouter.stateProvider.invalidCallbacks = [()=>{
-      uiRouter.stateService.go('nkShell.about');
-      return false;
+    uiRouter.stateProvider.invalidCallbacks = [() => {
+      this.negModuleLoader.load('nk-common').then(_ => {
+        uiRouter.stateService.go('nkCommon.comp1');
+      });
     }];
 
-    uiRouter.stateService.defaultErrorHandler((fromPath)=>{
+    uiRouter.stateProvider.onInvalid(() => {
+      console.log(this);
+      //console.log(from, to);
+    });
+
+    uiRouter.stateService.defaultErrorHandler((fromPath) => {
       debugger;
     });
 
-    uiRouter.transitionService.onBefore({}, (evt) => {
-      console.log('onBefore', evt);
-      return new Promise<boolean>((resolve, reject) => {
-        console.log(uiRouter.stateService);
-        resolve(true);
-      });
+    uiRouter.transitionService.onBefore({}, t => {
+      // return false;
+      // // debugger
+      // console.log('onBefore', t);
+      let toState = t.$to().name;
+      if (!t.router.stateService.get(toState)) {
+        return new Promise<boolean>((resolve, reject) => {
+          this.negModuleLoader.load('nk-common').then(_ => {
+            uiRouter.stateService.go('nkCommon.comp1');
+          });
+          resolve(true);
+        });
+      }
+      return Promise.resolve(true);
+
     });
     uiRouter.transitionService.onStart({}, (a) => {
       console.log('onStart', a);

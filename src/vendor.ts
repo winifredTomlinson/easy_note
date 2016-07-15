@@ -12,3 +12,6 @@ import '@angular/router-deprecated';
 
 //RxJS
 import 'rxjs';
+
+//UIRouter
+import 'ui-router-ng2';

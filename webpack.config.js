@@ -11,7 +11,8 @@ module.exports = {
     polyfills: './src/polyfills.ts',
     vendor: './src/vendor.ts',
     newkit: ['./src/newkit/newkit.ts'],
-    bootstrap: './src/bootstrap.ts'
+    bootstrap: './src/bootstrap.ts',
+    'nk-common': './src/modules/nk-common/app.state.ts'
   },
   output: {
     path: 'dist/assets/js',
@@ -37,7 +38,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: './src/index.html', to: path.join(__dirname, 'dist') },
-      { from: './src/assets', to: path.join(__dirname, 'dist/assets') }
+      { from: './assets', to: path.join(__dirname, 'dist/assets') }
     ])
   ],
   devServer: {
