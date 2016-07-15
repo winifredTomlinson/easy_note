@@ -10,6 +10,14 @@ export class NkUIRouterConfig implements UIRouterConfig {
   constructor( @Inject(NegModuleLoader) private negModuleLoader: NegModuleLoader) {
   }
 
+  private _getModuleName(stateName): string {
+    if (!stateName) {
+      return '';
+    }
+    let stateNameArr = stateName.split('.');
+    return stateNameArr.length > 1 ? stateName[0] : '';
+  }
+
   configure(uiRouter: UIRouter) {
     this.negModuleLoader.setRouter(uiRouter);
     NkShellStates
@@ -17,14 +25,22 @@ export class NkUIRouterConfig implements UIRouterConfig {
         uiRouter.stateRegistry.register(state);
       });
 
-    uiRouter.stateProvider.invalidCallbacks = [() => {
-      this.negModuleLoader.load('nk-common').then(_ => {
-        uiRouter.stateService.go('nkCommon.comp1');
+    uiRouter.stateProvider.invalidCallbacks = [($from$, $to$) => {
+      return new Promise((resolve, reject) => {
+        let toStateName = $to$.name();
+        let moduleName = this._getModuleName(toStateName);
+        if (!moduleName) {
+          return;
+        }
+        this.negModuleLoader.load(moduleName).then(_ => {
+          let state = uiRouter.stateService.target(toStateName);
+          resolve(state);
+        });
       });
     }];
 
     uiRouter.stateProvider.onInvalid(() => {
-      console.log(this);
+      // console.log(this);
       //console.log(from, to);
     });
 
