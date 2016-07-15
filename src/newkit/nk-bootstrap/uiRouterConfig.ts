@@ -14,7 +14,8 @@ export class NkUIRouterConfig implements UIRouterConfig {
       return '';
     }
     let stateNameArr = stateName.split('.');
-    return stateNameArr.length > 1 ? stateName[0] : '';
+    let moduleName = stateNameArr.length > 1 ? stateNameArr[0] : '';
+    return moduleName.replace(/[A-Z]/, (match) => `-${match.toLowerCase()}`);
   }
 
   configure(uiRouter: UIRouter) {

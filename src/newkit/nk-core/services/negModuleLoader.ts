@@ -8,23 +8,29 @@ export class NegModuleLoader {
 
   private uiRouter: UIRouter;
 
-  constructor(private http: Http) {
+  private loadedModules: Set<string>;
 
+  constructor(private http: Http) {
+    this.loadedModules = new Set<string>();
   }
 
   setRouter(uiRouter) {
     this.uiRouter = uiRouter;
   }
 
-  load(moduleName) {
+  load(moduleName): Promise<any> {
+    if (this.loadedModules.has(moduleName)) {
+      return Promise.resolve();
+    }
     return new Promise((resolve, reject) => {
-      this.http.get('/assets/js/nk-common.js')
+      this.http.get(`/assets/js/${moduleName}.js`)
         .toPromise()
         .then(res => {
           let mod = eval(res.text());
           mod.APP_STATES.forEach(state => {
             this.uiRouter.stateRegistry.register(state);
           });
+          this.loadedModules.add(moduleName);
           resolve();
         }).catch(err => reject(err));
     });
