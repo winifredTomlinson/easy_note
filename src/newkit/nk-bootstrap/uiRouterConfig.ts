@@ -2,7 +2,7 @@ import {Injectable, Inject} from '@angular/core';
 import {UIRouter, UIRouterConfig} from 'ui-router-ng2';
 
 import {NegModuleLoader} from './../nk-core';
-import {NkShellStates} from './../nk-shell/app.state.ts';
+import {NkShellStates} from './../nk-shell/';
 
 @Injectable()
 export class NkUIRouterConfig implements UIRouterConfig {
@@ -51,7 +51,7 @@ export class NkUIRouterConfig implements UIRouterConfig {
     uiRouter.transitionService.onBefore({}, t => {
       // return false;
       // // debugger
-      // console.log('onBefore', t);
+      console.log('onBefore', t);
       let toState = t.$to().name;
       if (!t.router.stateService.get(toState)) {
         return new Promise<boolean>((resolve, reject) => {
@@ -62,7 +62,6 @@ export class NkUIRouterConfig implements UIRouterConfig {
         });
       }
       return Promise.resolve(true);
-
     });
     uiRouter.transitionService.onStart({}, (a) => {
       console.log('onStart', a);

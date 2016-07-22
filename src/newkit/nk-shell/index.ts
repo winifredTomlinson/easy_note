@@ -5,6 +5,7 @@ import {HomeComponent} from './components/home/home.component';
 import {AboutComponent} from './components/about/about.component';
 import {NotFoundComponent} from './components/404/notfound.component';
 
+export {AppComponent} from './components/app/app.component';
 
 export let NkShellStates = [
   { name: 'nkShell', component: LayoutComponent, url: '/system' },

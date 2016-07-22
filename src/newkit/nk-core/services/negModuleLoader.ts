@@ -27,7 +27,7 @@ export class NegModuleLoader {
         .toPromise()
         .then(res => {
           let mod = eval(res.text());
-          mod.APP_STATES.forEach(state => {
+          mod.MODULE_STATES.forEach(state => {
             this.uiRouter.stateRegistry.register(state);
           });
           this.loadedModules.add(moduleName);

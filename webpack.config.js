@@ -8,12 +8,11 @@ let CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   debug: true,
   entry: {
-    'polyfills': './src/newkit/nk-bootstrap/polyfills.ts',
     'vendor': './src/newkit/nk-bootstrap/vendor.ts',
     'nk-core': ['./src/newkit/nk-core/index.ts'],
     'newkit': './src/newkit/nk-bootstrap/index.ts',
 
-    'nk-common': './src/modules/nk-common/app.state.ts'
+    'nk-common': './src/modules/nk-common/index.ts'
   },
   output: {
     path: 'dist/assets/js',
@@ -35,7 +34,7 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['nk-core', 'vendor', 'polyfills']
+      name: ['nk-core', 'vendor']
     }),
     new CopyWebpackPlugin([
       { from: './src/index.html', to: path.join(__dirname, 'dist') },
