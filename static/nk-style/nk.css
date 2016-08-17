@@ -115,7 +115,8 @@ a {
 .nk-menu li .active:not(.open) > a {
   background: #ffffe0;
 }
-.nk-menu li .fa-angle-down {
+.nk-menu li .fa-angle-down,
+.nk-menu li .fa-angle-right {
   margin-right: 5px;
   margin-top: 11px;
 }

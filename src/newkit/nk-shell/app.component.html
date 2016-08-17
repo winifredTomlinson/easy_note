@@ -41,79 +41,7 @@
         </span>
     </div>
   </div>
-  <div class="nk-menu">
-    <ul>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-cogs"></i>
-          <span>Control Panel</span>
-          <i class="fa fa-angle-down" style="float:right"></i>
-        </a>
-        <ul class="submenu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="fa fa-tasks"></i>
-              <span>Menu Setting</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="menu-icon fa fa-wrench"></i>
-          <span>Maintain</span>
-          <i class="fa fa-angle-down" style="float:right"></i>
-        </a>
-        <ul class="submenu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="fa fa-tasks"></i>
-              <span>Menu Setting</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-search"></i>
-              <span>Global Search</span>
-              <i class="fa fa-angle-down" style="float:right"></i>
-            </a>
-            <ul class="submenu">
-              <li>
-                <a href="javascript:void(0)">
-                  <i class="fa fa-rss"></i>
-                  <span>Global Search Config</span>
-                  <i class="fa fa-angle-down" style="float:right"></i>
-                </a>
-                <ul class="submenu">
-                  <li class="acti1ve" title="Global Search Config Lvel 4">
-                    <a href="javascript:void(0)">
-                      <i class="fa fa-heart"></i>
-                      <span>Global Search Config Lvel 4</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="javascript:void(0)">
-          <i class="fa fa-cogs"></i>
-          <span>Last Panel</span>
-          <i class="fa fa-angle-down" style="float:right"></i>
-        </a>
-        <ul class="submenu">
-          <li class="acti1ve" title="Global Search Config Lvel 4">
-            <a href="javascript:void(0)">
-              <i class="fa fa-heart"></i>
-              <span>Test Menu</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <!--<div style="height:700px;"></div>-->
+  <div class="nk-menu" nk-menu [menuData]="menuData">
   </div>
 </div>
 <div class="content-wrapper">
@@ -123,7 +51,6 @@
     <li class="active">Data</li>
   </ol>
   <div class="content">
-    AAA
-    <div style="height: 800px;">aa</div>
+    <ui-view></ui-view>
   </div>
 </div>

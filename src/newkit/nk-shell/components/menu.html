@@ -3,10 +3,10 @@
     <a (click)="menuClick(menu, $event)">
       <i [ngClass]="menu.icon"></i>
       <span>{{menu.name}}</span>
-      <b *ngIf="menu.children && menu.children.length > 0" (click)="menuCollapse(menu, $event)" class="fa" [ngClass]="{'fa-angle-down': menu.open, 'fa-angle-right': !menu.open}"
-        style="float:right;margin-top: 9px; margin-right: 10px;"></b>
+      <i *ngIf="menu.children && menu.children.length > 0" (click)="menuCollapse(menu, $event)" class="fa" [ngClass]="{'fa-angle-down': menu.open, 'fa-angle-right': !menu.open}"
+        style="float:right;"></i>
     </a>
-    <ul class="level1" *ngIf="menu.children && menu.children.length > 0">
+    <ul class="submenu" *ngIf="menu.children && menu.children.length > 0">
       <li *ngFor="let m1 of menu.children" [ngClass]="{'menu-collapse': !m1.open}">
         <a (click)="menuClick(m1)">
           <i [ngClass]="m1.icon"></i>
@@ -14,7 +14,7 @@
           <b *ngIf="m1.children && m1.children.length > 0" (click)="menuCollapse(m1, $event)" class="fa" [ngClass]="{'fa-angle-down': m1.open, 'fa-angle-right': !m1.open}"
             style="float:right;margin-top: 9px; margin-right: 10px;"></b>
         </a>
-        <ul class="level2" *ngIf="m1.children && m1.children.length > 0">
+        <ul class="submenu" *ngIf="m1.children && m1.children.length > 0">
           <li *ngFor="let m2 of m1.children" [ngClass]="{'menu-collapse': !m2.open}">
             <a (click)="menuClick(m2)">
               <i [ngClass]="m2.icon"></i>
@@ -22,7 +22,7 @@
               <b *ngIf="m2.children && m2.children.length > 0" (click)="menuCollapse(m2, $event)" class="fa" [ngClass]="{'fa-angle-down': m2.open, 'fa-angle-right': !m2.open}"
                 style="float:right;margin-top: 9px; margin-right: 10px;"></b>
             </a>
-            <ul class="level3" *ngIf="m2.children && m2.children.length > 0">
+            <ul class="submenu" *ngIf="m2.children && m2.children.length > 0">
               <li *ngFor="let m3 of m2.children" [ngClass]="{'menu-collapse': !m3.open, 'active': m3.active}">
                 <a (click)="menuClick(m3)">
                   <i [ngClass]="m3.icon"></i>
