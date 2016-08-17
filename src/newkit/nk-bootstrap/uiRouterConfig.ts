@@ -1,12 +1,12 @@
-import {Injectable, Inject} from '@angular/core';
-import {UIRouter, UIRouterConfig} from 'ui-router-ng2';
+import { Injectable, Inject } from '@angular/core';
+import { UIRouter, UIRouterConfig } from 'ui-router-ng2';
 
-import {NegModuleLoader} from './../nk-core';
-import {NkShellStates} from './../nk-shell/';
+import { NegModuleLoader } from './../nk-core';
+import { NkShellStates } from './../nk-shell/';
 
 @Injectable()
 export class NkUIRouterConfig implements UIRouterConfig {
-  constructor( @Inject(NegModuleLoader) private negModuleLoader: NegModuleLoader) {
+  constructor(private negModuleLoader: NegModuleLoader) {
   }
 
   private _getModuleName(stateName): string {

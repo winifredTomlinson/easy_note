@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     'vendor': './src/newkit/nk-bootstrap/vendor.ts',
     'nk-core': ['./src/newkit/nk-core/index.ts'],
-    'newkit': './src/newkit/nk-bootstrap/index.ts',
+    'newkit': './src/newkit/nk-bootstrap/main.ts',
 
     'nk-common': './src/modules/nk-common/index.ts'
   },

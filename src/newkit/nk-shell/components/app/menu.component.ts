@@ -1,6 +1,6 @@
-import {Component, Injectable, Inject} from '@angular/core';
+import { Component, Injectable, Inject } from '@angular/core';
 // import {ROUTER_DIRECTIVES, Router} from '@angular/router';
-import {UIRouter} from 'ui-router-ng2';
+import { UIRouter } from 'ui-router-ng2';
 
 @Component({
   selector: 'nk-menu',
@@ -10,10 +10,7 @@ import {UIRouter} from 'ui-router-ng2';
 })
 export class MenuComponent {
   private menuData: Array<any>;
-  constructor(
-    // @Inject(Router) private router: Router,
-    @Inject(UIRouter) private uiRouter: UIRouter
-  ) {
+  constructor(private uiRouter: UIRouter) {
     this.initMenuData();
   }
 

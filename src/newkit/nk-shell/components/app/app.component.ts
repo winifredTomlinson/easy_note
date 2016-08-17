@@ -3,9 +3,6 @@ import {CrossDomainMessage} from './../../services/crossDomainMessage';
 
 import {MenuComponent} from './menu.component';
 
-import {HomeComponent} from './../home/home.component';
-import {AboutComponent} from './../about/about.component';
-
 @Component({
   selector: 'nk-shell',
   template: require('./app.html'),

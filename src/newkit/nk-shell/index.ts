@@ -1,11 +1,11 @@
 import '!style!css!./css/layout.css';
 
-import {LayoutComponent} from './components/layout/layout.component';
-import {HomeComponent} from './components/home/home.component';
-import {AboutComponent} from './components/about/about.component';
-import {NotFoundComponent} from './components/404/notfound.component';
+import { LayoutComponent } from './layout.component';
+import { HomeComponent } from './app/home/home.component';
+import { AboutComponent } from './app/about/about.component';
+import { NotFoundComponent } from './app/404/notfound.component';
 
-export {AppComponent} from './components/app/app.component';
+export { AppComponent } from './app.component';
 
 export let NkShellStates = [
   { name: 'nkShell', component: LayoutComponent, url: '/system' },

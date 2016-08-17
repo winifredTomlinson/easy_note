@@ -1,5 +1,6 @@
 import 'normalize.css';
 import 'jquery';
+import './../../config/config';
 
 // Polyfills
 import 'core-js';
