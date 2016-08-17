@@ -4,7 +4,7 @@ import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class negAjax {
+export class NegAjax {
   constructor(private http: Http) {
 
   }

@@ -13,7 +13,7 @@ import {AppComponent} from './../nk-shell';
 
 // enableProdMode();
 bootstrap(AppComponent, [
- provide(APP_BASE_HREF, { useValue: '/' }),
+  provide(APP_BASE_HREF, { useValue: '/' }),
   provide(LocationStrategy, { useClass: HashLocationStrategy }),
   provide(PlatformLocation, { useClass: BrowserPlatformLocation }),
   ...HTTP_PROVIDERS,
