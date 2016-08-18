@@ -12,7 +12,13 @@
 
 <fieldset>
   <legend>Dfis Uploader</legend>
-  File Url: {{newkitConfig}}
+  File Url: {{fileUrl}}
   <input type="file" (change)="onChange($event)">
   <button (click)="testDfisUploader()">Dfis Uploader</button>
+</fieldset>
+
+<fieldset>
+  <legend>Event Bus</legend>
+  <button (click)="testEmitEvent()">Emit Event</button>
+  <button (click)="testUnSubscribeEvent()">UnSubscribe Event</button>
 </fieldset>

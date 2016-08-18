@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 
-import { NegGlobalConfig, NegConfigService, NegDfisUploader } from './../../../nk-core';
+import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus } from './../../../nk-core';
 
 @Component({
   moduleId: module.id,
@@ -9,19 +9,28 @@ import { NegGlobalConfig, NegConfigService, NegDfisUploader } from './../../../n
 })
 @Injectable()
 export class ServicesTestComponent implements OnInit {
+
+  private eventId:any;
+
   public systemName: string;
   public newkitConfig: any;
   public file1: File;
   public fileUrl: string;
+
   constructor(
     private negGlobalConfig: NegGlobalConfig,
     private negConfigService: NegConfigService,
-    private negDfisUploader: NegDfisUploader
+    private negDfisUploader: NegDfisUploader,
+    private negEventBus: NegEventBus
   ) {
 
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.eventId = this.negEventBus.on('event.test', data => {
+      alert(data);
+    });
+  }
 
   public testGlobalConfig() {
     this.negGlobalConfig.get('newkit', 'SystemName')
@@ -37,7 +46,7 @@ export class ServicesTestComponent implements OnInit {
       });
   }
 
-  public onChange(evt){
+  public onChange(evt) {
     this.file1 = evt.srcElement.files[0];
   }
 
@@ -47,5 +56,13 @@ export class ServicesTestComponent implements OnInit {
       .then(fileUrl => {
         this.fileUrl = fileUrl;
       })
+  }
+
+  public testEmitEvent() {
+    this.negEventBus.emit('event.test', 'hahhahahhahah，我的Event Data.');
+  }
+
+  public testUnSubscribeEvent(){
+    this.eventId.unsubscribe();
   }
 }
