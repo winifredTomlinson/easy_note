@@ -15,7 +15,7 @@ export class NegGlobalConfig {
   /**
    * 加载指定domain的global config数据
    * @param {string} domain - 指定的Domain
-   * @param {boolean} force - 是否强制请求（默认会检查是否存在） 
+   * @param {boolean} force? - 是否强制请求（默认会检查是否存在） 
    * @returns {Promise} 
    */
   load(domain: string, force?: boolean): Promise<any> {
@@ -23,7 +23,7 @@ export class NegGlobalConfig {
       throw new Error('domain param required.');
     }
     let encodeDomain = this.negUtil.encodeUri(domain);
-    let url = `${NewkitConf.APIGatewayAddress}/framework/v1/global-configuration?domain=${domain}`;
+    let url = `${NewkitConf.APIGatewayAddress}/framework/v1/global-configuration?domain=${encodeDomain}`;
     return new Promise((resolve, reject) => {
       if (!force) {
         if (this.globalConfigMap.has(domain)) {
@@ -44,7 +44,7 @@ export class NegGlobalConfig {
    * 获取指定的Config数据
    * @param  {string} domain - 指定Domain
    * @param  {string} key - 指定要获取的Key
-   * @param  {boolean} force - 是否强制获取最新数据
+   * @param  {boolean} force? - 是否强制获取最新数据
    */
   get(domain: string, key: string, force?: boolean): Promise<any> {
     if (!domain) {
@@ -62,7 +62,7 @@ export class NegGlobalConfig {
             return resolve(config.Value);
           }
           resolve(null);
-        }).catch(reason => resolve(reason));
+        }).catch(reason => reject(reason));
     });
   }
 }

@@ -2,5 +2,10 @@
   <legend>Global Config</legend>
   SystemName: {{systemName}}
   <button (click)="testGlobalConfig()">Request GlobalConfig</button>
-  
+</fieldset>
+
+<fieldset>
+  <legend>Config Service</legend>
+  Newkit-Config: {{newkitConfig | json}}
+  <button (click)="testConfigService()">Request ConfigService</button>
 </fieldset>

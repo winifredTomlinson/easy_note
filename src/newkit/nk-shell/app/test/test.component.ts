@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 
-import { NegGlobalConfig } from './../../../nk-core';
+import { NegGlobalConfig, NegConfigService } from './../../../nk-core';
 
 @Component({
   moduleId: module.id,
@@ -10,18 +10,27 @@ import { NegGlobalConfig } from './../../../nk-core';
 @Injectable()
 export class ServicesTestComponent implements OnInit {
   public systemName:string;
+  public newkitConfig: any;
   constructor(
-    private negGlobalConfig: NegGlobalConfig
+    private negGlobalConfig: NegGlobalConfig,
+    private negConfigService: NegConfigService
   ) {
 
   }
 
   ngOnInit() { }
 
-  testGlobalConfig() {
+  public testGlobalConfig() {
     this.negGlobalConfig.get('newkit', 'SystemName')
     .then(data => {
       this.systemName = data;
+    });
+  }
+
+  public testConfigService(){
+    this.negConfigService.get('bts', 'newkit-config')
+    .then(data => {
+      this.newkitConfig = JSON.parse(data);
     });
   }
 }
