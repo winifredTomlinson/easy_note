@@ -9,3 +9,10 @@
   Newkit-Config: {{newkitConfig | json}}
   <button (click)="testConfigService()">Request ConfigService</button>
 </fieldset>
+
+<fieldset>
+  <legend>Dfis Uploader</legend>
+  File Url: {{newkitConfig}}
+  <input type="file" (change)="onChange($event)">
+  <button (click)="testDfisUploader()">Dfis Uploader</button>
+</fieldset>

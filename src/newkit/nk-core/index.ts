@@ -5,10 +5,12 @@ import { NegModuleLoader } from './services/negModuleLoader';
 import { NegUtil } from './services/negUtil';
 import { NegGlobalConfig } from './services/negGlobalConfig';
 import { NegConfigService } from './services/negConfigService';
+import { NegDfisUploader } from './services/negDfisUploader';
 
 // All services export 
 export * from './services/negAlert';
 export * from './services/negAjax';
+export * from './services/negDfisUploader';
 export * from './services/negModuleLoader';
 export * from './services/negUtil';
 export * from './services/negGlobalConfig';
@@ -19,6 +21,7 @@ export const CORE_SERVICES = [
   NegAlert,
   NegAjax,
   NegConfigService,
+  NegDfisUploader,
   NegGlobalConfig,  
   NegModuleLoader,
   NegUtil

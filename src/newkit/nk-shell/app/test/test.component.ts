@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 
-import { NegGlobalConfig, NegConfigService } from './../../../nk-core';
+import { NegGlobalConfig, NegConfigService, NegDfisUploader } from './../../../nk-core';
 
 @Component({
   moduleId: module.id,
@@ -9,11 +9,14 @@ import { NegGlobalConfig, NegConfigService } from './../../../nk-core';
 })
 @Injectable()
 export class ServicesTestComponent implements OnInit {
-  public systemName:string;
+  public systemName: string;
   public newkitConfig: any;
+  public file1: File;
+  public fileUrl: string;
   constructor(
     private negGlobalConfig: NegGlobalConfig,
-    private negConfigService: NegConfigService
+    private negConfigService: NegConfigService,
+    private negDfisUploader: NegDfisUploader
   ) {
 
   }
@@ -22,15 +25,27 @@ export class ServicesTestComponent implements OnInit {
 
   public testGlobalConfig() {
     this.negGlobalConfig.get('newkit', 'SystemName')
-    .then(data => {
-      this.systemName = data;
-    });
+      .then(data => {
+        this.systemName = data;
+      });
   }
 
-  public testConfigService(){
+  public testConfigService() {
     this.negConfigService.get('bts', 'newkit-config')
-    .then(data => {
-      this.newkitConfig = JSON.parse(data);
-    });
+      .then(data => {
+        this.newkitConfig = JSON.parse(data);
+      });
+  }
+
+  public onChange(evt){
+    this.file1 = evt.srcElement.files[0];
+  }
+
+  public testDfisUploader() {
+    let url = `http://neg-app-dfis:8200/MISInternal/DocumentTool/newkit-test.jpg`;
+    this.negDfisUploader.upload(url, this.file1)
+      .then(fileUrl => {
+        this.fileUrl = fileUrl;
+      })
   }
 }
