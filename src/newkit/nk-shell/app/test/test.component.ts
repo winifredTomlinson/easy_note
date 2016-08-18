@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 
-import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus } from './../../../nk-core';
+import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus, NegTracker } from './../../../nk-core';
 
 @Component({
   moduleId: module.id,
@@ -11,6 +11,7 @@ import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus } from 
 export class ServicesTestComponent implements OnInit {
 
   private eventId:any;
+  private tracker: any;
 
   public systemName: string;
   public newkitConfig: any;
@@ -21,7 +22,8 @@ export class ServicesTestComponent implements OnInit {
     private negGlobalConfig: NegGlobalConfig,
     private negConfigService: NegConfigService,
     private negDfisUploader: NegDfisUploader,
-    private negEventBus: NegEventBus
+    private negEventBus: NegEventBus,
+    private negTracker: NegTracker
   ) {
 
   }
@@ -64,5 +66,14 @@ export class ServicesTestComponent implements OnInit {
 
   public testUnSubscribeEvent(){
     this.eventId.unsubscribe();
+  }
+
+  public testStartTrack(){
+    this.tracker = this.negTracker.startTrack('Test', 'Click', 'test test click', 'jh3r');
+  }
+
+  public testEndTack(){
+    this.tracker.end();
+    alert('over');
   }
 }

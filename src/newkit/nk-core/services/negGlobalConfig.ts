@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { NegAjax } from './../services/negAjax';
 import { NegUtil } from './../services/negUtil';
 
+const globalConfigMap: Map<string, Array<any>> = new Map<string, Array<any>>();
+
 @Injectable()
 export class NegGlobalConfig {
 
-  private globalConfigMap: Map<string, Array<any>>;
-
-  constructor(private negAjax: NegAjax, private negUtil: NegUtil) {
-    this.globalConfigMap = new Map<string, Array<any>>();
-  }
+  constructor(private negAjax: NegAjax, private negUtil: NegUtil) { }
 
   /**
    * 加载指定domain的global config数据
@@ -26,14 +24,14 @@ export class NegGlobalConfig {
     let url = `${NewkitConf.APIGatewayAddress}/framework/v1/global-configuration?domain=${encodeDomain}`;
     return new Promise((resolve, reject) => {
       if (!force) {
-        if (this.globalConfigMap.has(domain)) {
+        if (globalConfigMap.has(domain)) {
           return resolve(true);
         }
       }
       this.negAjax.get(url)
         .then(res => {
           let data = res.json();
-          this.globalConfigMap.set(domain, data);
+          globalConfigMap.set(domain, data);
           resolve(true);
         })
         .catch(reason => reject(reason));
@@ -56,7 +54,7 @@ export class NegGlobalConfig {
     return new Promise((resolve, reject) => {
       this.load(domain, force)
         .then(() => {
-          let domainConfig = this.globalConfigMap.get(domain);
+          let domainConfig = globalConfigMap.get(domain);
           let config = domainConfig.find(x => x.Key === key);
           if (config) {
             return resolve(config.Value);

@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { NegAjax } from './../services/negAjax';
 import { NegUtil } from './../services/negUtil';
 
+const configServiceMap: Map<string, any> = new Map<string, any>();
+
 @Injectable()
 export class NegConfigService {
 
-  private configServiceMap: Map<string, any>;
-
-  constructor(private negAjax: NegAjax, private negUtil: NegUtil) {
-    this.configServiceMap = new Map<string, any>();
-  }
+  constructor(private negAjax: NegAjax, private negUtil: NegUtil) { }
   /**
    * 加载config services.
    * @param  {string} system - 系统名称
@@ -23,14 +21,14 @@ export class NegConfigService {
     let url = `${NewkitConf.configServiceAddress}/${this.negUtil.encodeUri(system)}/${this.negUtil.encodeUri(key)}`;
     return new Promise((resolve, reject) => {
       if (!force) {
-        if (this.configServiceMap.has(hashKey)) {
+        if (configServiceMap.has(hashKey)) {
           return resolve(true);
         }
       }
       this.negAjax.get(url)
         .then(res => {
           let data = res.json();
-          this.configServiceMap.set(hashKey, data);
+          configServiceMap.set(hashKey, data);
           resolve(true);
         })
         .catch(reason => reject(reason));
@@ -54,7 +52,7 @@ export class NegConfigService {
     return new Promise((resolve, reject) => {
       this._load(system, key, hashKey, force)
         .then(() => {
-          let config = this.configServiceMap.get(hashKey);
+          let config = configServiceMap.get(hashKey);
           if (config) {
             return resolve(config.configValue);
           }

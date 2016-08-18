@@ -3,27 +3,25 @@ import { Http } from '@angular/http';
 
 import { UIRouter } from 'ui-router-ng2';
 
+const loadedModules: Set<string> = new Set<string>();
+
 @Injectable()
 export class NegModuleLoader {
 
   private uiRouter: UIRouter;
 
-  private loadedModules: Set<string>;
-
-  constructor(private http: Http) {
-    this.loadedModules = new Set<string>();
-  }
+  constructor(private http: Http) { }
 
   setRouter(uiRouter) {
     this.uiRouter = uiRouter;
   }
 
   load(moduleName): Promise<any> {
-    if (this.loadedModules.has(moduleName)) {
+    if (loadedModules.has(moduleName)) {
       return Promise.resolve();
     }
     return new Promise((resolve, reject) => {
-      let path = NewkitConf.debug ? '': '/assets/js';
+      let path = NewkitConf.debug ? '' : '/assets/js';
       console.log(path);
       this.http.get(`${path}/${moduleName}.js`)
         .toPromise()
@@ -32,7 +30,7 @@ export class NegModuleLoader {
           mod.MODULE_STATES.forEach(state => {
             this.uiRouter.stateRegistry.register(state);
           });
-          this.loadedModules.add(moduleName);
+          loadedModules.add(moduleName);
           resolve();
         }).catch(err => reject(err));
     });

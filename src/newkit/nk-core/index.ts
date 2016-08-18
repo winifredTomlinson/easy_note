@@ -7,6 +7,9 @@ import { NegGlobalConfig } from './services/negGlobalConfig';
 import { NegConfigService } from './services/negConfigService';
 import { NegDfisUploader } from './services/negDfisUploader';
 import { NegEventBus } from './services/negEventBus';
+import { NegStorage } from './services/negStorage';
+import { NegTracker } from './services/negTracker';
+import { NegUserProfile } from './services/negUserProfile';
 
 // All services export 
 export * from './services/negAlert';
@@ -17,6 +20,9 @@ export * from './services/negUtil';
 export * from './services/negGlobalConfig';
 export * from './services/negConfigService';
 export * from './services/negEventBus';
+export * from './services/negStorage';
+export * from './services/negTracker';
+export * from './services/negUserProfile';
 
 // Export all services
 export const CORE_SERVICES = [
@@ -25,8 +31,11 @@ export const CORE_SERVICES = [
   NegConfigService,
   NegDfisUploader,
   NegEventBus,
-  NegGlobalConfig,  
+  NegGlobalConfig,
   NegModuleLoader,
+  NegStorage,
+  NegTracker,
+  NegUserProfile,
   NegUtil
 ];
 
