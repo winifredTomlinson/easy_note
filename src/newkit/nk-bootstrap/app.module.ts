@@ -6,7 +6,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { UIROUTER_PROVIDERS, UIRouterConfig, UIROUTER_DIRECTIVES } from 'ui-router-ng2';
 
 import { NkUIRouterConfig } from './uiRouterConfig';
-import { NegModuleLoader } from './../nk-core';
+import { CORE_SERVICES } from './../nk-core';
 import { AppComponent } from './../nk-shell';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { AppComponent } from './../nk-shell';
     ...UIROUTER_PROVIDERS,
     provide(UIRouterConfig, { useClass: NkUIRouterConfig }),
     provide(PLATFORM_DIRECTIVES, { useValue: UIROUTER_DIRECTIVES, multi: true }),
-    NegModuleLoader
+    ...CORE_SERVICES
   ],
   bootstrap: [AppComponent] // 标记根组件
 })

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { UIRouter, UIRouterConfig } from 'ui-router-ng2';
 
 import { NegModuleLoader } from './../nk-core';
-import { NkShellStates } from './../nk-shell/';
+import { MODULE_STATES } from './../nk-shell';
 
 @Injectable()
 export class NkUIRouterConfig implements UIRouterConfig {
@@ -20,7 +20,7 @@ export class NkUIRouterConfig implements UIRouterConfig {
 
   configure(uiRouter: UIRouter) {
     this.negModuleLoader.setRouter(uiRouter);
-    NkShellStates
+    MODULE_STATES
       .forEach(state => {
         uiRouter.stateRegistry.register(state);
       });
@@ -90,8 +90,7 @@ export class NkUIRouterConfig implements UIRouterConfig {
     uiRouter.urlRouterProvider.otherwise(() => {
       console.log('otherwise');
       //todo，此处默认传递给angular1
-      // return uiRouter.stateService.go('nkShell.home', null, null) && null;
-      return null;
+      return '/system/home';
     });
   }
 }

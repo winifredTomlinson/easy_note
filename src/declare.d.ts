@@ -1,2 +1,2 @@
-declare var NewkitConf: any;
-declare var $: any;
+declare let NewkitConf: any;
+declare let $: any;

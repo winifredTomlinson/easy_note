@@ -8,6 +8,7 @@ import {UIROUTER_DIRECTIVES} from "ui-router-ng2";
 })
 
 export class HomeComponent {
+  private data:any = {a: 1, b: 2};
   constructor() {
     console.log('home init');
   }
