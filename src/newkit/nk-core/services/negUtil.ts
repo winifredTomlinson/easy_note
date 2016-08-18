@@ -3,14 +3,25 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NegUtil {
 
-  constructor() { }
+  private window: any;
 
-  encodeUri(text: string): void {
-    return (window as any).encodeURI(text);
+  constructor() {
+    this.window = window;
   }
 
-  decodeUri(text: string): void {
-    return (window as any).decodeURI(text);
+  encodeUri(text: string): string {
+    return this.window.encodeURI(text);
   }
 
+  decodeUri(text: string): string {
+    return this.window.decodeURI(text);
+  }
+
+  escape(text: string): string {
+    return this.window.escape(text);
+  }
+
+  unescape(text: string): string {
+    return this.window.unescape(text);
+  }
 }

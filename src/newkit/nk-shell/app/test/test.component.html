@@ -28,3 +28,19 @@
   <button (click)="testStartTrack()">Start Track</button>
   <button (click)="testEndTack()">End Track</button>
 </fieldset>
+
+<fieldset>
+  <legend>Neg Storage</legend>
+  <label><input type="radio" value="cookie" [(ngModel)]="st.storageType">Cookie</label>
+  <label><input type="radio" value="local" [(ngModel)]="st.storageType">LocalStorage</label>
+  <label><input type="radio" value="session" [(ngModel)]="st.storageType">SessionStorage</label>
+  <label><input type="radio" value="memory" [(ngModel)]="st.storageType">Memory</label>
+  <br>
+  Name: <input type="text" [(ngModel)]="st.storageName">
+  Value: <input type="text" [(ngModel)]="st.storageValue">
+  <br>
+  <button (click)="setStorageValue()">SET</button>
+  <button (click)="getStorageValue()">Get</button>
+  <button (click)="removeStorageValue()">Remove</button>
+  <button (click)="clearStorage()">Clear</button>
+</fieldset>

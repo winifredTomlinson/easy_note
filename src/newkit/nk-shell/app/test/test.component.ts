@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 
-import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus, NegTracker } from './../../../nk-core';
+import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus, NegTracker, NegStorage } from './../../../nk-core';
 
 @Component({
   moduleId: module.id,
@@ -10,20 +10,22 @@ import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus, NegTra
 @Injectable()
 export class ServicesTestComponent implements OnInit {
 
-  private eventId:any;
+  private eventId: any;
   private tracker: any;
 
   public systemName: string;
   public newkitConfig: any;
   public file1: File;
   public fileUrl: string;
+  public st = { storageType: 'cookie', storageName: 'test', storageValue: 'testvalue' };
 
   constructor(
     private negGlobalConfig: NegGlobalConfig,
     private negConfigService: NegConfigService,
     private negDfisUploader: NegDfisUploader,
     private negEventBus: NegEventBus,
-    private negTracker: NegTracker
+    private negTracker: NegTracker,
+    private negStorage: NegStorage
   ) {
 
   }
@@ -64,16 +66,33 @@ export class ServicesTestComponent implements OnInit {
     this.negEventBus.emit('event.test', 'hahhahahhahah，我的Event Data.');
   }
 
-  public testUnSubscribeEvent(){
+  public testUnSubscribeEvent() {
     this.eventId.unsubscribe();
   }
 
-  public testStartTrack(){
+  public testStartTrack() {
     this.tracker = this.negTracker.startTrack('Test', 'Click', 'test test click', 'jh3r');
   }
 
-  public testEndTack(){
+  public testEndTack() {
     this.tracker.end();
     alert('over');
+  }
+
+  public setStorageValue() {
+    this.negStorage[this.st.storageType].set(this.st.storageName, this.st.storageValue);
+  }
+
+  public getStorageValue() {
+    let value = this.negStorage[this.st.storageType].get(this.st.storageName);
+    alert(value);
+  }
+
+  public removeStorageValue() {
+    this.negStorage[this.st.storageType].remove(this.st.storageName);
+  }
+
+  public clearStorage() {
+    this.negStorage[this.st.storageType].clear();
   }
 }
