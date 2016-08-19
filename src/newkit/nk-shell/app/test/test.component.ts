@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 
-import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus, NegTracker, NegStorage } from './../../../nk-core';
+import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus, NegTracker, NegStorage, NegUserProfile } from './../../../nk-core';
 
 @Component({
   moduleId: module.id,
@@ -25,7 +25,8 @@ export class ServicesTestComponent implements OnInit {
     private negDfisUploader: NegDfisUploader,
     private negEventBus: NegEventBus,
     private negTracker: NegTracker,
-    private negStorage: NegStorage
+    private negStorage: NegStorage,
+    private negUserProfile: NegUserProfile
   ) {
 
   }
@@ -34,6 +35,11 @@ export class ServicesTestComponent implements OnInit {
     this.eventId = this.negEventBus.on('event.test', data => {
       alert(data);
     });
+    this.negUserProfile.init('jh3r')
+      .then(() => {
+        let value = this.negUserProfile.get('system');
+        console.log(value);
+      });
   }
 
   public testGlobalConfig() {
@@ -94,5 +100,18 @@ export class ServicesTestComponent implements OnInit {
 
   public clearStorage() {
     this.negStorage[this.st.storageType].clear();
+  }
+
+  public testGetProfile() {
+    let value = this.negUserProfile.get('abc');
+    alert(JSON.stringify(value));
+  }
+
+  public testSetProfile() {
+    this.negUserProfile.set('abc', { nice: true });
+  }
+
+  public testDeleteProfile() {
+    this.negUserProfile.remove('abc');
   }
 }

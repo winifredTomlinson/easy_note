@@ -10,6 +10,7 @@ import { NegEventBus } from './services/negEventBus';
 import { NegStorage } from './services/negStorage';
 import { NegTracker } from './services/negTracker';
 import { NegUserProfile } from './services/negUserProfile';
+import { NegContext } from './services/negContext';
 
 // All services export 
 export * from './services/negAlert';
@@ -23,12 +24,14 @@ export * from './services/negEventBus';
 export * from './services/negStorage';
 export * from './services/negTracker';
 export * from './services/negUserProfile';
+export * from './services/negContext';
 
 // Export all services
 export const CORE_SERVICES = [
   NegAlert,
   NegAjax,
   NegConfigService,
+  NegContext,
   NegDfisUploader,
   NegEventBus,
   NegGlobalConfig,
