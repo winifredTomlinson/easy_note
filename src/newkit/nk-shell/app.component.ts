@@ -7,7 +7,7 @@ import { MenuComponent } from './components';
   selector: 'nk-app',
   template: require('./app.component.html'),
   styles: [require('./app.component.styl')],
-  directives: [UIROUTER_DIRECTIVES, MenuComponent] 
+  directives: [UIROUTER_DIRECTIVES, MenuComponent]
 })
 export class AppComponent implements OnInit, AfterContentInit {
   private menuData: Array<any>;
@@ -18,31 +18,34 @@ export class AppComponent implements OnInit, AfterContentInit {
     this._init();
   }
 
-  _init(){
+  _init() {
     this.menuData = [{
-      icon: 'fa fa-home',
-      name: 'Home',
+      icon: 'fa fa-cogs',
+      name: 'Control Panel',
       // url: '/home',
       children: [{
-        icon: 'fa fa-lock',
-        name: 'AAAA',
+        icon: 'fa fa-wrench',
+        name: 'Maintain',
         // url: '/',
         children: [{
           icon: 'fa fa-file',
-          name: '第三级菜单，很长很长很长很长很长很长很长',
-          // url: '/',
-          children: [{
-            icon: 'fa fa-file',
-            name: '第四级菜单很长很长很长很长行阿萨德发送发到发发到',
-            url: 'nkShell.home',
-            active: true
-          }]
+          name: 'Menu Setting',
+          url: 'nkShell.menuSetting',
+          active: true
+        }, {
+            icon: 'fa fa-search',
+            name: 'Global Search',
+            url: 'nkShell.globalSearch'
+        }, {
+            icon: 'fa fa-rss',
+            name: 'Deploy Module',
+            url: 'nkShell.deploy'
         }]
       }]
     }, {
         icon: 'fa fa-link',
-        name: 'About',
-        url: 'nkShell.about',
+        name: 'Global Configuration',
+        url: 'nkShell.globalConfiguration',
         children: []
       }, {
         icon: 'fa fa-plus',
