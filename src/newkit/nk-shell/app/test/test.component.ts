@@ -38,7 +38,6 @@ export class ServicesTestComponent implements OnInit {
     this.negUserProfile.init('jh3r')
       .then(() => {
         let value = this.negUserProfile.get('system');
-        console.log(value);
       });
   }
 

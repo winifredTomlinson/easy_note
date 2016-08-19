@@ -22,7 +22,6 @@ export class NegModuleLoader {
     }
     return new Promise((resolve, reject) => {
       let path = NewkitConf.debug ? '' : '/assets/js';
-      console.log(path);
       this.http.get(`${path}/${moduleName}.js`)
         .toPromise()
         .then(res => {

@@ -19,7 +19,6 @@ export class NegUserProfile {
     return new Promise((resolve, reject) => {
       this.negAjax.get(url)
         .then(res => {
-          debugger
           let data = res.json();
           this.userProfile = data;
           this.userProfile.Profiles.forEach(x => {
@@ -34,7 +33,6 @@ export class NegUserProfile {
 
   get(key: string) {
     let result = null;
-    console.log(this.userProfile.Profiles);
     if (this.userProfile.Profiles && this.userProfile.Profiles.length > 0) {
       let keyItem = this.userProfile.Profiles.find(x => x.Key === key);
       if (keyItem) {

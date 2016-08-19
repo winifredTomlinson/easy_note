@@ -44,8 +44,7 @@ export class NkUIRouterConfig implements UIRouterConfig {
       //console.log(from, to);
     });
 
-    uiRouter.stateService.defaultErrorHandler((fromPath) => {
-      debugger;
+    uiRouter.stateService.defaultErrorHandler((fromPath) => {;
     });
 
     uiRouter.transitionService.onBefore({}, t => {

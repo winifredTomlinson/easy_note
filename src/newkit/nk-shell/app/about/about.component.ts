@@ -11,7 +11,6 @@ export class AboutComponent {
   constructor(
     @Inject(CrossDomainMessage) private crossDomainMessage: CrossDomainMessage
   ) {
-    console.log('about init');
     this.aaaa = 'abc';
   }
   postMsg() {
