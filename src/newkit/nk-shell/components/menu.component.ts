@@ -1,6 +1,8 @@
 import { Component, Injectable, Input } from '@angular/core';
 import { UIRouter } from 'ui-router-ng2';
 
+import { NegEventBus } from './../../nk-core';
+
 @Component({
   selector: '[nk-menu]',
   template: require('./menu.html')
@@ -10,7 +12,7 @@ import { UIRouter } from 'ui-router-ng2';
 export class MenuComponent {
   @Input() private menuData: Array<any>;
 
-  constructor(private uiRouter: UIRouter) {
+  constructor(private uiRouter: UIRouter, private negEventBus: NegEventBus) {
   }
 
   public menuCollapse(menu: any, evt?: any): void {
@@ -26,6 +28,10 @@ export class MenuComponent {
       this.menuCollapse(menu);
     } else {
       let url = menu.url;
+      this.negEventBus.emit('nkShell.menuChanged', menu);
+      if(menu.isNg1){
+        return;
+      }
       if (url) {
         menu.active = true;
         this.uiRouter.stateService.go(url, null, null);

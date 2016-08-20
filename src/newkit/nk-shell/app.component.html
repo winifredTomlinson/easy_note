@@ -51,6 +51,7 @@
     <li class="active">Data</li>
   </ol>
   <div class="content">
-    <ui-view></ui-view>
+    <ui-view *ngIf="!currentIsNg1Module"></ui-view>
+    <iframe *ngIf="currentIsNg1Module" id="iframe-for-ng1-page" [src]="ng1PageSrc" frameborder="0" scrolling="no" [style.height]="iframeHeight"></iframe>
   </div>
 </div>

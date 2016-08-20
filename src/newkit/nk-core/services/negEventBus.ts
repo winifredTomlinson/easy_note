@@ -25,6 +25,7 @@ export class NegEventBus {
   }
 
   on(eventName: string, handler: Function): Subscription {
+    console.log('eventName', eventName);
     let eventObservable;
     if (!eventMap.has(eventName)) {
       let eventSource = new Subject<any>();
