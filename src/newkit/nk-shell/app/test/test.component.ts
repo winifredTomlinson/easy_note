@@ -1,6 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 
-import { NegGlobalConfig, NegConfigService, NegDfisUploader, NegEventBus, NegTracker, NegStorage, NegUserProfile } from './../../../nk-core';
+import { NegGlobalConfig, NegConfigService, NegDfisUploader,
+  NegEventBus, NegTracker, NegStorage, NegUserProfile,
+  NegGlobalLoading
+} from './../../../nk-core';
 
 @Component({
   moduleId: module.id,
@@ -26,7 +29,8 @@ export class ServicesTestComponent implements OnInit {
     private negEventBus: NegEventBus,
     private negTracker: NegTracker,
     private negStorage: NegStorage,
-    private negUserProfile: NegUserProfile
+    private negUserProfile: NegUserProfile,
+    private negGlobalLoading: NegGlobalLoading
   ) {
 
   }
@@ -112,5 +116,12 @@ export class ServicesTestComponent implements OnInit {
 
   public testDeleteProfile() {
     this.negUserProfile.remove('abc');
+  }
+
+  public testStartGlobalLoading() {
+    this.negGlobalLoading.show('这是一个测试');
+    setTimeout(() => {
+      this.negGlobalLoading.hide();
+    }, 3000);
   }
 }

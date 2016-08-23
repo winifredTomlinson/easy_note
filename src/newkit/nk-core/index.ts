@@ -11,6 +11,7 @@ import { NegStorage } from './services/negStorage';
 import { NegTracker } from './services/negTracker';
 import { NegUserProfile } from './services/negUserProfile';
 import { NegContext } from './services/negContext';
+import { NegGlobalLoading } from './services/negGlobalLoading';
 
 // All services export 
 export * from './services/negAlert';
@@ -25,6 +26,7 @@ export * from './services/negStorage';
 export * from './services/negTracker';
 export * from './services/negUserProfile';
 export * from './services/negContext';
+export * from './services/negGlobalLoading';
 
 // Export all services
 export const CORE_SERVICES = [
@@ -39,7 +41,8 @@ export const CORE_SERVICES = [
   NegStorage,
   NegTracker,
   NegUserProfile,
-  NegUtil
+  NegUtil,
+  NegGlobalLoading
 ];
 
 // All pipes import 
