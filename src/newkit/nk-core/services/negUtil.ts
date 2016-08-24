@@ -143,6 +143,20 @@ export class NegUtil {
     return this._baseClone(value, true, true);
   }
 
+  getQuery(key?: string): any {
+    let search = window.location.search.substring(1);
+    let searchArr = search.split('&');
+    let result = {};
+    searchArr.forEach(s => {
+      let sArr = s.split('=');
+      result[sArr[0]] = sArr.length === 2 ? sArr[1] : null;
+    });
+    if (key) {
+      return result[key];
+    }
+    return result;
+  }
+
   _isLength(value) {
     return typeof value == 'number' &&
       value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;

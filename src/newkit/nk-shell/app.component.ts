@@ -1,16 +1,18 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import { DomSanitizationService, SafeResourceUrl } from '@angular/platform-browser';
 import { UIROUTER_DIRECTIVES } from 'ui-router-ng2';
 
-import { NegEventBus } from './../nk-core';
+import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil } from './../nk-core';
 import { MenuComponent } from './components';
+import { MessageProcessor, AuthService } from './services';
 
 @Component({
   moduleId: module.id,
   selector: 'nk-app',
   template: require('./app.component.html'),
   styles: [require('./app.component.styl')],
-  directives: [UIROUTER_DIRECTIVES, MenuComponent]
+  directives: [UIROUTER_DIRECTIVES, MenuComponent],
+  providers: [MessageProcessor, AuthService]
 })
 export class AppComponent implements OnInit, AfterContentInit {
 
@@ -20,60 +22,104 @@ export class AppComponent implements OnInit, AfterContentInit {
   public ng1PageSrc: SafeResourceUrl;
   public iframeHeight: string;
 
+  private isLogged: boolean = false;
+  private rootPath: string;
+
   constructor(
     private sanitizer: DomSanitizationService,
-    private negEventBus: NegEventBus
-  ) { }
-
-  ngOnInit() {
-    this.ng1PageSrc = this.sanitizer.bypassSecurityTrustResourceUrl('');
-
-    window.addEventListener('message', evt => {
-      this._processMessageEvent(evt);
-    }, false);
-
-    this.negEventBus.on('nkShell.menuChanged', data => {
-      this._processMenuChanged(data);
-    });
-
-    this._init();
+    public negEventBus: NegEventBus,
+    public negGlobalLoading: NegGlobalLoading,
+    private negStorage: NegStorage,
+    private negAuth: NegAuth,
+    private negAjax: NegAjax,
+    private negUtil: NegUtil,
+    private messageProcessor: MessageProcessor,
+    private authService: AuthService
+  ) {
+    this.rootPath = `${window.location.protocol}//${window.location.host}`;
   }
 
-  _processMessageEvent(evt: any) {
-    let msg = evt.data;
-    if (typeof msg !== 'object' || msg.eventName) {
-      return;
+  ngOnInit() {
+    this._doLogin()
+      .then(() => {
+        this.isLogged = true;
+        this._init();
+        setTimeout(() => {
+          this._initMenuDataEvents();
+        }, 100);
+        this.negStorage.local.set('login-error-count', 0);
+      }).catch(reason => {
+        let errorCount = (this.negStorage.local.get('login-error-count') || 0) + 1;
+        if (errorCount > 10) {
+          return console.log('login failed:', reason);
+        }
+        let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${this.rootPath}/`;
+        window.location.href = ssoLoginUrl;
+      });
+  }
+
+  ngAfterContentInit() {
+
+  }
+
+  _initMenuDataEvents() {
+    $(function () {
+      $('.nk-menu li').on('click', function (e) {
+        var $this = $(this);
+        $this[$this.hasClass('open') ? 'removeClass' : 'addClass']('open');
+        if ($this.find('ul').length === 0) {
+          $('.nk-menu li').removeClass('active');
+          $this.addClass('active').parents('li').addClass('active');
+        }
+        return false;
+      });
+    });
+  }
+
+  _doLogin(): Promise<any> {
+    let p: Promise<any>; // Auth Promise
+    // If redirect by sso
+    let ssoToken = this.negUtil.getQuery('t');
+    if (ssoToken) {
+      p = this.authService.login(ssoToken);
+    } else {
+      let token = this.negStorage.local.get('x-newkit-token');
+      // No token
+      if (!token) {
+        let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${this.rootPath}/`;
+        window.location.href = ssoLoginUrl;
+        return;
+      }
+      // Auto login
+      p = this.authService.autoLogin(token);
     }
-    if (msg.eventName === 'resize') {
-      this.iframeHeight = msg.data + 'px';
-      return;
-    }
-    // 拉取上下文信息（权限，UserProfile）
-    if (msg.eventName === 'pullContext') {
-      debugger
-      let iframeWindow: Window = (document.getElementById('iframe-for-ng1-page') as HTMLIFrameElement).contentWindow;
-      iframeWindow.postMessage({
-        eventName: 'pushContext',
-        data: ''
-      }, '*');
-      return;
-    }
-    if (msg.eventName === 'redirect') {
-      console.log('redirect');
-      return;
-    }
+    // Process result
+    return p;
   }
 
   _processMenuChanged(menu) {
     this.currentIsNg1Module = menu.isNg1;
     if (this.currentIsNg1Module) {
       let url = `http://10.16.85.170:8888${menu.url}?theme=core`;
-      // let url = 'http://10.16.85.170:8000/t.html';
       this.ng1PageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      this.negGlobalLoading.show();
     }
   }
 
   _init() {
+    this.ng1PageSrc = this.sanitizer.bypassSecurityTrustResourceUrl('');
+    this.messageProcessor.init(this);
+    window.addEventListener('message', evt => {
+      this.messageProcessor.processMessage(evt);
+    }, false);
+
+    this.negEventBus.on('nkShell.menuChanged', data => {
+      this._processMenuChanged(data);
+    });
+
+    this._initMenuData();
+  }
+  _initMenuData() {
     this.menuData = [{
       icon: 'fa fa-cogs',
       name: 'Control Panel',
@@ -118,19 +164,4 @@ export class AppComponent implements OnInit, AfterContentInit {
         url: 'nkCommon.test'
       }];
   }
-
-  ngAfterContentInit() {
-    $(function () {
-      $('.nk-menu li').on('click', function (e) {
-        var $this = $(this);
-        $this[$this.hasClass('open') ? 'removeClass' : 'addClass']('open');
-        if ($this.find('ul').length === 0) {
-          $('.nk-menu li').removeClass('active');
-          $this.addClass('active').parents('li').addClass('active');
-        }
-        return false;
-      });
-    });
-  }
-
 }

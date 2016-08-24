@@ -12,6 +12,8 @@ import { NegTracker } from './services/negTracker';
 import { NegUserProfile } from './services/negUserProfile';
 import { NegContext } from './services/negContext';
 import { NegGlobalLoading } from './services/negGlobalLoading';
+import { NegProgress } from './services/negProgress';
+import { NegAuth } from './services/negAuth';
 
 // All services export 
 export * from './services/negAlert';
@@ -27,6 +29,8 @@ export * from './services/negTracker';
 export * from './services/negUserProfile';
 export * from './services/negContext';
 export * from './services/negGlobalLoading';
+export * from './services/negProgress';
+export * from './services/negAuth';
 
 // Export all services
 export const CORE_SERVICES = [
@@ -42,7 +46,9 @@ export const CORE_SERVICES = [
   NegTracker,
   NegUserProfile,
   NegUtil,
-  NegGlobalLoading
+  NegGlobalLoading,
+  NegProgress,
+  NegAuth
 ];
 
 // All pipes import 
