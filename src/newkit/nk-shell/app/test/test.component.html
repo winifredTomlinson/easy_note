@@ -1,4 +1,15 @@
 <fieldset>
+  <legend>Neg Alert</legend>
+  Type: <input type="text" [(ngModel)]="alert.type" class="form-control">
+  <br> Content: <input type="text" [(ngModel)]="alert.content" class="form-control">
+  <br>
+  Config: <textarea [(ngModel)]="alert.opt" class="form-control" rows="5"></textarea>
+  <button (click)="testNegAlert()">Alert</button>
+  <button (click)="testNegAlertPrompt()">Prompt</button>
+  <button (click)="testNegAlertNotice()">Notice</button>
+</fieldset>
+
+<fieldset>
   <legend>Global Config</legend>
   SystemName: {{systemName}}
   <button (click)="testGlobalConfig()">Request GlobalConfig</button>
@@ -35,9 +46,7 @@
   <label><input type="radio" value="local" [(ngModel)]="st.storageType">LocalStorage</label>
   <label><input type="radio" value="session" [(ngModel)]="st.storageType">SessionStorage</label>
   <label><input type="radio" value="memory" [(ngModel)]="st.storageType">Memory</label>
-  <br>
-  Name: <input type="text" [(ngModel)]="st.storageName">
-  Value: <input type="text" [(ngModel)]="st.storageValue">
+  <br> Name: <input type="text" [(ngModel)]="st.storageName"> Value: <input type="text" [(ngModel)]="st.storageValue">
   <br>
   <button (click)="setStorageValue()">SET</button>
   <button (click)="getStorageValue()">Get</button>
@@ -55,4 +64,9 @@
 <fieldset>
   <legend>Neg Global Loading</legend>
   <button (click)="testStartGlobalLoading()">Start Loading</button>
+</fieldset>
+
+<fieldset>
+  <legend>Neg Progress</legend>
+  <button (click)="testStartProgress()">Start Progress</button>
 </fieldset>

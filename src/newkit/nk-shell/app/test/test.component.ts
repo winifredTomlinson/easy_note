@@ -2,7 +2,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
 
 import { NegGlobalConfig, NegConfigService, NegDfisUploader,
   NegEventBus, NegTracker, NegStorage, NegUserProfile,
-  NegGlobalLoading
+  NegGlobalLoading, NegProgress, NegAlert
 } from './../../../nk-core';
 
 @Component({
@@ -21,6 +21,13 @@ export class ServicesTestComponent implements OnInit {
   public file1: File;
   public fileUrl: string;
   public st = { storageType: 'cookie', storageName: 'test', storageValue: 'testvalue' };
+  private alert: { type: string, content: string, opt?: string } = {
+    type: 'msg', content: 'Hello', opt: JSON.stringify({
+      icon: 'info',
+      shift: 1,
+      title: 'test'
+    }, null, '\t')
+  };
 
   constructor(
     private negGlobalConfig: NegGlobalConfig,
@@ -30,7 +37,9 @@ export class ServicesTestComponent implements OnInit {
     private negTracker: NegTracker,
     private negStorage: NegStorage,
     private negUserProfile: NegUserProfile,
-    private negGlobalLoading: NegGlobalLoading
+    private negGlobalLoading: NegGlobalLoading,
+    private negProgress: NegProgress,
+    private negAlert: NegAlert
   ) {
 
   }
@@ -43,6 +52,28 @@ export class ServicesTestComponent implements OnInit {
       .then(() => {
         let value = this.negUserProfile.get('system');
       });
+  }
+
+  public testNegAlert() {
+    this.negAlert[this.alert.type](this.alert.content, JSON.parse(this.alert.opt), () => {
+      this.negAlert.msg('EN');
+    }, () => {
+      this.negAlert.msg('Not');
+      return false;
+    });
+  }
+
+  public testNegAlertPrompt() {
+    this.negAlert.prompt('', { type: 'password', maxlength: 10 }, index => {
+      this.negAlert.success('OK');
+      this.negAlert.close(index);
+    })
+  }
+
+  public testNegAlertNotice() {
+    this.negAlert.notice('abc', {}, () => {
+      this.negAlert.success('OK');
+    })
   }
 
   public testGlobalConfig() {
@@ -122,6 +153,13 @@ export class ServicesTestComponent implements OnInit {
     this.negGlobalLoading.show('这是一个测试');
     setTimeout(() => {
       this.negGlobalLoading.hide();
+    }, 3000);
+  }
+
+  public testStartProgress() {
+    this.negProgress.start();
+    setTimeout(() => {
+      this.negProgress.done();
     }, 3000);
   }
 }

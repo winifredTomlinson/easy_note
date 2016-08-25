@@ -2,6 +2,9 @@ import 'normalize.css';
 import 'jquery';
 import './../../config/config';
 
+// Lodash
+import 'lodash';
+
 // Polyfills
 import 'core-js';
 import 'reflect-metadata';

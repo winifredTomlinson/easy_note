@@ -85,3 +85,12 @@ body {
   border-top-color: #e7ba08;
   animation: spin 1.5s linear infinite
 }
+
+#nprogress .bar {
+    background: #b52c26;
+}
+
+#nprogress .spinner-icon{
+  border-top-color: #b52c26;
+  border-left-color: #b52c26;
+}

@@ -2,7 +2,7 @@ import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/cor
 import { DomSanitizationService, SafeResourceUrl } from '@angular/platform-browser';
 import { UIROUTER_DIRECTIVES } from 'ui-router-ng2';
 
-import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil } from './../nk-core';
+import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil, NegProgress } from './../nk-core';
 import { MenuComponent } from './components';
 import { MessageProcessor, AuthService } from './services';
 
@@ -29,8 +29,9 @@ export class AppComponent implements OnInit, AfterContentInit {
     private sanitizer: DomSanitizationService,
     public negEventBus: NegEventBus,
     public negGlobalLoading: NegGlobalLoading,
+    public negProgress: NegProgress,
     private negStorage: NegStorage,
-    private negAuth: NegAuth,
+    public negAuth: NegAuth,
     private negAjax: NegAjax,
     private negUtil: NegUtil,
     private messageProcessor: MessageProcessor,
@@ -100,9 +101,19 @@ export class AppComponent implements OnInit, AfterContentInit {
   _processMenuChanged(menu) {
     this.currentIsNg1Module = menu.isNg1;
     if (this.currentIsNg1Module) {
-      let url = `http://10.16.85.170:8888${menu.url}?theme=core`;
-      this.ng1PageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-      this.negGlobalLoading.show();
+      this.messageProcessor.sendMessageEvent('pageFaq');
+      let timerId: any = setTimeout(() => {
+        let url = `http://10.16.85.170:8888${menu.url}?theme=core`;
+        this.ng1PageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        this.negGlobalLoading.show();
+      }, 100);
+      let sub = this.negEventBus.on('postMessage.pageOk', data => {
+        console.log('canceled');
+        window.clearTimeout(timerId);
+        this.messageProcessor.sendMessageEvent('redirect', menu.url);
+        sub.unsubscribe();
+        return;
+      });
     }
   }
 

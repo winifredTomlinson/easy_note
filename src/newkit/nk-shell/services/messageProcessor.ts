@@ -15,6 +15,19 @@ export class MessageProcessor {
     this.app = app;
   }
 
+  public sendMessageEvent(eventName: string, data?: any) {
+    try {
+      let iframeWindow = (document.getElementById('iframe-for-ng1-page') as HTMLIFrameElement).contentWindow;
+      iframeWindow.postMessage({
+        eventName: eventName,
+        data: data
+      }, '*');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   public processMessage(evt: any) {
     let app = this.app;
     let msgObj = evt.data;
@@ -22,6 +35,7 @@ export class MessageProcessor {
     if (typeof msgObj !== 'object' || !msgObj.eventName) {
       return;
     }
+    this.app.negEventBus.emit(`postMessage.${msgObj.eventName}`, msgObj.data);
     switch (msgObj.eventName) {
       case 'resize':
         this._processResize(msgObj.data);
@@ -32,6 +46,10 @@ export class MessageProcessor {
       case 'loading.show':
       case 'loading.hide':
         this._processLoading(msgObj.eventName === 'loading.show');
+        break;
+      case 'progress.start':
+      case 'progress.done':
+        this._processProgress(msgObj.eventName === 'progress.start')
         break;
       case 'redirect':
         this._processRedirect();
@@ -44,11 +62,7 @@ export class MessageProcessor {
   }
 
   private _pushContext() {
-    let iframeWindow = (document.getElementById('iframe-for-ng1-page') as HTMLIFrameElement).contentWindow;
-    iframeWindow.postMessage({
-      eventName: 'pushContext',
-      data: ''
-    }, '*');
+    this.sendMessageEvent('pushContext', this.app.negAuth.getAuthData());
   }
 
   private _processLoading(isShown: boolean) {
@@ -57,6 +71,14 @@ export class MessageProcessor {
       return;
     }
     this.app.negGlobalLoading.hide();
+  }
+
+  private _processProgress(isStart: boolean) {
+    if (isStart) {
+      this.app.negProgress.start();
+      return;
+    }
+    this.app.negProgress.done();
   }
 
   private _processRedirect() {
