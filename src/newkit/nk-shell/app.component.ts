@@ -159,6 +159,10 @@ export class AppComponent implements OnInit, AfterContentInit {
             url: '/system/deploy',
             isNg1: true
           }]
+      }, {
+        icon: 'fa fa-home',
+        name: 'Home(Test)',
+        url: 'nkShell.home'
       }]
     }, {
         icon: 'fa fa-link',
