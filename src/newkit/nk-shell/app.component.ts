@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
-import { DomSanitizationService, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { UIROUTER_DIRECTIVES } from 'ui-router-ng2';
 
 import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil, NegProgress } from './../nk-core';
@@ -7,11 +7,9 @@ import { MenuComponent } from './components';
 import { MessageProcessor, AuthService } from './services';
 
 @Component({
-  moduleId: module.id,
   selector: 'nk-app',
   template: require('./app.component.html'),
   styles: [require('./app.component.styl')],
-  directives: [UIROUTER_DIRECTIVES, MenuComponent],
   providers: [MessageProcessor, AuthService]
 })
 export class AppComponent implements OnInit, AfterContentInit {
@@ -26,7 +24,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   private rootPath: string;
 
   constructor(
-    private sanitizer: DomSanitizationService,
+    private sanitizer: DomSanitizer,
     public negEventBus: NegEventBus,
     public negGlobalLoading: NegGlobalLoading,
     public negProgress: NegProgress,
@@ -160,10 +158,10 @@ export class AppComponent implements OnInit, AfterContentInit {
             isNg1: true
           }]
       }, {
-        icon: 'fa fa-home',
-        name: 'Home(Test)',
-        url: 'nkShell.home'
-      }]
+          icon: 'fa fa-home',
+          name: 'Home(Test)',
+          url: 'nkShell.home'
+        }]
     }, {
         icon: 'fa fa-link',
         name: 'Global Configuration',

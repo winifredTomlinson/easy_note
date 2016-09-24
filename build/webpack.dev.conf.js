@@ -13,7 +13,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: '#eval-source-map',
   plugins: [
     new CommonsChunkPlugin({
-      names: ['vendor']
+      names: ['nk-core', 'vendor']
     }),
     new webpack.DefinePlugin({
       'process.env': config.dev.env

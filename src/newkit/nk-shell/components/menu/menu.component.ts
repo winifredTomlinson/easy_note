@@ -1,15 +1,17 @@
 import { Component, Injectable, Input } from '@angular/core';
 import { UIRouter } from 'ui-router-ng2';
 
-import { NegEventBus } from './../../nk-core';
+import { NegEventBus } from './../../../nk-core';
 
 @Component({
   selector: '[nk-menu]',
-  template: require('./menu.html')
-  // styles: [require('./menu.css')]
+  template: require('./menu.html'),
+  styles: [require('./menu.css')]
 })
+
 @Injectable()
 export class MenuComponent {
+
   @Input() private menuData: Array<any>;
 
   constructor(private uiRouter: UIRouter, private negEventBus: NegEventBus) {

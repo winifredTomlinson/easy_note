@@ -6,7 +6,6 @@ import { NegGlobalConfig, NegConfigService, NegDfisUploader,
 } from './../../../nk-core';
 
 @Component({
-  moduleId: module.id,
   selector: 'nk-shell-test',
   template: require('./test.component.html')
 })

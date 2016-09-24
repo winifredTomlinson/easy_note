@@ -3,8 +3,7 @@ import {UIROUTER_DIRECTIVES} from "ui-router-ng2";
 
 @Component({
   selector: 'nk-home',
-  template: require('./home.html'),
-  directives: [UIROUTER_DIRECTIVES]
+  template: require('./home.html')
 })
 
 export class HomeComponent {

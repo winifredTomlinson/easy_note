@@ -1,4 +1,3 @@
-import 'normalize.css';
 import 'jquery';
 import './../../config/config';
 
