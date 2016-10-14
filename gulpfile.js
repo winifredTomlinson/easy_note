@@ -53,9 +53,9 @@ gulp.task('nk-shell', () => {
 
 gulp.task('vendor', () => {
   return gulp.src([
-    node_modules / lodash / lodash.js,
-    node_modules / zone.js / dist / zone.js,
-    node_modules / reflect - metadata / Reflect.js,
+    'node_modules/lodash/lodash.js',
+    'node_modules/zone.js/dist/zone.js',
+    'node_modules/reflect-metadata/Reflect.js',
     'node_modules/systemjs/dist/system.src.js',
     'node_modules/rxjs/bundles/Rx.js',
     'node_modules/@angular/core/bundles/core.umd.js',
@@ -73,4 +73,4 @@ gulp.task('vendor', () => {
     .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('default', gulp.series('vendor', 'nk-core', 'nk-shell'));
+gulp.task('default', gulp.parallel('vendor', 'nk-core', 'nk-shell'));

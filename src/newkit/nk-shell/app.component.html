@@ -1,7 +1,7 @@
 <div class="app-page-login" *ngIf="!isLogged">
 	Now loading, please waiting...
 </div>
-<div class="app-page-main" *ngIf="isLogged">
+<div class="app-page-main" [hidden]="!isLogged">
 	<nav class="navbar navbar-dark bg-blue">
 		<a class="navbar-brand" href="#">
 			<img src="http://10.16.75.27:8101/modules/nk-shell/resources/images/logo.png" class="logo" alt=""></a>
@@ -55,9 +55,9 @@
 			<li class="active">Data</li>
 		</ol>
 		<div class="content">
-			<router-outlet></router-outlet>
-			<iframe [style.display]="currentIsNg1Module ? 'block': 'none'" id="iframe-for-ng1-page" [src]="ng1PageSrc" frameborder="0"
-				scrolling="no" [style.height]="iframeHeight"></iframe>
+			<router-outlet [hidden]="currentIsNg1Module" ></router-outlet>
+			<iframe [hidden]="currentIsNg1Module ? 'block': 'none'" id="iframe-for-ng1-page" [src]="ng1PageSrc" frameborder="0" scrolling="no"
+				[style.height]="iframeHeight"></iframe>
 		</div>
 	</div>
 </div>

@@ -14,8 +14,6 @@ import {
 } from './app';
 
 const appRoutes: Routes = [{
-  path: '', component: AboutComponent
-}, {
   path: 'system', component: LayoutComponent, children: [
     { path: 'menu-setting', component: MenuSettingComponent },
     { path: 'global-configuration', component: GlobalConfigurationComponent },
@@ -24,6 +22,10 @@ const appRoutes: Routes = [{
     { path: 'home', component: ServicesTestComponent },
     { path: 'about', component: AboutComponent },
   ],
+}, {
+  path: '', component: AboutComponent
+}, {
+  path: '**', component: NotFoundComponent
 }];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, { useHash: true });
