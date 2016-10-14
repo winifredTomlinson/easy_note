@@ -9,4 +9,8 @@ export class GlobalConfigurationComponent implements OnInit {
 
   ngOnInit() { }
 
+  private onButtonClick(){
+    alert('abc');
+  }
+
 }

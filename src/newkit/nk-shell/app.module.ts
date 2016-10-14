@@ -23,7 +23,7 @@ trace.enable(Category.TRANSITION, Category.VIEWCONFIG);
       states: APP_STATES,
       useHash: true,
       configClass: NkUIRouterConfig
-    }),
+    })
   ],
   declarations: [AppComponent, ...ALL_PAGES, ...ALL_COMPONENTS],
   providers: [

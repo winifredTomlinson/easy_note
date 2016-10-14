@@ -9,7 +9,9 @@ import { MessageProcessor, AuthService } from './services';
 @Component({
   selector: 'nk-app',
   template: require('./app.component.html'),
-  styles: [require('./app.component.styl')],
+  styles: [
+    require('!raw!./app.component.styl') 
+  ],
   providers: [MessageProcessor, AuthService]
 })
 export class AppComponent implements OnInit, AfterContentInit {
@@ -145,36 +147,36 @@ export class AppComponent implements OnInit, AfterContentInit {
           active: true,
           isNg1: true
         }, {
-            icon: 'fa fa-search',
-            name: 'Global Search',
-            url: '/system/global-search',
-            // url: 'nkShell.globalSearch',
-            isNg1: true,
-          }, {
-            icon: 'fa fa-rss',
-            name: 'Deploy Module',
-            // url: 'nkShell.deploy',
-            url: '/system/deploy',
-            isNg1: true
-          }]
-      }, {
-          icon: 'fa fa-home',
-          name: 'Home(Test)',
-          url: 'nkShell.home'
+          icon: 'fa fa-search',
+          name: 'Global Search',
+          url: '/system/global-search',
+          // url: 'nkShell.globalSearch',
+          isNg1: true,
+        }, {
+          icon: 'fa fa-rss',
+          name: 'Deploy Module',
+          // url: 'nkShell.deploy',
+          url: '/system/deploy',
+          isNg1: true
         }]
+      }, {
+        icon: 'fa fa-home',
+        name: 'Home(Test)',
+        url: 'nkShell.home'
+      }]
     }, {
-        icon: 'fa fa-link',
-        name: 'Global Configuration',
-        url: 'nkShell.globalConfiguration',
-        children: []
-      }, {
-        icon: 'fa fa-plus',
-        name: 'Comp1',
-        url: 'nkCommon.comp1'
-      }, {
-        icon: 'fa fa-plus',
-        name: 'Not Found',
-        url: 'nkCommon.test'
-      }];
+      icon: 'fa fa-link',
+      name: 'Global Configuration',
+      url: 'nkShell.globalConfiguration',
+      children: []
+    }, {
+      icon: 'fa fa-plus',
+      name: 'Comp1',
+      url: 'nkCommon.comp1'
+    }, {
+      icon: 'fa fa-plus',
+      name: 'Not Found',
+      url: 'nkCommon.test'
+    }];
   }
 }

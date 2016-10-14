@@ -6,7 +6,7 @@ import { NegEventBus } from './../../../nk-core';
 @Component({
   selector: '[nk-menu]',
   template: require('./menu.html'),
-  styles: [require('./menu.css')]
+  styles: [require('!raw!./menu.css')]
 })
 
 @Injectable()

@@ -1,24 +1,21 @@
-import 'jquery';
 import './../../config/config';
+
+require('@progress/kendo-angular-grid/dist/npm/css/main.css');
+require('@progress/kendo-angular-charts/dist/npm/css/main.css');
+require('@progress/kendo-angular-dropdowns/dist/npm/css/main.css');
+require('@progress/kendo-angular-inputs/dist/npm/css/main.css');
+require('@progress/kendo-angular-layout/dist/npm/css/main.css');
+require('@progress/kendo-angular-dialog/dist/npm/css/main.css');
+require('@progress/kendo-angular-upload/dist/npm/css/main.css');
+require('@progress/kendo-angular-buttons/dist/npm/css/main.css');
+require('@progress/kendo-angular-popup/dist/npm/css/main.css');
+require('@progress/kendo-angular-scrollview/dist/npm/css/main.css')
 
 // Lodash
 import 'lodash';
 
 // Polyfills
 import 'core-js';
-import 'reflect-metadata';
-import 'zone.js/dist/zone';
 
-// Angular 2
-import '@angular/platform-browser';
-import '@angular/platform-browser-dynamic';
-import '@angular/core';
-import '@angular/common';
-import '@angular/http';
-import '@angular/forms';
-
-//RxJS
-import 'rxjs';
-
-//UIRouter
+// UIRouter
 import 'ui-router-ng2';
