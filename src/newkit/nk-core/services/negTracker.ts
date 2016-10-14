@@ -14,7 +14,7 @@ export class NegTracker {
   constructor(private negAjax: NegAjax) { }
 
   startTrack(moduleName: string, action: string, label?: string, userId?: string) {
-    if (!module) {
+    if (!moduleName) {
       throw new Error('param moduleName required.');
     }
     if (!action) {

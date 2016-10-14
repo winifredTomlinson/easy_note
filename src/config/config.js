@@ -8,4 +8,4 @@ const config = {
   Applications: ['1f48a705-b734-476c-b32b-29359177c122']
 };
 
-(<any>window).NewkitConf = config;
+window.NewkitConf = config;

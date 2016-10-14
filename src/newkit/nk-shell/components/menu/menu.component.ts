@@ -1,20 +1,24 @@
-import { Component, Injectable, Input } from '@angular/core';
+import { Component, Injectable, Input, AfterViewInit } from '@angular/core';
 import { UIRouter } from 'ui-router-ng2';
 
 import { NegEventBus } from './../../../nk-core';
 
 @Component({
   selector: '[nk-menu]',
-  template: require('./menu.html'),
-  styles: [require('!raw!./menu.css')]
+  templateUrl: './menu.html',
+  // styles: [require('!raw!./menu.css')]
 })
 
 @Injectable()
-export class MenuComponent {
+export class MenuComponent implements AfterViewInit {
 
   @Input() private menuData: Array<any>;
 
   constructor(private uiRouter: UIRouter, private negEventBus: NegEventBus) {
+  }
+
+  ngAfterViewInit(){
+    console.log(this.menuData);
   }
 
   public menuCollapse(menu: any, evt?: any): void {

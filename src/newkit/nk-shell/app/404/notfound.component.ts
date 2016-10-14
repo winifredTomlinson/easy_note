@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'nk-shell-404',
-  template: require('./notfound.html')
+  templateUrl: './notfound.html'
 })
 export class NotFoundComponent implements OnInit {
   constructor() { }

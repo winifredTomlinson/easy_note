@@ -7,7 +7,7 @@ import { NegGlobalConfig, NegConfigService, NegDfisUploader,
 
 @Component({
   selector: 'nk-shell-test',
-  template: require('./test.component.html')
+  templateUrl: './test.component.html'
 })
 @Injectable()
 export class ServicesTestComponent implements OnInit {

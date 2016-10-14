@@ -8,9 +8,9 @@ import { MessageProcessor, AuthService } from './services';
 
 @Component({
   selector: 'nk-app',
-  template: require('./app.component.html'),
+  templateUrl: './app.component.html',
   styles: [
-    require('!raw!./app.component.styl') 
+    // require('!raw!./app.component.styl') 
   ],
   providers: [MessageProcessor, AuthService]
 })
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, AfterContentInit {
           return console.log('login failed:', reason);
         }
         let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${this.rootPath}/`;
-        window.location.href = ssoLoginUrl;
+        // window.location.href = ssoLoginUrl;
       });
   }
 
@@ -127,7 +127,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.negEventBus.on('nkShell.menuChanged', data => {
       this._processMenuChanged(data);
     });
-
+    
     this._initMenuData();
   }
   _initMenuData() {

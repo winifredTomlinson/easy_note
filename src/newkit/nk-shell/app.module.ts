@@ -1,4 +1,4 @@
-import '!style!css!./css/layout.css';
+// import '!style!css!./css/layout.css';
 
 import { NgModule, NgModuleFactoryLoader } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
