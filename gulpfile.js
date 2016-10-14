@@ -1,35 +1,61 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const tsc = require('gulp-typescript');
+const ts = require('gulp-typescript');
+const inlineNg2Template = require('gulp-inline-ng2-template');
 const embedTemplates = require('gulp-angular-embed-templates');
 
-gulp.task('nk-core', () => {
-  var tsResult = gulp.src('./src/newkit/nk-core/**/*.ts')
-    .pipe(embedTemplates()) // inline templates
-    .pipe(tsc.createProject('tsconfig.json', {
-      outFile: 'nk-core.js'
-    })());
+let tsOption = {
+  target: 'es5',
+  module: 'system',
+  declaration: false,
+  noLib: false,
+  moduleResolution: 'node',
+  noImplicitAny: false,
+  removeComments: true,
+  preserveConstEnums: true,
+  experimentalDecorators: true,
+  emitDecoratorMetadata: true,
+  lib: [
+    'es2015',
+    'dom'
+  ]
+};
 
-  return tsResult.js
+gulp.task('nk-core', () => {
+  let nkCoreOpt = Object.assign({}, tsOption, {
+    outFile: 'nk-core.js'
+  });
+  return gulp.src([
+    './src/declare.d.ts',
+    './src/newkit/nk-core/**/*.ts'
+  ])
+    .pipe(inlineNg2Template({
+      useRelativePaths: true
+    })) // inline templates
+    .pipe(ts(nkCoreOpt))
     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('nk-shell', () => {
-  var tsResult = gulp.src('./src/newkit/nk-shell/**/*.ts')
-    .pipe(embedTemplates()) // inline templates
-    .pipe(tsc.createProject('tsconfig.json', {
-      outFile: 'nk-shell.js'
-    })());
-
-  return tsResult.js
+  let nkShellOpt = Object.assign({}, tsOption, {
+    outFile: 'nk-shell.js'
+  });
+  return gulp.src([
+    './src/declare.d.ts',
+    './src/newkit/nk-shell/**/*.ts'
+  ])
+    .pipe(inlineNg2Template({
+      useRelativePaths: true
+    })) // inline templates
+    .pipe(ts(nkShellOpt))
     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('vendor', () => {
   return gulp.src([
-    "node_modules/lodash/lodash.js",
-    "node_modules/zone.js/dist/zone.js",
-    "node_modules/reflect-metadata/Reflect.js",
+    node_modules / lodash / lodash.js,
+    node_modules / zone.js / dist / zone.js,
+    node_modules / reflect - metadata / Reflect.js,
     'node_modules/systemjs/dist/system.src.js',
     'node_modules/rxjs/bundles/Rx.js',
     'node_modules/@angular/core/bundles/core.umd.js',
@@ -39,8 +65,8 @@ gulp.task('vendor', () => {
     'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
     'node_modules/@angular/forms/bundles/forms.umd.js',
     'node_modules/@angular/http/bundles/http.umd.js',
-    'node_modules/@angular/router/bundles/router.umd.js',
-    'node_modules/ui-router-ng2/_bundles/ui-router-ng2.js'
+    'node_modules/@angular/router/bundles/router.umd.js'
+    // 'node_modules/ui-router-ng2/_bundles/ui-router-ng2.js'
   ])
     .pipe(concat('vendor.js'))
     // .pipe(uglify())

@@ -1,5 +1,4 @@
 import { Component, Injectable, Input, AfterViewInit } from '@angular/core';
-import { UIRouter } from 'ui-router-ng2';
 
 import { NegEventBus } from './../../../nk-core';
 
@@ -14,7 +13,7 @@ export class MenuComponent implements AfterViewInit {
 
   @Input() private menuData: Array<any>;
 
-  constructor(private uiRouter: UIRouter, private negEventBus: NegEventBus) {
+  constructor(private negEventBus: NegEventBus) {
   }
 
   ngAfterViewInit(){
@@ -40,7 +39,7 @@ export class MenuComponent implements AfterViewInit {
       }
       if (url) {
         menu.active = true;
-        this.uiRouter.stateService.go(url, null, null);
+        // this.uiRouter.stateService.go(url, null, null);
       }
     }
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { UIROUTER_DIRECTIVES } from 'ui-router-ng2';
 
 import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil, NegProgress } from './../nk-core';
 import { MenuComponent } from './components';
@@ -55,7 +54,7 @@ export class AppComponent implements OnInit, AfterContentInit {
           return console.log('login failed:', reason);
         }
         let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${this.rootPath}/`;
-        // window.location.href = ssoLoginUrl;
+        window.location.href = ssoLoginUrl;
       });
   }
 

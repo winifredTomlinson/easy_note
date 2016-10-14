@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'nk-shell-layout',
-  template: '<div class="nk-shell"><ui-view></ui-view></div>'
+  template: '<div class="nk-shell"><router-outlet></router-outlet></div>'
 })
 export class LayoutComponent implements OnInit {
   constructor() {

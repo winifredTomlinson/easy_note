@@ -1,63 +1,63 @@
 <div class="app-page-login" *ngIf="!isLogged">
-  Now loading, please waiting...
+	Now loading, please waiting...
 </div>
 <div class="app-page-main" *ngIf="isLogged">
-  <nav class="navbar navbar-dark bg-blue">
-    <a class="navbar-brand" href="#">
-      <img src="http://10.16.75.27:8101/modules/nk-shell/resources/images/logo.png" class="logo" alt=""></a>
-    <ul class="nav navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav pull-right">
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
-      </li>
-      <li class="nav-item active" style="position:relative;">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Home <span class="sr-only">(current)</span></a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-      </li>
+	<nav class="navbar navbar-dark bg-blue">
+		<a class="navbar-brand" href="#">
+			<img src="http://10.16.75.27:8101/modules/nk-shell/resources/images/logo.png" class="logo" alt=""></a>
+		<ul class="nav navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">About</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Contact</a>
+			</li>
+		</ul>
+		<ul class="nav navbar-nav pull-right">
+			<li class="nav-item">
+				<a class="nav-link" href="#">About</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Contact</a>
+			</li>
+			<li class="nav-item active" style="position:relative;">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Home <span class="sr-only">(current)</span></a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">Action</a>
+					<a class="dropdown-item" href="#">Another action</a>
+					<a class="dropdown-item" href="#">Something else here</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Separated link</a>
+				</div>
+			</li>
 
-    </ul>
-  </nav>
-  <div class="nk-sidebar">
-    <div class="nk-menu-search">
-      <div class="input-group input-group-sm">
-        <input type="text" class="form-control" placeholder="Search menu...">
-        <span class="input-group-addon">
+		</ul>
+	</nav>
+	<div class="nk-sidebar">
+		<div class="nk-menu-search">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" placeholder="Search menu...">
+				<span class="input-group-addon">
           <i class="fa fa-search"></i>
         </span>
-      </div>
-    </div>
-    <div class="nk-menu" nk-menu [menuData]="menuData">
-    </div>
-  </div>
-  <div class="content-wrapper">
-    <ol class="breadcrumb">
-      <li><a href="#">Home1</a></li>
-      <li><a href="#">Library</a></li>
-      <li class="active">Data</li>
-    </ol>
-    <div class="content">
-      <ui-view *ngIf="!currentIsNg1Module"></ui-view>
-      <iframe [style.display]="currentIsNg1Module ? 'block': 'none'" id="iframe-for-ng1-page" [src]="ng1PageSrc" frameborder="0"
-        scrolling="no" [style.height]="iframeHeight"></iframe>
-    </div>
-  </div>
+			</div>
+		</div>
+		<div class="nk-menu" nk-menu [menuData]="menuData">
+		</div>
+	</div>
+	<div class="content-wrapper">
+		<ol class="breadcrumb">
+			<li><a href="#">Home1</a></li>
+			<li><a href="#">Library</a></li>
+			<li class="active">Data</li>
+		</ol>
+		<div class="content">
+			<router-outlet></router-outlet>
+			<iframe [style.display]="currentIsNg1Module ? 'block': 'none'" id="iframe-for-ng1-page" [src]="ng1PageSrc" frameborder="0"
+				scrolling="no" [style.height]="iframeHeight"></iframe>
+		</div>
+	</div>
 </div>
