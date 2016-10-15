@@ -8,9 +8,7 @@ import { MessageProcessor, AuthService } from './services';
 @Component({
   selector: 'nk-app',
   templateUrl: './app.component.html',
-  styles: [
-    // require('!raw!./app.component.styl') 
-  ],
+  styleUrls: ['./app.css'],
   providers: [MessageProcessor, AuthService]
 })
 export class AppComponent implements OnInit, AfterContentInit {
@@ -126,7 +124,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.negEventBus.on('nkShell.menuChanged', data => {
       this._processMenuChanged(data);
     });
-    
+
     this._initMenuData();
   }
   _initMenuData() {
