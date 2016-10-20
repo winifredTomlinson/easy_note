@@ -14,23 +14,27 @@ import { NegContext } from './services/negContext';
 import { NegGlobalLoading } from './services/negGlobalLoading';
 import { NegProgress } from './services/negProgress';
 import { NegAuth } from './services/negAuth';
+import { NegBreadcrumb } from './services/negBreadcrumb';
 
 // All services export 
-export * from './services/negAlert';
-export * from './services/negAjax';
-export * from './services/negDfisUploader';
-export * from './services/negModuleLoader';
-export * from './services/negUtil';
-export * from './services/negGlobalConfig';
-export * from './services/negConfigService';
-export * from './services/negEventBus';
-export * from './services/negStorage';
-export * from './services/negTracker';
-export * from './services/negUserProfile';
-export * from './services/negContext';
-export * from './services/negGlobalLoading';
-export * from './services/negProgress';
-export * from './services/negAuth';
+export {
+  NegAlert,
+  NegAjax,
+  NegConfigService,
+  NegContext,
+  NegDfisUploader,
+  NegEventBus,
+  NegGlobalConfig,
+  NegModuleLoader,
+  NegStorage,
+  NegTracker,
+  NegUserProfile,
+  NegUtil,
+  NegGlobalLoading,
+  NegProgress,
+  NegAuth,
+  NegBreadcrumb
+};
 
 // Export all services
 export const CORE_SERVICES = [
@@ -48,5 +52,6 @@ export const CORE_SERVICES = [
   NegUtil,
   NegGlobalLoading,
   NegProgress,
-  NegAuth
+  NegAuth,
+  NegBreadcrumb
 ];

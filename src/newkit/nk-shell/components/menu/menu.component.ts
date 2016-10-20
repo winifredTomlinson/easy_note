@@ -1,7 +1,7 @@
 import { Component, Injectable, Input, ElementRef, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NegEventBus } from './../../../nk-core';
+import { NegEventBus, NegBreadcrumb } from './../../../nk-core';
 
 @Component({
   selector: '[nk-menu]',
@@ -16,8 +16,9 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
+    private router: Router,
     private negEventBus: NegEventBus,
-    private router: Router
+    private negBreadcrumb: NegBreadcrumb
   ) {
   }
 
@@ -25,20 +26,28 @@ export class MenuComponent implements OnInit {
     this.elementRef.nativeElement.className = 'nk-menu';
   }
 
-  public menuClick(evt, menu: any): void {
+  public menuClick(evt, menu: any, m2?: any, m3?: any): void {
     evt.preventDefault();
     evt.stopPropagation();
     if (menu.children && menu.children.length > 0) {
       this.menuCollapse(menu);
     } else {
       let url = menu.url;
+      let breadcrumbs = [menu.name];
+      if (m2) {
+        breadcrumbs.unshift(m2.name);
+      }
+      if (m3) {
+        breadcrumbs.unshift(m3.name);
+      }
+      this.negBreadcrumb.setBreadcrumbs(breadcrumbs);
       this.negEventBus.emit('nkShell.menuChanged', menu);
       if (menu.isNg1) {
         return;
       }
       if (url) {
         menu.active = true;
-        this.router.navigateByUrl(url);
+        this.router.navigate([url]);
       }
     }
   }

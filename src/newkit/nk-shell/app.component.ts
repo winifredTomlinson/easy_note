@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -21,6 +21,10 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   private isLogged: boolean = false;
   private rootPath: string;
+
+  private breadcrumbs: string[] = ['Menu1', 'Level2', 'TESTST'];
+
+  private subs = [];
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -56,7 +60,17 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
+    let sub1 = this.negEventBus.on('global.setBreadcrumbs', data => {
+      this.breadcrumbs = data;
+    });
+    let sub2 = this.negEventBus.on('global.setLastBreadcrumb', data => {
+      this.breadcrumbs[this.breadcrumbs.length - 1] = data;
+    });
+    this.subs.push(sub1, sub2);
+  }
 
+  ngOnDestroy() {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
   _doLogin(): Promise<any> {

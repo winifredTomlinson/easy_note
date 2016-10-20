@@ -67,9 +67,10 @@
 	</div>
 	<div class="content-wrapper">
 		<ol class="breadcrumb">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Library</a></li>
-			<li class="active">Data</li>
+			<li *ngFor="let item of breadcrumbs; let i = index; trackBy: i" [ngClass]="{active: i === breadcrumbs.length - 1}">
+				<a *ngIf="i < breadcrumbs.length - 1" href="javascript:void(0)">{{ item }}</a>
+				<span *ngIf="i === breadcrumbs.length - 1">{{ item }}</span>
+			</li>
 		</ol>
 		<div class="content">
 			<router-outlet [hidden]="currentIsNg1Module"></router-outlet>
