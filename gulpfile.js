@@ -65,13 +65,13 @@ gulp.task('nk-shell', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('nk-common', () => {
+gulp.task('nk-test', () => {
   let nkShellOpt = Object.assign({}, tsOption, {
     outFile: 'modules/nk-common/app.js'
   });
   return gulp.src([
     './src/declare.d.ts',
-    './src/modules*/nk-common*/**/*.ts'
+    './src/modules/nk-common/**/*.ts'
   ])
     .pipe(inlineNg2Template({
       useRelativePaths: true
@@ -135,6 +135,7 @@ gulp.task('serve', () =>
   })
 );
 
+let watchTimer = null;
 gulp.task('watch', done => {
   let wather = gulp.watch([
     './index.html',
@@ -147,14 +148,17 @@ gulp.task('watch', done => {
     if (path.indexOf('.') < 0 || path.indexOf('___jb_') > 0) {
       return;
     }
-    notifier.notify({ title: 'Newkit', message: 'Start build and reload...' });
-    let tasks = [];
-    if (path.indexOf('nk-core') >= 0) {
-      tasks.push('nk-core');
-    } else if (path.indexOf('nk-shell') >= 0) {
-      tasks.push('nk-shell');
-    }
-    gulp.series(...tasks, 'bs-reload')();
+    clearTimeout(watchTimer);
+    watchTimer = setTimeout(() => {
+      notifier.notify({ title: 'Newkit', message: 'Start build and reload...' });
+      let tasks = [];
+      if (path.indexOf('nk-core') >= 0) {
+        tasks.push('nk-core');
+      } else if (path.indexOf('nk-shell') >= 0) {
+        tasks.push('nk-shell');
+      }
+      gulp.series(...tasks, 'bs-reload')();
+    }, 1000);
   });
   done();
 });

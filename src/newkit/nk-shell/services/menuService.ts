@@ -52,6 +52,10 @@ export class MenuService {
       icon: 'fa fa-plus',
       name: 'Not Found',
       url: '/nk-common/test'
+    }, {
+      icon: 'fa fa-plus',
+      name: 'NK Test Page1',
+      url: '/nk-test/page1'
     }];
   }
 }

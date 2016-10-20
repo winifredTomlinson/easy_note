@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil, NegProgress } from './../nk-core';
 import { MenuComponent } from './components';
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   constructor(
     private sanitizer: DomSanitizer,
+    private router: Router,
     public negEventBus: NegEventBus,
     public negGlobalLoading: NegGlobalLoading,
     public negProgress: NegProgress,
@@ -79,8 +81,10 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   _processMenuChanged(menu) {
-    this.currentIsNg1Module = menu.isNg1;
+    console.log(menu);
+    this.currentIsNg1Module = (menu.isNg1 === true);
     if (this.currentIsNg1Module) {
+      this.router.navigate(['/system/newkit1']);
       this.messageProcessor.sendMessageEvent('pageFaq');
       let timerId: any = setTimeout(() => {
         let url = `http://10.16.85.170:8888${menu.url}?theme=core`;

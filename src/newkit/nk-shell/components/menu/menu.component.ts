@@ -5,12 +5,11 @@ import { NegEventBus } from './../../../nk-core';
 
 @Component({
   selector: '[nk-menu]',
-  templateUrl: './menu.html',
-  // styles: [require('!raw!./menu.css')]
+  templateUrl: './menu.html'
 })
 
 @Injectable()
-export class MenuComponent implements OnInit, AfterViewInit {
+export class MenuComponent implements OnInit {
 
   @Input('nk-menu')
   private menuData: Array<any>;
@@ -24,13 +23,6 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.elementRef.nativeElement.className = 'nk-menu';
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      console.log(this.menuData, 'aaa');
-    }, 1000);
-
   }
 
   public menuClick(evt, menu: any): void {
