@@ -3,13 +3,12 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil, NegProgress } from './../nk-core';
 import { MenuComponent } from './components';
-import { MessageProcessor, AuthService } from './services';
+import { MessageProcessor, AuthService, MenuService } from './services';
 
 @Component({
   selector: 'nk-app',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.css'],
-  providers: [MessageProcessor, AuthService]
+  styleUrls: ['./app.css']
 })
 export class AppComponent implements OnInit, AfterContentInit {
 
@@ -32,7 +31,8 @@ export class AppComponent implements OnInit, AfterContentInit {
     private negAjax: NegAjax,
     private negUtil: NegUtil,
     private messageProcessor: MessageProcessor,
-    private authService: AuthService
+    private authService: AuthService,
+    private menuService: MenuService
   ) {
     this.rootPath = `${window.location.protocol}//${window.location.host}`;
   }
@@ -42,9 +42,6 @@ export class AppComponent implements OnInit, AfterContentInit {
       .then(() => {
         this.isLogged = true;
         this._init();
-        setTimeout(() => {
-          this._initMenuDataEvents();
-        }, 100);
         this.negStorage.local.set('login-error-count', 0);
       }).catch(reason => {
         let errorCount = (this.negStorage.local.get('login-error-count') || 0) + 1;
@@ -58,20 +55,6 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
 
-  }
-
-  _initMenuDataEvents() {
-    $(function () {
-      $('.nk-menu li').on('click', function (e) {
-        var $this = $(this);
-        $this[$this.hasClass('open') ? 'removeClass' : 'addClass']('open');
-        if ($this.find('ul').length === 0) {
-          $('.nk-menu li').removeClass('active');
-          $this.addClass('active').parents('li').addClass('active');
-        }
-        return false;
-      });
-    });
   }
 
   _doLogin(): Promise<any> {
@@ -125,55 +108,6 @@ export class AppComponent implements OnInit, AfterContentInit {
       this._processMenuChanged(data);
     });
 
-    this._initMenuData();
-  }
-  _initMenuData() {
-    this.menuData = [{
-      icon: 'fa fa-cogs',
-      name: 'Control Panel',
-      // url: '/home',
-      children: [{
-        icon: 'fa fa-wrench',
-        name: 'Maintain',
-        // url: '/',
-        children: [{
-          icon: 'fa fa-file',
-          name: 'Menu Setting',
-          // url: 'nkShell.menuSetting',
-          url: '/system/menu-setting',
-          active: true,
-          isNg1: true
-        }, {
-          icon: 'fa fa-search',
-          name: 'Global Search',
-          url: '/system/global-search',
-          // url: 'nkShell.globalSearch',
-          isNg1: true,
-        }, {
-          icon: 'fa fa-rss',
-          name: 'Deploy Module',
-          // url: 'nkShell.deploy',
-          url: '/system/deploy',
-          isNg1: true
-        }]
-      }, {
-        icon: 'fa fa-home',
-        name: 'Home(Test)',
-        url: 'nkShell.home'
-      }]
-    }, {
-      icon: 'fa fa-link',
-      name: 'Global Configuration',
-      url: 'nkShell.globalConfiguration',
-      children: []
-    }, {
-      icon: 'fa fa-plus',
-      name: 'Comp1',
-      url: 'nkCommon.comp1'
-    }, {
-      icon: 'fa fa-plus',
-      name: 'Not Found',
-      url: 'nkCommon.test'
-    }];
+    this.menuData = this.menuService.getMenuData();
   }
 }

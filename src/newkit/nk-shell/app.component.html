@@ -2,37 +2,56 @@
 	Now loading, please waiting...
 </div>
 <div class="app-page-main" [hidden]="!isLogged">
-	<nav class="navbar navbar-dark bg-blue">
-		<a class="navbar-brand" href="#">
-			<img src="http://10.16.75.27:8101/modules/nk-shell/resources/images/logo.png" class="logo" alt=""></a>
-		<ul class="nav navbar-nav">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-		</ul>
-		<ul class="nav navbar-nav pull-right">
-			<li class="nav-item">
-				<a class="nav-link" href="#">About</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Contact</a>
-			</li>
-			<li class="nav-item active" style="position:relative;">
-				<div class="dropdown open">
-					<a class="btn btn-secondary dropdown-toggle" href="http://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">
-    Dropdown link
-  </a>
-
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Another action</a>
-						<a class="dropdown-item" href="#">Something else here</a>
-					</div>
-				</div>
-			</li>
-
-		</ul>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+			<a class="navbar-brand" href="/">
+				<img src="http://10.16.75.27:8101/modules/nk-shell/resources/images/logo.png" class="logo" alt="">
+			</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="bg-green toolbar-item">
+					<a href="#">
+						<i class="fa fa-globe"></i>
+					</a>
+				</li>
+				<li class="bg-blue toolbar-item">
+					<a href="#">
+						<i class="fa fa-bullhorn"></i>
+					</a>
+				</li>
+				<li class="bg-purple toolbar-item">
+					<a href="#">
+						<i class="fa fa-question-circle"></i>
+					</a>
+				</li>
+				<li class="dropdown user-info bg-light-blue">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<img src="http://apis.newegg.org/common/v1/domain/user/jh3r/avatar" alt="">
+						<span class="user-content">
+              <small>Welcome,</small>
+              Jay.M.Hu
+            </span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>
+						<li class="divider"></li>
+						<!--<li class="dropdown-header">Nav header</li>-->
+						<li><a href="#"><i class="fa fa-power-off"></i> Sign out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 	</nav>
 	<div class="nk-sidebar">
 		<div class="nk-menu-search">
@@ -42,15 +61,15 @@
           <i class="fa fa-search"></i>
         </span>
 			</div>
+			<span></span>
 		</div>
-		<div class="nk-menu" nk-menu [menuData]="menuData">
-		</div>
+		<div [nk-menu]="menuData"></div>
 	</div>
 	<div class="content-wrapper">
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="#">Home1</a></li>
-			<li class="breadcrumb-item"><a href="#">Library</a></li>
-			<li class="breadcrumb-item active">Data</li>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Library</a></li>
+			<li class="active">Data</li>
 		</ol>
 		<div class="content">
 			<router-outlet [hidden]="currentIsNg1Module"></router-outlet>

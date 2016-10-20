@@ -6,6 +6,17 @@ const embedTemplates = require('gulp-angular-embed-templates');
 const browserSync = require('browser-sync');
 const historyApiFallback = require('connect-history-api-fallback');
 const notifier = require('node-notifier');
+const Builder = require('systemjs-builder');
+
+gulp.task('test', done => {
+  let builder = new Builder('dist/modules/nk-common');
+  builder.buildStatic('app.js', 'dist/modules/nk-common/test.js');
+  // builder.build('src/modules/nk-common/app.module.ts', {
+  //   baseUrl: './src/'
+  // }, 'dist/test.js');
+  // builder.buildStatic('src/modules/nk-common/app.module.ts', 'dist/tet.js');
+  done();
+});
 
 let tsOption = {
   target: 'es5',
@@ -54,11 +65,27 @@ gulp.task('nk-shell', () => {
     .pipe(gulp.dest('dist'));
 });
 
+gulp.task('nk-common', () => {
+  let nkShellOpt = Object.assign({}, tsOption, {
+    outFile: 'modules/nk-common/app.js'
+  });
+  return gulp.src([
+    './src/declare.d.ts',
+    './src/modules*/nk-common*/**/*.ts'
+  ])
+    .pipe(inlineNg2Template({
+      useRelativePaths: true
+    })) // inline templates
+    .pipe(ts(nkShellOpt))
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('static.css', () => {
   return gulp.src([
     'node_modules/font-awesome/css/font-awesome.css',
     'node_modules/bootstrap/dist/css/bootstrap.css',
-    'node_modules/nprogress/nprogress.css'
+    'node_modules/nprogress/nprogress.css',
+    'static/nk-style/nk.css'
   ]).pipe(concat('vendor.css'))
     .pipe(gulp.dest('./dist/static/css'));
 });
@@ -104,7 +131,7 @@ gulp.task('serve', () =>
     },
     middleware: [historyApiFallback()],
     ghostMode: false,
-    port: 8888
+    port: 10000
   })
 );
 

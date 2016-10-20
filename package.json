@@ -7,8 +7,8 @@
     "start": "webpack",
     "watch": "webpack -w",
     "serve": "cd dist && anywhere -f",
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
+    "dev": "gulp",
+    "build": "gulp -r",
     "postinstall": "typings install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -68,6 +68,7 @@
     "node-notifier": "^4.6.1",
     "shelljs": "^0.7.3",
     "stylus": "^0.54.5",
+    "systemjs-builder": "^0.15.32",
     "typescript": "^2.0.3"
   }
 }
