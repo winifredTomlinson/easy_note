@@ -1,10 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NegEventBus } from './../../../nk-core';
+
 @Component({
   template: ''
 })
 export class Newkit1Component implements OnInit {
-  constructor() { }
+  constructor(
+    private negEventBus: NegEventBus
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    let hash = window.location.hash.replace(/^#/, '');
+    if (hash) {
+      this.negEventBus.emit('nkShell.menuChanged', {
+        isNg1: true,
+        url: hash
+      });
+    }
+  }
 }

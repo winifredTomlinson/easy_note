@@ -15,6 +15,7 @@ import { NegGlobalLoading } from './services/negGlobalLoading';
 import { NegProgress } from './services/negProgress';
 import { NegAuth } from './services/negAuth';
 import { NegBreadcrumb } from './services/negBreadcrumb';
+import { NegStore } from './services/negStore';
 
 // All services export 
 export {
@@ -33,7 +34,8 @@ export {
   NegGlobalLoading,
   NegProgress,
   NegAuth,
-  NegBreadcrumb
+  NegBreadcrumb,
+  NegStore
 };
 
 // Export all services
@@ -53,5 +55,6 @@ export const CORE_SERVICES = [
   NegGlobalLoading,
   NegProgress,
   NegAuth,
-  NegBreadcrumb
+  NegBreadcrumb,
+  NegStore
 ];

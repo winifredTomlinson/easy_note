@@ -19,7 +19,6 @@ export class MenuService {
           name: 'Menu Setting',
           // url: 'nkShell.menuSetting',
           url: '/system/menu-setting',
-          active: true,
           isNg1: true
         }, {
           icon: 'fa fa-search',
@@ -42,7 +41,8 @@ export class MenuService {
     }, {
       icon: 'fa fa-link',
       name: 'Global Configuration',
-      url: 'nkShell.globalConfiguration',
+      url: '/system/global-configuration',
+      isNg1: true,
       children: []
     }, {
       icon: 'fa fa-plus',

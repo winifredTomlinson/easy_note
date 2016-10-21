@@ -5,7 +5,10 @@ import { NegEventBus, NegBreadcrumb } from './../../../nk-core';
 
 @Component({
   selector: '[nk-menu]',
-  templateUrl: './menu.html'
+  templateUrl: './menu.html',
+  styleUrls: [
+    './menu.css'
+  ]
 })
 
 @Injectable()
@@ -24,6 +27,25 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.elementRef.nativeElement.className = 'nk-menu';
+
+    setTimeout(() => {
+      console.log('current menu', '/system/deploy');
+      this.setCurrentMenu('/system/deploy');
+    }, 5000);
+  }
+
+  public clearMenuActive(menus?) {
+    menus = menus || this.menuData;
+    menus.forEach(x => {
+      x.active = false;
+      if (x.children && x.children.length > 0) {
+        this.clearMenuActive(x.children);
+      }
+    });
+  }
+
+  public setCurrentMenu(url: string) {
+    this.isCurrentMenu(this.menuData, url);
   }
 
   public menuClick(evt, menu: any, m2?: any, m3?: any): void {
@@ -42,14 +64,33 @@ export class MenuComponent implements OnInit {
       }
       this.negBreadcrumb.setBreadcrumbs(breadcrumbs);
       this.negEventBus.emit('nkShell.menuChanged', menu);
+      this.clearMenuActive();
+      menu.active = true;
       if (menu.isNg1) {
         return;
       }
       if (url) {
-        menu.active = true;
         this.router.navigate([url]);
       }
     }
+  }
+
+  private isCurrentMenu(menus, url: string): boolean {
+    for (let i = 0, len = menus.length; i < len; i++) {
+      if (menus[i].children && menus[i].children.length > 0) {
+        let find = this.isCurrentMenu(menus[i].children, url);
+        if (find) {
+          menus[i].open = true;
+          return find;
+        }
+      } else {
+        if (menus[i].url === url) {
+          menus[i].active = true;
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   private menuCollapse(menu: any, isOpen?: boolean): void {

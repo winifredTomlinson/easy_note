@@ -115,7 +115,8 @@ gulp.task('static.js', () => {
     'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
     'node_modules/@angular/forms/bundles/forms.umd.js',
     'node_modules/@angular/http/bundles/http.umd.js',
-    'node_modules/@angular/router/bundles/router.umd.js'
+    'node_modules/@angular/router/bundles/router.umd.js',
+    'node_modules/ng2-translate/bundles/ng2-translate.js'
   ])
     .pipe(concat('vendor.js'))
     // .pipe(uglify())

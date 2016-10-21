@@ -95,18 +95,19 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   _processMenuChanged(menu) {
-    console.log(menu);
     this.currentIsNg1Module = (menu.isNg1 === true);
     if (this.currentIsNg1Module) {
       this.router.navigate(['/system/newkit1']);
       this.messageProcessor.sendMessageEvent('pageFaq');
+      setTimeout(() => {
+        window.location.hash = menu.url;
+      }, 100);
       let timerId: any = setTimeout(() => {
         let url = `http://10.16.85.170:8888${menu.url}?theme=core`;
         this.ng1PageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
         this.negGlobalLoading.show();
       }, 100);
       let sub = this.negEventBus.on('postMessage.pageOk', data => {
-        console.log('canceled');
         window.clearTimeout(timerId);
         this.messageProcessor.sendMessageEvent('redirect', menu.url);
         sub.unsubscribe();
