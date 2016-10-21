@@ -99,6 +99,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     if (this.currentIsNg1Module) {
       this.router.navigate(['/system/newkit1']);
       this.messageProcessor.sendMessageEvent('pageFaq');
+      this.negEventBus.emit('global.setCurrentMenu', menu.url);
       setTimeout(() => {
         window.location.hash = menu.url;
       }, 100);

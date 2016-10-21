@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NegEventBus } from './../../../nk-core';
 
@@ -7,6 +8,7 @@ import { NegEventBus } from './../../../nk-core';
 })
 export class Newkit1Component implements OnInit {
   constructor(
+    private router: Router,
     private negEventBus: NegEventBus
   ) { }
 
@@ -17,6 +19,8 @@ export class Newkit1Component implements OnInit {
         isNg1: true,
         url: hash
       });
+    } else {
+      // this.router.navigate(['/']);
     }
   }
 }

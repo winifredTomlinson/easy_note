@@ -54,6 +54,10 @@ export class MessageProcessor {
       case 'redirect':
         this._processRedirect();
         break;
+      case 'router-change-success':
+        console.log('hash=', msgObj.data);
+        window.location.hash = msgObj.data;
+        break;
     }
   }
 

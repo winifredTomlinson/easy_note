@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, ElementRef, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Injectable, Input, ElementRef, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NegEventBus, NegBreadcrumb } from './../../../nk-core';
@@ -12,10 +12,12 @@ import { NegEventBus, NegBreadcrumb } from './../../../nk-core';
 })
 
 @Injectable()
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
   @Input('nk-menu')
   private menuData: Array<any>;
+
+  private subs: any = [];
 
   constructor(
     private elementRef: ElementRef,
@@ -27,11 +29,14 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.elementRef.nativeElement.className = 'nk-menu';
+    let sub1 = this.negEventBus.on('global.setCurrentMenu', url => {
+      this.setCurrentMenu(url);
+    });
+    this.subs.push(sub1);
+  }
 
-    setTimeout(() => {
-      console.log('current menu', '/system/deploy');
-      this.setCurrentMenu('/system/deploy');
-    }, 5000);
+  ngOnDestroy() {
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 
   public clearMenuActive(menus?) {
@@ -45,7 +50,9 @@ export class MenuComponent implements OnInit {
   }
 
   public setCurrentMenu(url: string) {
-    this.isCurrentMenu(this.menuData, url);
+    if (_.isArray(this.menuData)) {
+      this.isCurrentMenu(this.menuData, url);
+    }
   }
 
   public menuClick(evt, menu: any, m2?: any, m3?: any): void {
