@@ -104,6 +104,10 @@ gulp.task('static.js', () => {
     'node_modules/bootstrap/dist/js/bootstrap.js',
     'node_modules/nprogress/nprogress.js',
     'node_modules/lodash/lodash.js',
+
+    'static/vendor/html2canvas.min.js',
+    'static/vendor/neg-feedback.min.js',
+
     'node_modules/zone.js/dist/zone.js',
     'node_modules/reflect-metadata/Reflect.js',
     'node_modules/systemjs/dist/system.src.js',

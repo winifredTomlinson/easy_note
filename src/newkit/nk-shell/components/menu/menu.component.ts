@@ -30,7 +30,9 @@ export class MenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.elementRef.nativeElement.className = 'nk-menu';
     let sub1 = this.negEventBus.on('global.setCurrentMenu', url => {
-      this.setCurrentMenu(url);
+      setTimeout(() => {
+        this.setCurrentMenu(url);
+      }, 200);
     });
     this.subs.push(sub1);
   }

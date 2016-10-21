@@ -12,15 +12,15 @@ export class AuthService implements CanActivate {
     private negStorage: NegStorage
   ) { }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ) {
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.negAuth.isAuthenticated()) {
       return true;
     }
     console.log('unauthenticated navigating to login');
     console.log('go to login');
+    // let rootPath = `${window.location.protocol}//${window.location.host}`;
+    // let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${rootPath}/`;
+    // window.location.href = ssoLoginUrl;
     return false;
   }
 

@@ -1,6 +1,8 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthService } from './services/authService';
+
 import {
   HomeComponent,
   MenuSettingComponent,
@@ -48,7 +50,7 @@ const appRoutes: Routes = [{
 },
 { path: 'nk-common', loadChildren: loadModule('nk-common') },
 { path: 'nk-test', loadChildren: loadModule('nk-test') },
-{ path: '', component: AboutComponent },
+{ path: '', component: AboutComponent, canActivate: [AuthService] },
 { path: '**', component: NotFoundComponent }
 ];
 
