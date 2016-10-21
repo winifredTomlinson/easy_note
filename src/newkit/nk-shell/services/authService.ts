@@ -1,15 +1,28 @@
 import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { NegAuth, NegAjax, NegStorage } from './../../nk-core';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements CanActivate {
 
   constructor(
     private negAuth: NegAuth,
     private negAjax: NegAjax,
     private negStorage: NegStorage
   ) { }
+
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ) {
+    if (this.negAuth.isAuthenticated()) {
+      return true;
+    }
+    console.log('unauthenticated navigating to login');
+    console.log('go to login');
+    return false;
+  }
 
   login(ssoToken: string): Promise<any> {
     let postData = {
@@ -25,7 +38,7 @@ export class AuthService {
 
   autoLogin(token: string): Promise<any> {
     // Step1: if authorize exists.
-    let authorizeRes = this.negStorage.local.get('x-newkit-authorize');
+    let authorizeRes = this.negStorage.session.get('x-newkit-authorize');
     if (authorizeRes) {
       this.negAuth.setAuthData(authorizeRes);
       return Promise.resolve();
@@ -52,7 +65,7 @@ export class AuthService {
       globalSearch: data.globalSearch,
       neweggPermission: data.NeweggPermission
     };
-    this.negStorage.local.set('x-newkit-authorize', authData);
+    this.negStorage.session.set('x-newkit-authorize', authData);
     this.negAuth.setAuthData(authData);
   }
 }
