@@ -59,6 +59,6 @@ gulp.task('bs-reload', done => {
 });
 
 gulp.task('default', gulp.series(
-  gulp.parallel(/*'build:vendor', 'build:newkit', */'build:modules'),
+  gulp.parallel('build:vendor', 'build:newkit', 'build:modules'),
   gulp.parallel('serve')
 ));

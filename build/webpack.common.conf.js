@@ -15,7 +15,8 @@ module.exports = {
     '@angular/router': 'ng.router',
     '@angular/forms': 'ng.forms',
 
-    'newkit/core': 'newkit["nk-core"]'
+    'newkit/core': 'newkit["nk-core"]',
+    'ng2-translate': 'window["ng2-translate"]'
   },
   module: {
     loaders: [

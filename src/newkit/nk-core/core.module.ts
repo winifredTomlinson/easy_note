@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from 'ng2-translate';
 
 // import { GridModule } from '@progress/kendo-angular-grid';
 // import { ChartsModule } from '@progress/kendo-angular-charts';
@@ -32,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     HttpModule, JsonpModule,
     FormsModule,
+    TranslateModule
     // ...KendoModule
   ]
 })
