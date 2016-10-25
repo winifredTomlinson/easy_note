@@ -7,6 +7,15 @@ body {
   font-size: 14px;
 }
 
+.nk-menu ul li a {
+  color: #616161;
+}
+
+.nk-menu ul li a:hover {
+  background: #f1f5f9;
+  color: #616161;
+}
+
 @-webkit-keyframes spin {
   0% {
     transform: rotate(0deg)
@@ -87,10 +96,10 @@ body {
 }
 
 #nprogress .bar {
-    background: #b52c26;
+  background: #b52c26;
 }
 
-#nprogress .spinner-icon{
+#nprogress .spinner-icon {
   border-top-color: #b52c26;
   border-left-color: #b52c26;
 }

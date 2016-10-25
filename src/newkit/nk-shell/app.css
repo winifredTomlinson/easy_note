@@ -73,7 +73,6 @@
   width: 100%;
   position: relative;
   background: white;
-  border-bottom: 1px solid #E3E5E8;
 }
 
 .menu-search input {
@@ -105,17 +104,4 @@
 
 .nk-refresh:hover {
   background: lightgray;
-}
-
-.navbar .toolbar-item .dropdown-menu > li > a{
-  color: #333 !important;
-  text-align: left;
-}
-
-.nk-menu-search{
-  border-right: 1px solid #333;
-}
-
-.breadcrumb{
-  background: #3e3833;
 }

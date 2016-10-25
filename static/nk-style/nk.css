@@ -20,7 +20,7 @@
   background: #2c5976;
 }
 .bg-green {
-  background: #69aa46;
+  background: #2e8965;
 }
 .bg-green:hover {
   background: #2c7659;
@@ -57,17 +57,24 @@ a {
   border-radius: 0;
   border-bottom: 1px solid #e5e5e5;
   margin: 0;
-  background: #474544;
+  background: #f5f5f5;
 }
 .breadcrumb a {
-  color: #fff;
+  color: #333;
+}
+.nav > li > a:hover,
+.nav > li > a:focus,
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  background: inherit;
 }
 .navbar {
   height: 50px;
   padding: 0 10px;
   border-radius: 0;
   z-index: 1;
-  background-image: linear-gradient(to bottom, #080808 0, #0f0f0f 100%);
+  background: #438eb9;
   border: none;
 }
 .navbar .navbar-brand {
@@ -121,23 +128,16 @@ a {
   padding-top: 50px;
   height: 100%;
   width: 220px;
-  background: linear-gradient(to right, #3a3633 93%, #3e3833 100%);
+  background: #fff;
+  border-right: 1px solid #ccc;
 }
 .nk-menu-search {
   position: relative;
-  padding: 4.5px;
+  padding: 4px;
   height: 40px;
   border: solid transparent;
   border-width: 1px 0;
-  border-bottom: 1px solid #525151;
-  box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.07);
-}
-.nk-menu-search >span {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  border-bottom: 1px solid #1a1817;
+  border-bottom: 1px solid #e5e5e5;
 }
 .nk-menu {
   position: fixed;
@@ -156,9 +156,6 @@ a {
   left: 0;
   bottom: 0;
 }
-.nk-menu ul li a:active {
-  background: #616161 !important;
-}
 .nk-menu ul {
   width: 100%;
   padding: 40px 28px 25px 0;
@@ -170,7 +167,6 @@ a {
   position: relative;
 }
 .nk-menu ul .active>a {
-  color: #fff !important;
   position: relative;
 }
 .nk-menu ul li.active>a:before {
@@ -195,7 +191,7 @@ a {
   line-height: normal;
   font-size: 14px;
   padding: 10px 10px 10px 11px;
-  color: #c0bbb7;
+  color: #616161;
   display: block;
   font-weight: 400;
   text-decoration: none !important;
@@ -206,11 +202,8 @@ a {
   padding-top: 7px;
   padding-bottom: 7px;
 }
-.nk-menu ul li a:focus {
-  color: #c9c9c9;
-}
 .nk-menu ul li a:hover {
-  color: #fff;
+  color: #4b88b7;
   text-decoration: none;
 }
 .nk-menu ul li a.inactive,
@@ -231,7 +224,11 @@ a {
 }
 .nk-menu ul li.open>a,
 .nk-menu ul li.open>a b {
-  color: #fff !important;
+  color: #616161;
+}
+.nk-menu ul li.open>a:hover,
+.nk-menu ul li.open>a b:hover {
+  color: #4b88b7;
 }
 .nk-menu>ul>li>a>i {
   width: 15px;
@@ -251,7 +248,7 @@ a {
   left: 23px;
   top: 0;
   bottom: 0;
-  border-left: 1px solid #7a7a7a;
+  border-left: 1px dotted #8eb3d0;
 }
 .nk-menu>ul ul li::before {
   content: "";
@@ -260,7 +257,7 @@ a {
   width: 8px;
   left: 23px;
   top: 16px;
-  border-top: 1px solid #7a7a7a;
+  border-top: 1px dotted #8eb3d0;
   z-index: 1;
 }
 .nk-menu>ul ul ul li::before {
@@ -286,7 +283,7 @@ a {
 .nk-menu ul ul {
   margin: 0;
   display: none;
-  background: rgba(69,69,69,0.6);
+  background: #f1f5f9;
   padding: 7px 0;
 }
 .nk-menu ul ul ul {
@@ -304,16 +301,14 @@ a {
   outline: 0;
 }
 .nk-menu ul ul li>a:hover {
-  background-color: rgba(69,69,69,0.8);
-  color: #fff;
+  color: #4b88b7;
 }
 .nk-menu ul ul ul li a {
-  color: #bfbfbf;
   padding: 8px 10px 8px 60px;
   font-size: 14px;
 }
 .nk-menu ul ul ul li a:hover {
-  color: #fff;
+  color: #4b88b7;
 }
 .nk-menu ul ul ul ul li a {
   padding-left: 80px;
@@ -325,10 +320,10 @@ a {
   padding-left: 120px;
 }
 .nk-menu ul ul b {
-  color: #b3b3b3;
+  color: #616161;
 }
 .nk-menu ul ul>li:hover b {
-  color: #d5d9e2;
+  color: #616161;
 }
 .content-wrapper {
   margin-left: 220px;
