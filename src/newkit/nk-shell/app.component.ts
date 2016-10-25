@@ -2,14 +2,14 @@ import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy } from '@
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil, NegProgress, NegAlert } from './../nk-core';
+import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil, NegProgress, NegAlert } from 'newkit/core';
 import { MenuComponent } from './components';
 import { MessageProcessor, AuthService, MenuService } from './services';
 
 @Component({
   selector: 'nk-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.css']
+  template: require('./app.component.html'),
+  styles: [require('./app.css')]
 })
 export class AppComponent implements OnInit, AfterContentInit {
 

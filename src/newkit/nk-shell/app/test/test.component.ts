@@ -3,7 +3,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { NegGlobalConfig, NegConfigService, NegDfisUploader,
   NegEventBus, NegTracker, NegStorage, NegUserProfile,
   NegGlobalLoading, NegProgress, NegAlert
-} from './../../../nk-core';
+} from 'newkit/core';
 
 @Component({
   selector: 'nk-shell-test',

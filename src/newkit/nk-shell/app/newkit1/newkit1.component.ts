@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NegEventBus } from './../../../nk-core';
+import { NegEventBus } from 'newkit/core';
 
 @Component({
   template: ''

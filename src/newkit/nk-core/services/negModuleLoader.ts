@@ -3,33 +3,37 @@ import { Http } from '@angular/http';
 
 const loadedModules: Set<string> = new Set<string>();
 
+let instance = null;
+
 @Injectable()
 export class NegModuleLoader {
 
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    instance = this;
+  }
 
-  setRouter(uiRouter) {
-    // this.uiRouter = uiRouter;
+  static load(moduleName) {
+    return instance.load(moduleName);
   }
 
   load(moduleName): Promise<any> {
-    return Promise.resolve();
-    // if (loadedModules.has(moduleName)) {
-    //   return Promise.resolve();
-    // }
-    // return new Promise((resolve, reject) => {
-    //   let path = NewkitConf.debug ? '' : '/assets/js';
-    //   this.http.get(`${path}/${moduleName}.js`)
-    //     .toPromise()
-    //     .then(res => {
-    //       let mod = eval(res.text());
-    //       mod.MODULE_STATES.forEach(state => {
-    //         this.uiRouter.stateRegistry.register(state);
-    //       });
-    //       loadedModules.add(moduleName);
-    //       resolve();
-    //     }).catch(err => reject(err));
-    // });
+    return new Promise((resolve, reject) => {
+      let path = `/dist/modules/${moduleName}/app.js`;
+      this.http.get(path)
+        .toPromise()
+        .then(res => {
+          let code = res.text();
+          this._DomEval(code);
+          resolve(window['newkit'][moduleName].AppModule);
+        }).catch(err => reject(err));
+    });
+  }
+
+  _DomEval(code, doc?) {
+    doc = doc || document;
+    var script = doc.createElement("script");
+    script.text = code;
+    doc.head.appendChild(script).parentNode.removeChild(script);
   }
 }

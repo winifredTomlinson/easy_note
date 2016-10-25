@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 // import { TranslateModule } from 'ng2-translate/ng2-translate';
 
-import { CORE_SERVICES, CORE_PIPES, NkCoreModule } from './../nk-core';
+import { CORE_SERVICES, CORE_PIPES, NkCoreModule, NegModuleLoader } from 'newkit/core';
 import { routing } from './app.routing';
 
 import { ALL_PAGES } from './app';
@@ -33,5 +33,7 @@ import { CrossDomainMessage, AuthService, MenuService, MessageProcessor } from '
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor(private negModuleLoader: NegModuleLoader) {
 
+  }
 }

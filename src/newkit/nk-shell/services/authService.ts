@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import { NegAuth, NegAjax, NegStorage } from './../../nk-core';
+import { NegAuth, NegAjax, NegStorage } from 'newkit/core';
 
 @Injectable()
 export class AuthService implements CanActivate {

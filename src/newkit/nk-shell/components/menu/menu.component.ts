@@ -1,7 +1,7 @@
 import { Component, Injectable, Input, ElementRef, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NegEventBus, NegBreadcrumb } from './../../../nk-core';
+import { NegEventBus, NegBreadcrumb } from 'newkit/core';
 
 @Component({
   selector: '[nk-menu]',

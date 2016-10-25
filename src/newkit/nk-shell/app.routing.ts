@@ -1,7 +1,10 @@
-import { ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, ApplicationRef } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { Http, ConnectionBackend } from '@angular/http';
 
 import { AuthService } from './services/authService';
+
+import { NegModuleLoader } from 'newkit/core';
 
 import {
   HomeComponent,
@@ -19,21 +22,7 @@ import {
 const loadModule = (moduleName) => {
   return () => {
     // let moduleName = window.location.pathname.replace(/^\//, '').split('/')[0];
-    return new Promise((resolve, reject) => {
-      console.log(moduleName);
-      SystemJS.import(`/dist/modules/${moduleName}/test.js`)
-        .then(() => {
-          SystemJS.import('app.module')
-            .then(data => {
-              console.log(data.AppModule)
-              resolve(data.AppModule);
-            });
-        })
-        .catch(err => {
-          console.error(err);
-          reject(err);
-        });
-    });
+    return NegModuleLoader.load(moduleName);
   }
 };
 
