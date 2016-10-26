@@ -20,7 +20,6 @@ export class AppComponent implements OnInit, AfterContentInit {
   public iframeHeight: string;
 
   private isLogged: boolean = false;
-  private rootPath: string;
 
   private breadcrumbs: string[] = [];
 
@@ -41,7 +40,6 @@ export class AppComponent implements OnInit, AfterContentInit {
     private authService: AuthService,
     private menuService: MenuService
   ) {
-    this.rootPath = `${window.location.protocol}//${window.location.host}`;
   }
 
   ngOnInit() {
@@ -51,12 +49,15 @@ export class AppComponent implements OnInit, AfterContentInit {
         this.isLogged = true;
         this._init();
         this.negStorage.local.set('login-error-count', 0);
+        setTimeout(() => {
+          this.negEventBus.emit('global.setCurrentMenu', window.location.pathname);
+        }, 500);
       }).catch(reason => {
         let errorCount = (this.negStorage.local.get('login-error-count') || 0) + 1;
         if (errorCount > 10) {
           return console.log('login failed:', reason);
         }
-        let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${this.rootPath}/`;
+        let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
         window.location.href = ssoLoginUrl;
       });
 
@@ -76,12 +77,18 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.subs.forEach(s => s.unsubscribe());
   }
 
-  goAbout() {
+  private goAbout() {
     this.router.navigate(['/system/about']);
   }
 
-  showFeedback() {
+  private showFeedback() {
     window['negFeedback'].show();
+  }
+
+  private doLogout() {
+    this.negStorage.local.remove('x-newkit-token');
+    let logoutUrl = `http://10.16.75.26:8501/logout?redirect_url=${encodeURIComponent(window.location.href)}`;
+    window.location.href = logoutUrl;
   }
 
   _initFeedback() {
@@ -118,14 +125,22 @@ export class AppComponent implements OnInit, AfterContentInit {
   _doLogin(): Promise<any> {
     let p: Promise<any>; // Auth Promise
     // If redirect by sso
-    let ssoToken = this.negUtil.getQuery('t');
+    let query = this.negUtil.getQuery();
+    let ssoToken = query['t'];
     if (ssoToken) {
+      let search = [];
+      Object.keys(query).forEach(key => {
+        if (key !== 't') {
+          search.push(`${key}=${query[key]}`);
+        }
+      });
+      location.search = `?${search.join('&')}`;
       p = this.authService.login(ssoToken);
     } else {
       let token = this.negStorage.local.get('x-newkit-token');
       // No token
       if (!token) {
-        let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${this.rootPath}/`;
+        let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
         window.location.href = ssoLoginUrl;
         return;
       }
