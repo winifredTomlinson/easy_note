@@ -1,6 +1,12 @@
 <h1>Buttons -> ButtonGroup</h1>
 <hr>
-<kendo-button-group>
+<label><input type="checkbox" [(ngModel)]="isDisabled">Is Disabled</label>
+<kendo-button-group [selection]="'single'">
+	<button kendoButton [togglable]="true" (click)="selection = 'single'">single</button>
+	<button kendoButton [togglable]="true" (click)="selection = 'multiple'">multiple</button>
+</kendo-button-group>
+<hr>
+<kendo-button-group [disabled]="isDisabled" [selection]="selection">
 	<button kendoButton [togglable]="true">Option A</button>
 	<button kendoButton [togglable]="true">Option B</button>
 	<button kendoButton [togglable]="true">Option C</button>

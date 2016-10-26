@@ -1,0 +1,15 @@
+<h1>Dropdowns -> ComboBox</h1>
+<hr>
+<kendo-combobox [data]="listItems">
+</kendo-combobox>
+<kendo-combobox [data]="list2Items" [textField]="'text'" [valueField]="'value'">
+</kendo-combobox>
+
+<kendo-combobox [data]="list2Items" [textField]="'text'" [valueField]="'value'" [value]="selectedValue" [valuePrimitive]="true">
+	<template itemTemplate let-dataItem>
+		{{ dataItem.text }} | {{ dataItem.value }}
+	</template>
+</kendo-combobox>
+
+<hr> 想了解更多，请查阅：
+<a href="http://www.telerik.com/kendo-angular-ui/components/dropdowns/combobox/">http://www.telerik.com/kendo-angular-ui/components/dropdowns/combobox/</a>

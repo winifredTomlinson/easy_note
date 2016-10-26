@@ -1,0 +1,36 @@
+<h1>Chart</h1>
+<hr>
+<kendo-chart [title]="chartTitle" [series]="chartSeries">
+</kendo-chart>
+<hr>
+<kendo-chart [title]="chartTitle" [series]="chartSeries">
+	<kendo-chart-series>
+		<kendo-chart-series-item [data]="[5, 3, 2, 1]">
+		</kendo-chart-series-item>
+	</kendo-chart-series>
+</kendo-chart>
+<hr>
+<button (click)="toggleSeries()">Toggle second series</button>
+<kendo-chart [transitions]="showTransitions">
+	<kendo-chart-series>
+		<kendo-chart-series-item [data]="[1, 2, 3, 5]">
+		</kendo-chart-series-item>
+		<kendo-chart-series-item [data]="[5, 3, 2, 1]" *ngIf="showSeries">
+		</kendo-chart-series-item>
+	</kendo-chart-series>
+</kendo-chart>
+<hr>
+<button (click)="addSeries()">Add series</button>
+<kendo-chart [transitions]="false">
+	<kendo-chart-series>
+		<kendo-chart-series-item *ngFor="let series of model" [name]="series.name" [data]="series.data">
+		</kendo-chart-series-item>
+	</kendo-chart-series>
+</kendo-chart>
+<hr>
+<kendo-chart (seriesClick)="onSeriesClick($event)">
+	<kendo-chart-series>
+		<kendo-chart-series-item [data]="seriesData">
+		</kendo-chart-series-item>
+	</kendo-chart-series>
+</kendo-chart>

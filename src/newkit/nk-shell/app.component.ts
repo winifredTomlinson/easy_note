@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   private isLogged: boolean = false;
   private rootPath: string;
 
-  private breadcrumbs: string[] = ['Menu1', 'Level2', 'TESTST'];
+  private breadcrumbs: string[] = [];
 
   private subs = [];
 

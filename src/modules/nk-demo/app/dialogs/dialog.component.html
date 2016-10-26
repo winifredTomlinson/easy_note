@@ -1,0 +1,54 @@
+<h1>Dialog</h1>
+<hr>
+<kendo-button-group [selection]="'single'">
+	<button kendoButton [togglable]="true" (click)="showDialog1 = true">Dialog1</button>
+	<button kendoButton [togglable]="true" (click)="showDialog2 = true">Dialog2</button>
+	<button kendoButton [togglable]="true" (click)="showDialog3 = true">Dialog3</button>
+	<button kendoButton [togglable]="true" (click)="showDialog4 = true">Dialog4</button>
+	<button kendoButton [togglable]="true" (click)="showDialog5 = true">Dialog5</button>
+</kendo-button-group>
+<hr>
+<kendo-dialog title="Action required" [hidden]="!showDialog1">
+	<p>Entropy happened.</p>
+	<p>Do you accept?</p>
+	<kendo-dialog-actions>
+		<button kendoButton primary="true">Yes</button>
+		<button kendoButton>No</button>
+	</kendo-dialog-actions>
+</kendo-dialog>
+
+<hr>
+
+<kendo-dialog title="Awesome title" [hidden]="!showDialog2">
+	No need for content, look at the awesome title!
+</kendo-dialog>
+
+<hr>
+<kendo-dialog [hidden]="!showDialog3">
+	<p>Subscribe to our newsletter!</p>
+	<p>
+		<input class="k-input" placeholder="Your e-mail here" />
+		<button kendoButton>I gladly accept</button>
+	</p>
+	<p>Resistance is futile.</p>
+</kendo-dialog>
+
+<hr>
+<kendo-dialog title="Reassuring title" [hidden]="!showDialog4">
+	Do not worry, your data has not been deleted.
+
+	<kendo-dialog-actions>
+		<button kendoButton (click)="onDialogClose()">Keep doing that</button>
+		<button kendoButton (click)="onDeleteData()">Whatever</button>
+	</kendo-dialog-actions>
+</kendo-dialog>
+
+<hr>
+<kendo-dialog title="Action required" (onClose)="onDialogClose()" [hidden]="!showDialog5">
+	<p>Do you accept?</p>
+
+	<kendo-dialog-actions>
+		<button kendoButton (click)="onDialogAccept()">Yes</button>
+		<button kendoButton (click)="onDialogClose()">No</button>
+	</kendo-dialog-actions>
+</kendo-dialog>

@@ -1,0 +1,40 @@
+<h1>Dropdowns -> DropdownList</h1>
+<hr>
+<kendo-dropdownlist [data]="listItems">
+</kendo-dropdownlist>
+<hr>
+<p>指定Text/Value属性绑定的DropdownList</p>
+<kendo-dropdownlist [data]="list2Items" [textField]="'text'" [valueField]="'value'">
+</kendo-dropdownlist>
+<hr>
+<p>带默认值的DropdownList</p>
+<kendo-dropdownlist [defaultItem]="'Select...'" [data]="list2Items" [valuePrimitive]="true">
+</kendo-dropdownlist>
+<kendo-dropdownlist [defaultItem]="defaultItem" [data]="list2Items" [textField]="'text'" [valueField]="'value'">
+</kendo-dropdownlist>
+<hr>
+<p>带Item模板/Value模板的DropdownList</p>
+<kendo-dropdownlist [data]="list2Items" [textField]="'text'" [valueField]="'value'" [value]="selectedValue" [valuePrimitive]="true">
+	<template itemTemplate let-dataItem>
+		{{ dataItem.text }} | {{ dataItem.value }}
+	</template>
+</kendo-dropdownlist>
+<kendo-dropdownlist [data]="list2Items" [textField]="'text'" [valueField]="'value'" [value]="selectedValue" [valuePrimitive]="true">
+	<template valueTemplate let-dataItem>
+		{{ dataItem?.text }} | {{ dataItem?.value }}
+	</template>
+</kendo-dropdownlist>
+<hr>
+<p>带Header模板/Footer模板的DropdownList</p>
+<kendo-dropdownlist [data]="list2Items" [textField]="'text'" [valueField]="'value'" [value]="selectedValue" [valuePrimitive]="true">
+	<template headerTemplate>
+		<h4>Header template</h4>
+	</template>
+</kendo-dropdownlist>
+<kendo-dropdownlist [data]="list2Items" [textField]="'text'" [valueField]="'value'" [value]="selectedValue" [valuePrimitive]="true">
+	<template footerTemplate>
+		<h4>Footer template</h4>
+	</template>
+</kendo-dropdownlist>
+<hr>
+想了解更多，请查阅：<a href="http://www.telerik.com/kendo-angular-ui/components/dropdowns/dropdownlist/">http://www.telerik.com/kendo-angular-ui/components/dropdowns/dropdownlist/</a>

@@ -38,6 +38,37 @@ export class MenuService {
         }, {
           icon: 'fa fa-plus', name: 'Button Group', url: '/nk-demo/buttons/button-group'
         }]
+      }, {
+        icon: 'fa fa-plus', name: 'Kendo Charts',
+        children: [{
+          icon: 'fa fa-plus', name: 'Chart', url: '/nk-demo/charts/chart'
+        }]
+      }, {
+        icon: 'fa fa-plus', name: 'Kendo Dialogs',
+        children: [{
+          icon: 'fa fa-plus', name: 'Dialog', url: '/nk-demo/dialogs/dialog'
+        }]
+      }, {
+        icon: 'fa fa-plus', name: 'Kendo DropDowns',
+        children: [{
+          icon: 'fa fa-plus', name: 'DropDownList', url: '/nk-demo/dropdowns/dropdownlist'
+        }, {
+          icon: 'fa fa-plus', name: 'ComboBox', url: '/nk-demo/dropdowns/combobox'
+        }]
+      }, {
+        icon: 'fa fa-plus', name: 'Kendo Grids',
+        children: [{
+          icon: 'fa fa-plus', name: 'Grid', url: '/nk-demo/grids/grid'
+        }, {
+          icon: 'fa fa-plus', name: 'Grid2', url: '/nk-demo/grids/grid2'
+        }]
+      }, {
+        icon: 'fa fa-plus', name: 'Kendo Inputs',
+        children: [{
+          icon: 'fa fa-plus', name: 'Swtich', url: '/nk-demo/inputs/switch'
+        }, {
+          icon: 'fa fa-plus', name: 'Slider', url: '/nk-demo/inputs/slider'
+        }]
       }]
     }];
   }

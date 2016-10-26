@@ -4,6 +4,11 @@ import { Component, OnInit } from '@angular/core';
   template: require('./button-group.component.html')
 })
 export class ButtonGroupComponent implements OnInit {
+
+  private isDisabled: boolean = false;
+
+  private selection: string = 'single'
+
   constructor() { }
 
   ngOnInit() { }
