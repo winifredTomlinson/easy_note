@@ -35,7 +35,18 @@ module.exports = {
         'node_modules/font-awesome/css/font-awesome.css',
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/nprogress/nprogress.css',
-        'static/nk-style/nk.css'
+        'static/nk-style/nk.css',
+
+        'node_modules/@progress/kendo-angular-buttons/dist/npm/css/main.css',
+        'node_modules/@progress/kendo-angular-charts/dist/npm/css/main.css',
+        'node_modules/@progress/kendo-angular-dialog/dist/npm/css/main.css',
+        'node_modules/@progress/kendo-angular-dropdowns/dist/npm/css/main.css',
+        'node_modules/@progress/kendo-angular-grid/dist/npm/css/main.css',
+        'node_modules/@progress/kendo-angular-inputs/dist/npm/css/main.css',
+        'node_modules/@progress/kendo-angular-layout/dist/npm/css/main.css',
+        'node_modules/@progress/kendo-angular-popup/dist/npm/css/main.css',
+        'node_modules/@progress/kendo-angular-scrollview/dist/npm/css/main.css',
+        'node_modules/@progress/kendo-angular-upload/dist/npm/css/main.css'
       ]).pipe(concat('vendor.css'))
         .pipe(gulp.dest('./dist/css'));
     });

@@ -39,6 +39,7 @@ const appRoutes: Routes = [{
 },
 { path: 'nk-common', loadChildren: loadModule('nk-common') },
 { path: 'nk-test', loadChildren: loadModule('nk-test') },
+{ path: 'nk-demo', loadChildren: loadModule('nk-demo') },
 { path: '', component: AboutComponent, canActivate: [AuthService] },
 { path: '**', component: NotFoundComponent }
 ];

@@ -7,5 +7,16 @@ import { Component, OnInit } from '@angular/core';
 export class Page1Component implements OnInit {
   constructor() { }
 
+  private gridData: any[] = [{
+    "ProductID": 1,
+    "ProductName": "Chai",
+    "UnitPrice": 18.0000,
+    "Discontinued": false
+  }];
+
   ngOnInit() { }
+
+  public onButtonClick() {
+    alert('test');
+  }
 }

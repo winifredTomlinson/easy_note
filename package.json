@@ -5,12 +5,13 @@
   "main": "index.html",
   "scripts": {
     "start": "npm run dev",
-    "dev": "gulp --gulpfile build/gulpfile.js --cwd ./",
     "dev:vendor": "gulp build:vendor --gulpfile build/gulpfile.js --cwd ./",
     "dev:nk-core": "gulp build:nk-core --gulpfile build/gulpfile.js --cwd ./",
     "dev:nk-shell": "gulp build:nk-shell --gulpfile build/gulpfile.js --cwd ./",
     "dev:modules": "gulp build:modules --gulpfile build/gulpfile.js --cwd ./",
+    "dev": "gulp --gulpfile build/gulpfile.js --cwd ./",
     "serve": "gulp serve --gulpfile build/gulpfile.js --cwd ./",
+    "watch": "gulp watch --gulpfile build/gulpfile.js --cwd ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
