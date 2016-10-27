@@ -10,7 +10,7 @@ import { ALL_PAGES } from './app';
 import { ALL_COMPONENTS } from './components';
 import { AppComponent } from './app.component';
 
-import { CrossDomainMessage, AuthService, MenuService, MessageProcessor } from './services';
+import { ALL_SERVICES } from './services';
 
 
 @NgModule({
@@ -25,10 +25,7 @@ import { CrossDomainMessage, AuthService, MenuService, MessageProcessor } from '
   providers: [
     ...CORE_SERVICES,
     ...CORE_PIPES,
-    CrossDomainMessage,
-    AuthService,
-    MenuService,
-    MessageProcessor
+    ...ALL_SERVICES
   ],
   bootstrap: [AppComponent]
 })

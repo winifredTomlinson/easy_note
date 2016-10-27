@@ -49,12 +49,14 @@ export class AppComponent implements OnInit, AfterContentInit {
         this.isLogged = true;
         this._init();
         this.negStorage.local.set('login-error-count', 0);
+        let pathname = window.location.pathname;
+        this.router.navigate([pathname]);
         setTimeout(() => {
-          this.negEventBus.emit('global.setCurrentMenu', window.location.pathname);
+          this.negEventBus.emit('global.setCurrentMenu', pathname);
         }, 500);
       }).catch(reason => {
         let errorCount = (this.negStorage.local.get('login-error-count') || 0) + 1;
-        if (errorCount > 10) {
+        if (errorCount > 3) {
           return console.log('login failed:', reason);
         }
         let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
@@ -86,6 +88,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   private doLogout() {
+    debugger
     this.negStorage.local.remove('x-newkit-token');
     let logoutUrl = `http://10.16.75.26:8501/logout?redirect_url=${encodeURIComponent(window.location.href)}`;
     window.location.href = logoutUrl;
@@ -125,24 +128,14 @@ export class AppComponent implements OnInit, AfterContentInit {
   _doLogin(): Promise<any> {
     let p: Promise<any>; // Auth Promise
     // If redirect by sso
-    let query = this.negUtil.getQuery();
-    let ssoToken = query['t'];
+    let ssoToken = this.negUtil.getQuery('t');
     if (ssoToken) {
-      let search = [];
-      Object.keys(query).forEach(key => {
-        if (key !== 't') {
-          search.push(`${key}=${query[key]}`);
-        }
-      });
-      location.search = `?${search.join('&')}`;
       p = this.authService.login(ssoToken);
     } else {
       let token = this.negStorage.local.get('x-newkit-token');
       // No token
       if (!token) {
-        let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
-        window.location.href = ssoLoginUrl;
-        return;
+        return Promise.reject(false);
       }
       // Auto login
       p = this.authService.autoLogin(token);

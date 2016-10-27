@@ -2,7 +2,7 @@ import { ModuleWithProviders, ApplicationRef } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Http, ConnectionBackend } from '@angular/http';
 
-import { AuthService } from './services/authService';
+import { AuthService, AuthGuard } from './services';
 
 import { NegModuleLoader } from 'newkit/core';
 
@@ -26,8 +26,26 @@ const loadModule = (moduleName) => {
   }
 };
 
+let modules = {
+  'nk-common': 'nk-common',
+  'nk-test': 'nk-test',
+  'nk-demo': 'nk-demo'
+};
+
+let dynamicRoutes = [];
+
+Object.keys(modules).forEach(key => {
+  dynamicRoutes.push({
+    path: key,
+    loadChildren: loadModule(modules[key]),
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard]
+  })
+});
+
 const appRoutes: Routes = [{
-  path: 'system', component: LayoutComponent, children: [
+  path: 'system', component: LayoutComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard],
+  children: [
     { path: 'menu-setting', component: MenuSettingComponent },
     { path: 'global-configuration', component: GlobalConfigurationComponent },
     { path: 'global-search', component: GlobalSearchComponent },
@@ -35,13 +53,11 @@ const appRoutes: Routes = [{
     { path: 'home', component: ServicesTestComponent },
     { path: 'about', component: AboutComponent },
     { path: 'newkit1', component: Newkit1Component }
-  ],
+  ]
 },
-{ path: 'nk-common', loadChildren: loadModule('nk-common') },
-{ path: 'nk-test', loadChildren: loadModule('nk-test') },
-{ path: 'nk-demo', loadChildren: loadModule('nk-demo') },
+...dynamicRoutes,
 { path: '', component: AboutComponent, canActivate: [AuthService] },
-{ path: '**', component: NotFoundComponent }
+{ path: '**', component: NotFoundComponent, canActivate: [AuthGuard] }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, { useHash: false });

@@ -1,7 +1,21 @@
-export * from './authService';
+import { AuthService } from './auth.service';
+import { MessageProcessor } from './messageProcessor';
+import { CrossDomainMessage } from './crossDomainMessage';
+import { MenuService } from './menu.service';
+import { AuthGuard } from './auth-guard.service';
 
-export * from './messageProcessor';
+export {
+  AuthService,
+  MessageProcessor,
+  CrossDomainMessage,
+  MenuService,
+  AuthGuard
+};
 
-export * from './crossDomainMessage';
-
-export * from './menuService';
+export const ALL_SERVICES = [
+  AuthService,
+  MessageProcessor,
+  CrossDomainMessage,
+  MenuService,
+  AuthGuard
+];
