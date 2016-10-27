@@ -1,5 +1,6 @@
 const config = {
   debug: true,
+  version: '2.0.0.beta.0',
   APIGatewayAddress: 'http://10.16.75.24:3000',
   configServiceAddress: 'http://10.16.75.24:3000/eggkeeper/v1',
   DomainName: 'Newkit',

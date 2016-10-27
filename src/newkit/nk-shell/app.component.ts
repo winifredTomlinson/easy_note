@@ -44,25 +44,16 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     this._initFeedback();
-    this._doLogin()
-      .then(() => {
-        this.isLogged = true;
-        this._init();
-        this.negStorage.local.set('login-error-count', 0);
-        let pathname = window.location.pathname;
-        this.router.navigate([pathname]);
-        setTimeout(() => {
-          this.negEventBus.emit('global.setCurrentMenu', pathname);
-        }, 500);
-      }).catch(reason => {
-        let errorCount = (this.negStorage.local.get('login-error-count') || 0) + 1;
-        if (errorCount > 3) {
-          return console.log('login failed:', reason);
-        }
-        let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
-        window.location.href = ssoLoginUrl;
-      });
-
+    this.negEventBus.on('global.loginSucceed', () => {
+      this.isLogged = true;
+      this._init();
+      this.negStorage.local.set('login-error-count', 0);
+      let pathname = window.location.pathname;
+      this.router.navigateByUrl(pathname + window.location.hash);
+      setTimeout(() => {
+        this.negEventBus.emit('global.setCurrentMenu', pathname);
+      }, 500);
+    });
   }
 
   ngAfterContentInit() {
@@ -88,7 +79,6 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   private doLogout() {
-    debugger
     this.negStorage.local.remove('x-newkit-token');
     let logoutUrl = `http://10.16.75.26:8501/logout?redirect_url=${encodeURIComponent(window.location.href)}`;
     window.location.href = logoutUrl;
@@ -123,25 +113,6 @@ export class AppComponent implements OnInit, AfterContentInit {
         }
       }
     });
-  }
-
-  _doLogin(): Promise<any> {
-    let p: Promise<any>; // Auth Promise
-    // If redirect by sso
-    let ssoToken = this.negUtil.getQuery('t');
-    if (ssoToken) {
-      p = this.authService.login(ssoToken);
-    } else {
-      let token = this.negStorage.local.get('x-newkit-token');
-      // No token
-      if (!token) {
-        return Promise.reject(false);
-      }
-      // Auto login
-      p = this.authService.autoLogin(token);
-    }
-    // Process result
-    return p;
   }
 
   _processMenuChanged(menu) {

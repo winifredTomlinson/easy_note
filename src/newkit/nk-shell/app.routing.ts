@@ -56,7 +56,12 @@ const appRoutes: Routes = [{
   ]
 },
 ...dynamicRoutes,
-{ path: '', component: AboutComponent, canActivate: [AuthService] },
+{
+  path: '', component: LayoutComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard],
+  children: [
+    { path: '', component: AboutComponent }
+  ]
+},
 { path: '**', component: NotFoundComponent, canActivate: [AuthGuard] }
 ];
 

@@ -31,7 +31,6 @@ export class MessageProcessor {
   public processMessage(evt: any) {
     let app = this.app;
     let msgObj = evt.data;
-    console.log(msgObj);
     if (typeof msgObj !== 'object' || !msgObj.eventName) {
       return;
     }
