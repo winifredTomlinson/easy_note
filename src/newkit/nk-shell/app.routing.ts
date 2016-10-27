@@ -62,7 +62,7 @@ const appRoutes: Routes = [{
     { path: '', component: AboutComponent }
   ]
 },
-{ path: '**', component: NotFoundComponent, canActivate: [AuthGuard] }
+{ path: '**', redirectTo: '', canActivate: [AuthGuard] }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, { useHash: false });

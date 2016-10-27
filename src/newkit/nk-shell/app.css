@@ -105,3 +105,8 @@
 .nk-refresh:hover {
   background: lightgray;
 }
+
+.languages li a{
+  color: inherit !important;
+  text-align: left;
+}

@@ -1,10 +1,11 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { TranslateService } from 'ng2-translate';
 
-import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegUtil, NegProgress, NegAlert } from 'newkit/core';
+import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegAlert, NegContext } from 'newkit/core';
 import { MenuComponent } from './components';
-import { MessageProcessor, AuthService, MenuService } from './services';
+import { MessageProcessor, MenuService } from './services';
 
 @Component({
   selector: 'nk-app',
@@ -25,21 +26,31 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   private subs = [];
 
+  private userInfo: any = {}; // 用户信息
+
+  private currentLang: string = 'en';
+
   constructor(
     private sanitizer: DomSanitizer,
     private router: Router,
+    private translateService: TranslateService,
     public negEventBus: NegEventBus,
     public negGlobalLoading: NegGlobalLoading,
-    public negProgress: NegProgress,
     private negStorage: NegStorage,
     public negAuth: NegAuth,
     private negAjax: NegAjax,
-    private negUtil: NegUtil,
     private negAlert: NegAlert,
+    private negContext: NegContext,
     private messageProcessor: MessageProcessor,
-    private authService: AuthService,
     private menuService: MenuService
   ) {
+    translateService.setDefaultLang('en');
+    translateService.setTranslation('en', {
+      'test': 'TEST'
+    });
+    translateService.setTranslation('zh-cn', {
+      'test': '测试'
+    });
   }
 
   ngOnInit() {
@@ -50,6 +61,8 @@ export class AppComponent implements OnInit, AfterContentInit {
       this.negStorage.local.set('login-error-count', 0);
       let pathname = window.location.pathname;
       this.router.navigateByUrl(pathname + window.location.hash);
+      this.userInfo = this.negAuth.getUserInfo();
+      console.log(this.userInfo);
       setTimeout(() => {
         this.negEventBus.emit('global.setCurrentMenu', pathname);
       }, 500);
@@ -68,6 +81,11 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   ngOnDestroy() {
     this.subs.forEach(s => s.unsubscribe());
+  }
+
+  private changeLanguage(lang) {
+    this.negContext.setLang(lang);
+    this.currentLang = lang;
   }
 
   private goAbout() {

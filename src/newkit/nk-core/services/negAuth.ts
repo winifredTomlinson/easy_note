@@ -19,6 +19,10 @@ export class NegAuth {
     return this.authData;
   }
 
+  getUserInfo() {
+    return this.authData ? this.authData.userInfo : null;
+  }
+
   isAuthenticated() {
     return this._isAuthenticated;
   }
