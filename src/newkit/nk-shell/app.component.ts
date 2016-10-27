@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from 'ng2-translate';
 
-import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegAlert, NegContext } from 'newkit/core';
+import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegAlert, NegContext, NegProgress } from 'newkit/core';
 import { MenuComponent } from './components';
 import { MessageProcessor, MenuService } from './services';
 
@@ -41,6 +41,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     private negAjax: NegAjax,
     private negAlert: NegAlert,
     private negContext: NegContext,
+    private negProgress: NegProgress,
     private messageProcessor: MessageProcessor,
     private menuService: MenuService
   ) {
@@ -71,7 +72,6 @@ export class AppComponent implements OnInit, AfterContentInit {
       let pathname = window.location.pathname;
       this.router.navigateByUrl(pathname + window.location.hash);
       this.userInfo = this.negAuth.getUserInfo();
-      console.log(this.userInfo);
       setTimeout(() => {
         this.negEventBus.emit('global.setCurrentMenu', pathname);
       }, 500);

@@ -23,11 +23,25 @@ export class AuthService {
       });
   }
 
+  getSystemConfigData() {
+    return Promise.all([
+      this.negAjax.get(`${NewkitConf.APIGatewayAddress}/framework/v1/user-profile/Newkit/${this.negAuth.getUserInfo().UserID}`),
+      this.negAjax.get(`${NewkitConf.NewkitAPI}/menu/urls`)
+    ])
+      .then(datas => {
+        this.negAuth.setAuthorizedUrls(datas[1].json());
+        this.negAuth.setUserConfig(datas[0].json());
+        return datas;
+      });
+  }
+
   autoLogin(token: string): Promise<any> {
     // Step1: if authorize exists.
     let authorizeRes = this.negStorage.session.get('x-newkit-authorize');
-    if (authorizeRes) {
+    let newkitToken = this.negStorage.local.get('x-newkit-token');
+    if (authorizeRes && token) {
       this.negAuth.setAuthData(authorizeRes);
+      this.negAjax.setToken(newkitToken);
       return Promise.resolve();
     }
 
@@ -41,7 +55,8 @@ export class AuthService {
 
   _processLoginData(res) {
     let token = res.headers.get('x-newkit-token');
-    this.negStorage.local.set('x-newkit-token', token, 1)
+    this.negStorage.local.set('x-newkit-token', token, 1);
+    this.negAjax.setToken(token);
     let data = res.json();
     let authData = {
       userInfo: data.UserInfo,

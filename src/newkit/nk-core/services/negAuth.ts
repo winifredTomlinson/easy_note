@@ -4,7 +4,12 @@ import { NegStorage } from './negStorage';
 
 @Injectable()
 export class NegAuth {
+
   private authData: any;
+
+  private authorizedUrls: any = {};
+
+  private userConfig: any = {};
 
   private _isAuthenticated: boolean = false;
   constructor(private negStorage: NegStorage) { }
@@ -13,6 +18,14 @@ export class NegAuth {
     this.authData = authData;
     this.authData.newkitToken = this.negStorage.local.get('x-newkit-token');
     this._isAuthenticated = true;
+  }
+
+  setAuthorizedUrls(value) {
+    this.authorizedUrls = value;
+  }
+
+  setUserConfig(value) {
+    this.userConfig = value;
   }
 
   getAuthData() {

@@ -18,24 +18,13 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    let url: string = route.url.join('');
+    let toUrl: string = state.url;
+    console.log('from', url, 'to', toUrl);
     if (this.isFirstRoute) {
       this.isFirstRoute = false;
-      return new Promise(resolve => {
-        this._doLogin()
-          .then(() => {
-            this.negEventBus.emit('global.loginSucceed');
-          })
-          .catch(reason => {
-            let errorCount = (this.negStorage.local.get('login-error-count') || 0) + 1;
-            if (errorCount > 3) {
-              return console.log('login failed:', reason);
-            }
-            let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
-            window.location.href = ssoLoginUrl;
-          });
-      });
+      return this._doLogin();
     }
-    console.log(route, state);
     console.log('AuthGuard#canActivate called');
     if (this.negAuth.isAuthenticated()) {
       return Promise.resolve(true);
@@ -58,7 +47,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     return true;
   }
 
-  _doLogin(): Promise<any> {
+  _doLogin(): Promise<boolean> {
     let p: Promise<any>; // Auth Promise
     // If redirect by sso
     let ssoToken = this.negUtil.getQuery('t');
@@ -68,12 +57,35 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       let token = this.negStorage.local.get('x-newkit-token');
       // No token
       if (!token) {
-        return Promise.reject(false);
+        p = Promise.reject('No token.');
       }
       // Auto login
       p = this.authService.autoLogin(token);
     }
-    // Process result
-    return p;
+
+    return new Promise((resolve, reject) => {
+      p.then(() => {
+        return this.authService.getSystemConfigData()
+          .then(() => {
+            this.negEventBus.emit('global.loginSucceed');
+            resolve(true);
+          }).catch(reason => {
+            return Promise.reject('Get system config error.');
+          });
+      })
+        .catch(reason => {
+          let errorCount = (this.negStorage.local.get('login-error-count') || 0) + 1;
+          if (errorCount > 3) {
+            return console.log('login failed:', reason);
+          }
+          resolve(false);
+          let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
+          window.location.href = ssoLoginUrl;
+        });
+    });
+
+
+    //     this.negA
+    // x-newkit-token:8d34b453abfaf5726aa48fa726301c39
   }
 }
