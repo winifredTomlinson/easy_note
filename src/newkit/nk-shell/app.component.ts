@@ -46,10 +46,19 @@ export class AppComponent implements OnInit, AfterContentInit {
   ) {
     translateService.setDefaultLang('en');
     translateService.setTranslation('en', {
-      'test': 'TEST'
+      'test': {
+        t1: 'TEST'
+      }
     });
     translateService.setTranslation('zh-cn', {
-      'test': '测试'
+      'test': {
+        t1: '测试'
+      }
+    });
+    translateService.setTranslation('zh-tw', {
+      'test': {
+        t1: '測試'
+      }
     });
   }
 
