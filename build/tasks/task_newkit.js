@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
+const webpackStream = require('webpack-stream');
 
 const commonConfig = require('./../webpack.common.conf');
 
@@ -20,8 +20,14 @@ module.exports = {
       });
       webpack(opt, (err, stats) => {
         if (err) return console.error(err);
+        stats.toString({ colors: true });
         done();
       });
+      // gulp.src('./src/newkit/nk-core/index.ts')
+      //   .pipe(webpackStream(opt, webpack, function (err, stats) {
+      //     console.log(stats.toString({ colors: true }));
+      //   }))
+      //   .pipe(gulp.dest('./dist'));
     });
 
     gulp.task('build:nk-shell', done => {
