@@ -1,8 +1,10 @@
 const webpack = require('webpack');
 
 module.exports = {
-  // devtool: '#source-map',
+  devtool: 'eval',
   // watch: true,
+  debug: true,
+  cache: true,
   resolve: {
     extensions: ['', '.ts', '.js']
   },

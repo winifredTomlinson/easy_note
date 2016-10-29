@@ -16,6 +16,8 @@ import { PopupModule } from '@progress/kendo-angular-popup';
 import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
 import { SortableModule } from '@progress/kendo-angular-sortable';
 
+import { ALL_COMPONENTS } from './components';
+
 const KendoModules = [
   GridModule, ChartsModule, DropDownsModule, InputsModule,
   LayoutModule, DialogModule, UploadModule, ButtonsModule,
@@ -28,13 +30,14 @@ const KendoModules = [
     HttpModule, JsonpModule,
     FormsModule,
   ],
-  declarations: [],
+  declarations: [...ALL_COMPONENTS],
   exports: [
     CommonModule,
     HttpModule, JsonpModule,
     FormsModule,
     TranslateModule,
-    ...KendoModules
+    ...KendoModules,
+    ...ALL_COMPONENTS
   ]
 })
 export class NkCoreModule {

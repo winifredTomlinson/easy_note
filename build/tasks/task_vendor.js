@@ -24,10 +24,12 @@ module.exports = {
         'node_modules/@angular/forms/bundles/forms.umd.js', //min
         'node_modules/@angular/http/bundles/http.umd.js', //min
 
-        'node_modules/ng2-translate/bundles/index.js'
+        'node_modules/ng2-translate/bundles/index.js',
+
+        'static/kendo/js/kendo.web.js'
       ])
         .pipe(concat('vendor.js'))
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest('./dist/assets/js'));
     });
 
     gulp.task('build:vendor.css', () => {
@@ -47,9 +49,12 @@ module.exports = {
         'node_modules/@progress/kendo-angular-layout/dist/npm/css/main.css',
         'node_modules/@progress/kendo-angular-popup/dist/npm/css/main.css',
         'node_modules/@progress/kendo-angular-scrollview/dist/npm/css/main.css',
-        'node_modules/@progress/kendo-angular-upload/dist/npm/css/main.css'
+        'node_modules/@progress/kendo-angular-upload/dist/npm/css/main.css',
+
+        'static/kendo/styles/kendo.common.css',
+        'static/kendo/styles/kendo.bootstrap.css'
       ]).pipe(concat('vendor.css'))
-        .pipe(gulp.dest('./dist/css'));
+        .pipe(gulp.dest('./dist/assets/css'));
     });
 
     gulp.task('build:vendor.fonts', () => {
@@ -57,14 +62,14 @@ module.exports = {
         'node_modules/font-awesome/fonts/*.*',
         'node_modules/bootstrap/dist/fonts/*.*'
       ])
-        .pipe(gulp.dest('./dist/fonts'));
+        .pipe(gulp.dest('./dist/assets/fonts'));
     });
 
     gulp.task('build:vendor.resources', () => {
       return gulp.src([
-        'static/kendo/styles/**/*.(png|gif)'
+        'static/kendo/styles/*/*.*'
       ])
-        .pipe(gulp.dest('./dist/css'));
+        .pipe(gulp.dest('./dist/assets/css'));
     });
 
     gulp.task('build:vendor', gulp.parallel('build:vendor.js', 'build:vendor.css', 'build:vendor.fonts', 'build:vendor.resources'));
