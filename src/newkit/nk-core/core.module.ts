@@ -16,36 +16,10 @@ import { PopupModule } from '@progress/kendo-angular-popup';
 import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
 import { SortableModule } from '@progress/kendo-angular-sortable';
 
-import {
-  AccordionModule, AutoCompleteModule, BlockUIModule, BreadcrumbModule, ButtonModule, CalendarModule,
-  CarouselModule, ChartModule, CheckboxModule, CodeHighlighterModule, ConfirmDialogModule, ContextMenuModule,
-  DataGridModule, DataListModule, DataScrollerModule, DataTableModule, DialogModule as PrimengDialogModule,
-  DragDropModule, EditorModule, FieldsetModule, GalleriaModule, GMapModule, GrowlModule, InplaceModule, InputMaskModule,
-  InputSwitchModule, InputTextModule, InputTextareaModule, LightboxModule, ListboxModule, MegaMenuModule,
-  MenuModule, MenubarModule, MessagesModule, MultiSelectModule, OrderListModule, OverlayPanelModule,
-  PaginatorModule, PanelModule, PanelMenuModule, PasswordModule, PickListModule, ProgressBarModule, RadioButtonModule,
-  RatingModule, ScheduleModule, SelectButtonModule, SliderModule, SlideMenuModule, SpinnerModule, SplitButtonModule,
-  StepsModule, TabMenuModule, TabViewModule, TerminalModule, TieredMenuModule, ToggleButtonModule, ToolbarModule, TooltipModule,
-  TreeModule, TreeTableModule, TriStateCheckboxModule
-} from 'primeng/primeng';
-
 const KendoModules = [
   GridModule, ChartsModule, DropDownsModule, InputsModule,
   LayoutModule, DialogModule, UploadModule, ButtonsModule,
   PopupModule, ScrollViewModule, SortableModule
-];
-
-const PrimengModules = [
-  AccordionModule, AutoCompleteModule, BlockUIModule, BreadcrumbModule, ButtonModule, CalendarModule,
-  CarouselModule, ChartModule, CheckboxModule, CodeHighlighterModule, ConfirmDialogModule, ContextMenuModule,
-  DataGridModule, DataListModule, DataScrollerModule, DataTableModule, PrimengDialogModule,
-  DragDropModule, EditorModule, FieldsetModule, GalleriaModule, GMapModule, GrowlModule, InplaceModule, InputMaskModule,
-  InputSwitchModule, InputTextModule, InputTextareaModule, LightboxModule, ListboxModule, MegaMenuModule,
-  MenuModule, MenubarModule, MessagesModule, MultiSelectModule, OrderListModule, OverlayPanelModule,
-  PaginatorModule, PanelModule, PanelMenuModule, PasswordModule, PickListModule, ProgressBarModule, RadioButtonModule,
-  RatingModule, ScheduleModule, SelectButtonModule, SliderModule, SlideMenuModule, SpinnerModule, SplitButtonModule,
-  StepsModule, TabMenuModule, TabViewModule, TerminalModule, TieredMenuModule, ToggleButtonModule, ToolbarModule, TooltipModule,
-  TreeModule, TreeTableModule, TriStateCheckboxModule
 ];
 
 @NgModule({
@@ -60,8 +34,7 @@ const PrimengModules = [
     HttpModule, JsonpModule,
     FormsModule,
     TranslateModule,
-    ...KendoModules,
-    ...PrimengModules
+    ...KendoModules
   ]
 })
 export class NkCoreModule {

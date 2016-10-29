@@ -60,6 +60,13 @@ module.exports = {
         .pipe(gulp.dest('./dist/fonts'));
     });
 
-    gulp.task('build:vendor', gulp.parallel('build:vendor.js', 'build:vendor.css', 'build:vendor.fonts'));
+    gulp.task('build:vendor.resources', () => {
+      return gulp.src([
+        'static/kendo/styles/**/*.(png|gif)'
+      ])
+        .pipe(gulp.dest('./dist/css'));
+    });
+
+    gulp.task('build:vendor', gulp.parallel('build:vendor.js', 'build:vendor.css', 'build:vendor.fonts', 'build:vendor.resources'));
   }
 };
