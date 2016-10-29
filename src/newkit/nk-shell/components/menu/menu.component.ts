@@ -45,8 +45,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     menus = menus || this.menuData;
     menus.forEach(x => {
       x.active = false;
-      if (x.children && x.children.length > 0) {
-        this.clearMenuActive(x.children);
+      if (x.SubMenus && x.SubMenus.length > 0) {
+        this.clearMenuActive(x.SubMenus);
       }
     });
   }
@@ -60,22 +60,22 @@ export class MenuComponent implements OnInit, OnDestroy {
   public menuClick(evt, menu: any, m2?: any, m3?: any): void {
     evt.preventDefault();
     evt.stopPropagation();
-    if (menu.children && menu.children.length > 0) {
+    if (menu.SubMenus && menu.SubMenus.length > 0) {
       this.menuCollapse(menu);
     } else {
-      let url = menu.url;
-      let breadcrumbs = [menu.name];
+      let url = menu.Url;
+      let breadcrumbs = [menu];
       if (m2) {
-        breadcrumbs.unshift(m2.name);
+        breadcrumbs.unshift(m2);
       }
       if (m3) {
-        breadcrumbs.unshift(m3.name);
+        breadcrumbs.unshift(m3);
       }
       this.negBreadcrumb.setBreadcrumbs(breadcrumbs);
       this.negEventBus.emit('nkShell.menuChanged', menu);
       this.clearMenuActive();
       menu.active = true;
-      if (menu.isNg1) {
+      if (menu.isNg1 !== false) {
         return;
       }
       if (url) {
@@ -84,16 +84,20 @@ export class MenuComponent implements OnInit, OnDestroy {
     }
   }
 
+  private getIconClass(icon){
+    return (icon || '').replace('icon', 'fa');
+  }
+
   private isCurrentMenu(menus, url: string): boolean {
     for (let i = 0, len = menus.length; i < len; i++) {
-      if (menus[i].children && menus[i].children.length > 0) {
-        let find = this.isCurrentMenu(menus[i].children, url);
+      if (menus[i].SubMenus && menus[i].SubMenus.length > 0) {
+        let find = this.isCurrentMenu(menus[i].SubMenus, url);
         if (find) {
           menus[i].open = true;
           return find;
         }
       } else {
-        if (menus[i].url === url) {
+        if (menus[i].Url === url) {
           menus[i].active = true;
           return true;
         }
@@ -104,8 +108,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private menuCollapse(menu: any, isOpen?: boolean): void {
     menu.open = isOpen === undefined ? !menu.open : isOpen;
-    if (menu.children && menu.children.length > 0 && !menu.open) {
-      menu.children.forEach(item => this.menuCollapse(item, menu.open));
+    if (menu.SubMenus && menu.SubMenus.length > 0 && !menu.open) {
+      menu.SubMenus.forEach(item => this.menuCollapse(item, menu.open));
     }
   }
 }

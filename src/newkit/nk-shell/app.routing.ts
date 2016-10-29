@@ -52,7 +52,8 @@ const appRoutes: Routes = [{
     { path: 'deploy', component: DeployComponent },
     { path: 'home', component: ServicesTestComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'newkit1', component: Newkit1Component }
+    { path: 'newkit1', component: Newkit1Component },
+    { path: '404', component: NotFoundComponent }
   ]
 },
 ...dynamicRoutes,

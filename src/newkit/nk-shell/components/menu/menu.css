@@ -1,0 +1,10 @@
+ul a{
+  overflow: hidden;
+  white-space: nowrap;
+}
+.menu-item-parent{
+  width: calc(100% - 40px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

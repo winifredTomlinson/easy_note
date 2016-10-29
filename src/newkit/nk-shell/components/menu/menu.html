@@ -1,22 +1,22 @@
 <ul>
 	<li *ngFor="let m1 of menuData; let i = index; trackBy: i" (click)="menuClick($event, m1)" [ngClass]="{active: m1.active}">
-		<a href="javascript:void(0)" [attr.title]="m1.name">
-			<i [class]="m1.icon"></i>
-			<span>{{ m1.name }}</span>
-			<i *ngIf="m1.children && m1.children.length > 0" class="fa nk-menu-angle" [ngClass]="{'fa-angle-down': m1.open, 'fa-angle-left': !m1.open}"></i>
+		<a href="javascript:void(0)" [attr.title]="m1 | menuTranslate">
+			<i class="fa" [ngClass]="getIconClass(m1.Icon)"></i>
+			<span>{{ m1 | menuTranslate }}</span>
+			<i *ngIf="m1.SubMenus && m1.SubMenus.length > 0" class="fa nk-menu-angle" [ngClass]="{'fa-angle-down': m1.open, 'fa-angle-left': !m1.open}"></i>
 		</a>
-		<ul *ngIf="m1.children && m1.children.length > 0" [style.display]="m1.open ? 'block': 'none'">
-			<li *ngFor="let m2 of m1.children; let i2 = index; trackBy: i2" (click)="menuClick($event, m2, m1)" [ngClass]="{active: m2.active}">
-				<a href="javascript:void(0)" [attr.title]="m2.name">
-					<i [class]="m2.icon"></i>
-					<span class="menu-item-parent">{{ m2.name }}</span>
-					<i *ngIf="m2.children && m2.children.length > 0" class="fa nk-menu-angle" [ngClass]="{'fa-angle-down': m2.open, 'fa-angle-left': !m2.open}"></i>
+		<ul *ngIf="m1.SubMenus && m1.SubMenus.length > 0" [style.display]="m1.open ? 'block': 'none'">
+			<li *ngFor="let m2 of m1.SubMenus; let i2 = index; trackBy: i2" (click)="menuClick($event, m2, m1)" [ngClass]="{active: m2.active}">
+				<a href="javascript:void(0)" [attr.title]="m2 | menuTranslate">
+					<i class="fa" [ngClass]="getIconClass(m2.Icon)"></i>
+					<span class="menu-item-parent">{{ m2 | menuTranslate }}</span>
+					<i *ngIf="m2.SubMenus && m2.SubMenus.length > 0" class="fa nk-menu-angle" [ngClass]="{'fa-angle-down': m2.open, 'fa-angle-left': !m2.open}"></i>
 				</a>
-				<ul *ngIf="m2.children && m2.children.length > 0" [style.display]="m2.open ? 'block': 'none'">
-					<li *ngFor="let m3 of m2.children; let i3 = index; trackBy: i3" (click)="menuClick($event, m3, m2, m1)" [ngClass]="{active: m3.active}">
-						<a href="javascript:void(0)" [attr.title]="m3.name">
-							<i [class]="m3.icon"></i>
-							<span class="menu-item-parent">{{ m3.name }}</span>
+				<ul *ngIf="m2.SubMenus && m2.SubMenus.length > 0" [style.display]="m2.open ? 'block': 'none'">
+					<li *ngFor="let m3 of m2.SubMenus; let i3 = index; trackBy: i3" (click)="menuClick($event, m3, m2, m1)" [ngClass]="{active: m3.active}">
+						<a href="javascript:void(0)" [attr.title]="m3 | menuTranslate">
+							<i class="fa" [ngClass]="getIconClass(m3.Icon)"></i>
+							<span class="menu-item-parent">{{ m3 | menuTranslate }}</span>
 						</a>
 					</li>
 				</ul>

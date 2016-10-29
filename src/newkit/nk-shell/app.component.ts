@@ -12,7 +12,7 @@ import { MessageProcessor, MenuService } from './services';
   template: require('./app.component.html'),
   styles: [require('./app.css')]
 })
-export class AppComponent implements OnInit, AfterContentInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   private menuData: Array<any>;
 
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   private userInfo: any = {}; // 用户信息
 
-  private currentLang: string = 'en';
+  private currentLang: string = 'en-us';
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -45,8 +45,8 @@ export class AppComponent implements OnInit, AfterContentInit {
     private messageProcessor: MessageProcessor,
     private menuService: MenuService
   ) {
-    translateService.setDefaultLang('en');
-    translateService.setTranslation('en', {
+    translateService.setDefaultLang('en-us');
+    translateService.setTranslation('en-us', {
       'test': {
         t1: 'TEST'
       }
@@ -64,6 +64,13 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
+    let sub1 = this.negEventBus.on('global.setBreadcrumbs', data => {
+      this.breadcrumbs = data;
+    });
+    let sub2 = this.negEventBus.on('global.setLastBreadcrumb', data => {
+      this.breadcrumbs[this.breadcrumbs.length - 1] = data;
+    });
+    this.subs.push(sub1, sub2);
     this._initFeedback();
     this.negEventBus.on('global.loginSucceed', () => {
       this.isLogged = true;
@@ -76,16 +83,6 @@ export class AppComponent implements OnInit, AfterContentInit {
         this.negEventBus.emit('global.setCurrentMenu', pathname);
       }, 500);
     });
-  }
-
-  ngAfterContentInit() {
-    let sub1 = this.negEventBus.on('global.setBreadcrumbs', data => {
-      this.breadcrumbs = data;
-    });
-    let sub2 = this.negEventBus.on('global.setLastBreadcrumb', data => {
-      this.breadcrumbs[this.breadcrumbs.length - 1] = data;
-    });
-    this.subs.push(sub1, sub2);
   }
 
   ngOnDestroy() {
@@ -143,22 +140,22 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   _processMenuChanged(menu) {
-    this.currentIsNg1Module = (menu.isNg1 === true);
+    this.currentIsNg1Module = (menu.isNg1 !== false);
     if (this.currentIsNg1Module) {
       this.router.navigate(['/system/newkit1']);
       this.messageProcessor.sendMessageEvent('pageFaq');
-      this.negEventBus.emit('global.setCurrentMenu', menu.url);
+      this.negEventBus.emit('global.setCurrentMenu', menu.Url);
       setTimeout(() => {
-        window.location.hash = menu.url;
+        window.location.hash = menu.Url;
       }, 100);
       let timerId: any = setTimeout(() => {
-        let url = `http://10.16.85.170:8888${menu.url}?theme=core`;
+        let url = `http://10.16.85.170:8888${menu.Url}?theme=core`;
         this.ng1PageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
         this.negGlobalLoading.show();
       }, 100);
       let sub = this.negEventBus.on('postMessage.pageOk', data => {
         window.clearTimeout(timerId);
-        this.messageProcessor.sendMessageEvent('redirect', menu.url);
+        this.messageProcessor.sendMessageEvent('redirect', menu.Url);
         sub.unsubscribe();
         return;
       });

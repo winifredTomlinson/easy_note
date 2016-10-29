@@ -17,10 +17,10 @@ export class Newkit1Component implements OnInit {
     if (hash) {
       this.negEventBus.emit('nkShell.menuChanged', {
         isNg1: true,
-        url: hash
+        Url: hash
       });
     } else {
-      // this.router.navigate(['/']);
+      // this.router.navigate(['/system/404']);
     }
   }
 }

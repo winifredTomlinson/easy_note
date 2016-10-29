@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 
+import { NegAuth } from 'newkit/core';
+
 @Injectable()
 export class MenuService {
 
-  constructor() { }
+  constructor(
+    private negAuth: NegAuth
+  ) { }
 
-  getMenuData() {
+  private getMenuData() {
+    console.log(this.negAuth.authData.menus);
+    return this.negAuth.authData.menus;
     return [{
       icon: 'fa fa-cogs', name: 'Control Panel',
       children: [{
