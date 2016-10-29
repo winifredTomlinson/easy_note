@@ -46,7 +46,7 @@ Object.keys(modules).forEach(key => {
 const appRoutes: Routes = [{
   path: 'system', component: LayoutComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard],
   children: [
-    { path: 'menu-setting', component: MenuSettingComponent },
+    { path: 'menu', component: MenuSettingComponent },
     { path: 'global-configuration', component: GlobalConfigurationComponent },
     { path: 'global-search', component: GlobalSearchComponent },
     { path: 'deploy', component: DeployComponent },
@@ -63,7 +63,7 @@ const appRoutes: Routes = [{
     { path: '', component: AboutComponent }
   ]
 },
-{ path: '**', redirectTo: '', canActivate: [AuthGuard] }
+{ path: '**', redirectTo: '/system/404', canActivate: [AuthGuard] }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, { useHash: false });

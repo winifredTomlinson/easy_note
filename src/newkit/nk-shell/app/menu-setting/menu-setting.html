@@ -1,3 +1,10 @@
 <div class="menu-setting">
-  Menu Setting
+	<p-treeTable [value]="menuData" selectionMode="single" [style]="{'margin-bottom':'30px'}">
+		<p-column field="en-us" header="MenuName"></p-column>
+		<p-column field="Url" header="Url"></p-column>
+		<p-column field="IsActived" header="IsActive"></p-column>
+    <p-column header="Operate">
+      
+    </p-column>
+	</p-treeTable>
 </div>
