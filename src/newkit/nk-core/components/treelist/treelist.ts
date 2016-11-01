@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'neg-tree-list1',
+  selector: 'neg-tree-list24',
   templateUrl: './treelist.html'
 })
 export class NegTreeList implements OnInit, AfterViewInit {

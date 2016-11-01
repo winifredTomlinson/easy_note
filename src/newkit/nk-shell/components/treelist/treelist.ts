@@ -75,7 +75,8 @@ export class NegTreeList implements OnInit, AfterViewInit {
       columns: [
         { field: "Position" },
         { field: "Name" },
-        { field: "Phone" }
+        { field: "Phone" },
+        { field: 'Test12' }
       ]
     });
   }
