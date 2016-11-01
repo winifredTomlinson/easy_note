@@ -1,8 +1,8 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const webpackStream = require('webpack-stream');
-
 const commonConfig = require('./../webpack.common.conf');
+const util = require('./util');
+
 
 module.exports = {
   init(gulp) {
@@ -15,19 +15,15 @@ module.exports = {
           path: './dist',
           filename: 'newkit/[name].js',
           library: ['newkit', '[name]'],
-          liabraryTarget: 'umd'
-        }
+          liabraryTarget: 'umd',
+          chunkFilename: '[id].js'
+        },
+        watch: true
       });
-      webpack(opt, (err, stats) => {
-        if (err) return console.error(err);
-        stats.toString({ colors: true });
+      webpack(opt).watch(200, (err, stats) => {
+        util.showWebpackError(err, stats);
         done();
       });
-      // gulp.src('./src/newkit/nk-core/index.ts')
-      //   .pipe(webpackStream(opt, webpack, function (err, stats) {
-      //     console.log(stats.toString({ colors: true }));
-      //   }))
-      //   .pipe(gulp.dest('./dist'));
     });
 
     gulp.task('build:nk-shell', done => {
@@ -40,15 +36,35 @@ module.exports = {
             path: './dist',
             filename: 'newkit/[name].js',
             library: ['newkit', '[name]'],
-            liabraryTarget: 'umd'
+            liabraryTarget: 'umd',
+            chunkFilename: '[id].js',
           },
-        })
-        , (err, stats) => {
-          if (err) return console.error(err);
+        })).watch(200, (err, stats) => {
+          util.showWebpackError(err, stats);
           done();
         });
     });
 
-    gulp.task('build:newkit', gulp.parallel('build:nk-core', 'build:nk-shell'));
+    gulp.task('build:nk-thirdparty', done => {
+      webpack(
+        webpackMerge(commonConfig, {
+          entry: {
+            'nk-thirdparty': './src/newkit/nk-thirdparty/index.ts'
+          },
+          output: {
+            path: './dist',
+            filename: 'newkit/[name].js',
+            library: ['newkit', '[name]'],
+            liabraryTarget: 'umd',
+            chunkFilename: '[id].js',
+          },
+          watch: false
+        }), (err, stats) => {
+          util.showWebpackError(err, stats, false);
+          done();
+        });
+    });
+
+    gulp.task('build:newkit', gulp.parallel('build:nk-core', 'build:nk-shell', 'build:nk-thirdparty'));
   }
 };

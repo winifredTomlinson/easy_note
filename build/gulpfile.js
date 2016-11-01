@@ -1,12 +1,8 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const ts = require('gulp-typescript');
-const inlineNg2Template = require('gulp-inline-ng2-template');
-const embedTemplates = require('gulp-angular-embed-templates');
 const browserSync = require('browser-sync');
 const historyApiFallback = require('connect-history-api-fallback');
 const notifier = require('node-notifier');
-const Builder = require('systemjs-builder');
 
 ['task_vendor', 'task_newkit', 'task_module', 'task_watch'].forEach(item => {
   require(`./tasks/${item}`).init(gulp);
@@ -32,5 +28,5 @@ gulp.task('bs-reload', done => {
 
 gulp.task('default', gulp.series(
   gulp.parallel('build:vendor', 'build:newkit', 'build:modules'),
-  gulp.parallel('serve', 'watch')
+  gulp.parallel('serve')
 ));

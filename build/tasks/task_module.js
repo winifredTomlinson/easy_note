@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-
 const commonConfig = require('./../webpack.common.conf');
+const util = require('./util');
 
 let tasks = [];
 let createModuleTask = (moduleName, gulp) => {
@@ -18,11 +18,13 @@ let createModuleTask = (moduleName, gulp) => {
           path: './dist/modules',
           filename: '[name]/app.js',
           library: ['newkit', '[name]'],
-          liabraryTarget: 'umd'
+          liabraryTarget: 'umd',
+          chunkFilename: '[id].js'
         },
+        watch: true
       })
       , (err, stats) => {
-        if (err) return console.error(err);
+        util.showWebpackError(err, stats);
         done();
       });
   });
