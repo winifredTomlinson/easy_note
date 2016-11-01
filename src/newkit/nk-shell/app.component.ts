@@ -36,14 +36,14 @@ export class AppComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     public negEventBus: NegEventBus,
     public negGlobalLoading: NegGlobalLoading,
-    private negStorage: NegStorage,
+    public negStorage: NegStorage,
     public negAuth: NegAuth,
-    private negAjax: NegAjax,
-    private negAlert: NegAlert,
-    private negContext: NegContext,
-    private negProgress: NegProgress,
-    private messageProcessor: MessageProcessor,
-    private menuService: MenuService
+    public negAjax: NegAjax,
+    public negAlert: NegAlert,
+    public negContext: NegContext,
+    public negProgress: NegProgress,
+    public messageProcessor: MessageProcessor,
+    public menuService: MenuService
   ) {
     translateService.setDefaultLang('en-us');
     translateService.setTranslation('en-us', {

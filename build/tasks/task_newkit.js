@@ -3,7 +3,6 @@ const webpackMerge = require('webpack-merge');
 const commonConfig = require('./../webpack.common.conf');
 const util = require('./util');
 
-
 module.exports = {
   init(gulp) {
     gulp.task('build:nk-core', done => {
@@ -65,6 +64,6 @@ module.exports = {
         });
     });
 
-    gulp.task('build:newkit', gulp.parallel('build:nk-core', 'build:nk-shell', 'build:nk-thirdparty'));
+    gulp.task('build:newkit', gulp.parallel('build:nk-core', 'build:nk-shell'));
   }
 };
