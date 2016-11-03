@@ -1,12 +1,10 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LayoutComponent, Comp1Component, Comp2Component } from './components';
+import { Page1Component } from './app';
 
 const appRoutes: Routes = [
-  { path: '', component: LayoutComponent },
-  { path: 'comp1', component: Comp1Component },
-  { path: 'test', component: Comp2Component }
+  { path: '', component: Page1Component }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(appRoutes);

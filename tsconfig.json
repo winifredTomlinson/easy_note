@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES5",
     "module": "commonjs",
     "declaration": false,
     "noLib": false,
-    "moduleResolution": "node",
-    "noImplicitAny": false,
-    "removeComments": false,
-    "preserveConstEnums": true,
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "sourceMap": false
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true,
+    "useCache": true
   }
 }

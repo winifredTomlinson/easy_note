@@ -13,8 +13,8 @@ export class NegTreeList implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.data = [{ id: 1, Name: "Daryl Sweeney", Position: "CEO", Phone: "(555) 924-9726", parentId: null },
-    { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", Phone: "(438) 738-4935", parentId: 1 },
+    this.data = [{ id: 1, Name: "Darylaaa Sweeney", Position: "CEO", Phone: "(555) 924-9726", parentId: null },
+    { id: 2, Name: "Guy aaaWooten", Position: "Chief Technical Officer", Phone: "(438) 738-4935", parentId: 1 },
     { id: 32, Name: "Buffy Weber", Position: "VP, Engineering", Phone: "(699) 838-6121", parentId: 2 },
     { id: 11, Name: "Hyacinth Hood", Position: "Team Lead", Phone: "(889) 345-2438", parentId: 32 },
     { id: 60, Name: "Akeem Carr", Position: "Junior Software Developer", Phone: "(738) 136-2814", parentId: 11 },

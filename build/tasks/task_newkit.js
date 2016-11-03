@@ -5,10 +5,11 @@ const util = require('./util');
 
 module.exports = {
   init(gulp) {
-    gulp.task('build:nk-core', done => {
+    gulp.task('build:newkit', done => {
       let opt = webpackMerge(commonConfig, {
         entry: {
           'nk-core': './src/newkit/nk-core/index.ts',
+          'nk-shell': './src/newkit/nk-shell/index.ts'
         },
         output: {
           path: './dist',
@@ -23,25 +24,6 @@ module.exports = {
         util.showWebpackError(err, stats);
         done();
       });
-    });
-
-    gulp.task('build:nk-shell', done => {
-      webpack(
-        webpackMerge(commonConfig, {
-          entry: {
-            'nk-shell': './src/newkit/nk-shell/index.ts'
-          },
-          output: {
-            path: './dist',
-            filename: 'newkit/[name].js',
-            library: ['newkit', '[name]'],
-            liabraryTarget: 'umd',
-            chunkFilename: '[id].js',
-          },
-        })).watch(200, (err, stats) => {
-          util.showWebpackError(err, stats);
-          done();
-        });
     });
 
     gulp.task('build:nk-thirdparty', done => {
@@ -63,7 +45,5 @@ module.exports = {
           done();
         });
     });
-
-    gulp.task('build:newkit', gulp.parallel('build:nk-core', 'build:nk-shell'));
   }
 };

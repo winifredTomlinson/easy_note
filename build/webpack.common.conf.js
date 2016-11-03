@@ -28,7 +28,8 @@ module.exports = {
     resolve: [
       'node_modules'
     ],
-    unsafeCache: true
+    unsafeCache: true,
+    cache: true
   },
   externals: {
     'rxjs': 'Rx',
