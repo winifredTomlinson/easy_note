@@ -3,7 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./../webpack.common.conf');
-const util = require('./util');
+const util = require('./../util');
 
 module.exports = {
   init(gulp) {

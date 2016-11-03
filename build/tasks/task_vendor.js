@@ -8,6 +8,7 @@ module.exports = {
         'node_modules/bootstrap/dist/js/bootstrap.js',
         'node_modules/nprogress/nprogress.js',
         'node_modules/lodash/lodash.js',
+        'static/layer/layer.js',
 
         'static/vendor/html2canvas.min.js',
         'static/vendor/neg-feedback.min.js',
@@ -26,7 +27,7 @@ module.exports = {
 
         'node_modules/ng2-translate/bundles/index.js',
 
-        'static/kendo/js/kendo.web.js'
+        // 'static/kendo/js/kendo.web.js'
       ])
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('./dist/assets/js'));
@@ -51,8 +52,8 @@ module.exports = {
         'node_modules/@progress/kendo-angular-scrollview/dist/npm/css/main.css',
         'node_modules/@progress/kendo-angular-upload/dist/npm/css/main.css',
 
-        'static/kendo/styles/kendo.common.css',
-        'static/kendo/styles/kendo.bootstrap.css'
+        // 'static/kendo/styles/kendo.common.css',
+        // 'static/kendo/styles/kendo.bootstrap.css'
       ]).pipe(concat('vendor.css'))
         .pipe(gulp.dest('./dist/assets/css'));
     });
@@ -67,9 +68,10 @@ module.exports = {
 
     gulp.task('build:vendor.resources', () => {
       return gulp.src([
-        'static/kendo/styles/*/*.*'
+        // 'static/kendo/styles/*/*.*'
+        'static/layer/skin*/**/*'
       ])
-        .pipe(gulp.dest('./dist/assets/css'));
+        .pipe(gulp.dest('./dist/assets/js'));
     });
 
     gulp.task('build:vendor', gulp.parallel('build:vendor.js', 'build:vendor.css', 'build:vendor.fonts', 'build:vendor.resources'));
