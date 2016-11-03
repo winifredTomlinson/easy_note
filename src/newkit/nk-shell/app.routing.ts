@@ -27,20 +27,18 @@ const loadModule = (moduleName) => {
 };
 
 let modules = {
-  'nk-common': 'nk-common',
-  'nk-test': 'nk-test',
-  'nk-demo': 'nk-demo'
+
 };
 
 let dynamicRoutes = [];
 
-Object.keys(modules).forEach(key => {
+NewkitConf.modules.forEach(item => {
   dynamicRoutes.push({
-    path: key,
-    loadChildren: loadModule(modules[key]),
+    path: item.path,
+    loadChildren: loadModule(item.module),
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard]
-  })
+  });
 });
 
 const appRoutes: Routes = [{

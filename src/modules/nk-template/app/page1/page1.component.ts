@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NegAjax } from 'newkit/core';
+
 @Component({
-  template: 'Page1'
+  template: 'Page12'
 })
 export class Page1Component implements OnInit {
-  constructor() { }
+  constructor(
+    private negAjax: NegAjax
+  ) { }
 
-  ngOnInit() { }
-  
+  ngOnInit() { 
+    this.negAjax.get('http://localhost:10000');
+  }
+
 }

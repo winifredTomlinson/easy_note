@@ -13,6 +13,7 @@
     "dev:modules": "gulp build:modules --gulpfile build/gulpfile.js --cwd ./",
     "serve": "gulp serve --gulpfile build/gulpfile.js --cwd ./",
     "watch": "gulp watch --gulpfile build/gulpfile.js --cwd ./",
+    "publish": "gulp publish --gulpfile build/gulpfile.js --cwd ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
