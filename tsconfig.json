@@ -3,6 +3,7 @@
     "target": "ES5",
     "module": "commonjs",
     "declaration": false,
+    "moduleResolution": "node",
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -12,7 +13,6 @@
   "buildOnSave": false,
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
-    "useWebpackText": true,
-    "useCache": true
+    "useWebpackText": true
   }
 }
