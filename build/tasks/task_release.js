@@ -22,23 +22,23 @@ module.exports = {
         './build*/server.js',
         './build*/util.js',
         './build*/webpack.common.conf.js',
-        './typings.json',
-        './package.json',
         './src*/modules/README.md',
-        './src*/config/config.js',
-        './index.html',
+        './src*/config/config.js'
       ]).pipe(gulp.dest('./release'));
     });
 
     gulp.task('release:html', () => {
       return gulp.src([
-        './index-release.html'
+        './index.release.html'
       ]).pipe(concat('index.html'))
         .pipe(gulp.dest('./release'));
     });
 
     gulp.task('release:package', done => {
-      
+      return gulp.src([
+        './package.release.json'
+      ]).pipe(concat('package.json'))
+        .pipe(gulp.dest('./release'));
     });
 
     gulp.task('release', gulp.series('release:clean', 'release:copyResource', 'release:html'));
