@@ -1,4 +1,3 @@
-const gulp = require('gulp4');
 const gutil = require('gulp-util');
 
 const showWebpackError = (err, stats, needReload) => {
@@ -28,6 +27,7 @@ const showWebpackError = (err, stats, needReload) => {
     }));
   }
   if (needReload !== false) {
+    const gulp = require('gulp4');
     gulp.series('bs-reload')();
   }
 };

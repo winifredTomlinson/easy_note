@@ -23,7 +23,9 @@ module.exports = {
         './build*/util.js',
         './build*/webpack.common.conf.js',
         './src*/modules/README.md',
-        './src*/config/config.js'
+        './src*/modules/nk-demo/**/*',
+        './src*/config/config.js',
+        './src*/declare.d.ts'
       ]).pipe(gulp.dest('./release'));
     });
 
@@ -41,6 +43,6 @@ module.exports = {
         .pipe(gulp.dest('./release'));
     });
 
-    gulp.task('release', gulp.series('release:clean', 'release:copyResource', 'release:html'));
+    gulp.task('release', gulp.series('release:clean', 'release:copyResource', 'release:html', 'release:package'));
   }
 };
