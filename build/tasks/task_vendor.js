@@ -25,8 +25,8 @@ module.exports = {
         'node_modules/@angular/forms/bundles/forms.umd.js', //min
         'node_modules/@angular/http/bundles/http.umd.js', //min
 
-        'node_modules/ng2-translate/bundles/index.js',
-
+        'node_modules/ng2-translate/bundles/ng2-translate.umd.js',
+        
         // 'static/kendo/js/kendo.web.js'
       ])
         .pipe(concat('vendor.js'))
