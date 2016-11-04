@@ -8,6 +8,7 @@ const util = require('./../util');
 
 module.exports = {
   init(gulp) {
+
     gulp.task('release:clean', done => {
       rm('release -r');
       done();
@@ -34,6 +35,10 @@ module.exports = {
         './index-release.html'
       ]).pipe(concat('index.html'))
         .pipe(gulp.dest('./release'));
+    });
+
+    gulp.task('release:package', done => {
+      
     });
 
     gulp.task('release', gulp.series('release:clean', 'release:copyResource', 'release:html'));

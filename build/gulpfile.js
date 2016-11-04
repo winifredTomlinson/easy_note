@@ -1,5 +1,5 @@
 require('shelljs/global');
-const gulp = require('gulp');
+const gulp = require('gulp4');
 const concat = require('gulp-concat');
 const browserSync = require('browser-sync');
 const historyApiFallback = require('connect-history-api-fallback');

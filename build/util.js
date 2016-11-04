@@ -1,4 +1,4 @@
-const gulp = require('gulp');
+const gulp = require('gulp4');
 const gutil = require('gulp-util');
 
 const showWebpackError = (err, stats, needReload) => {
