@@ -26,11 +26,6 @@ const config = {
         { Icon: 'fa-list', Url: '/nk-demo/inputs/slider', text: 'Slider' },
         { Icon: 'fa-list', Url: '/nk-demo/inputs/switch', text: 'Switch' }
       ]
-    },
-    {
-      Icon: 'fa-cogs', text: 'Newkit2 Template Demo', SubMenus: [
-        { Icon: 'fa-list', Url: '/nk-template/page1', text: 'Service Test' }
-      ]
     }
   ]
 };
