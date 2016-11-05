@@ -9,13 +9,10 @@ module.exports = {
         'node_modules/nprogress/nprogress.js',
         'node_modules/lodash/lodash.js',
         'static/layer/layer.js',
-
         'static/vendor/html2canvas.min.js',
         'static/vendor/neg-feedback.min.js',
 
-        'node_modules/zone.js/dist/zone.js', //min
         'node_modules/rxjs/bundles/Rx.js', //min
-        'node_modules/reflect-metadata/Reflect.js',
         'node_modules/@angular/core/bundles/core.umd.js', //min
         'node_modules/@angular/compiler/bundles/compiler.umd.js', //min
         'node_modules/@angular/common/bundles/common.umd.js', //min

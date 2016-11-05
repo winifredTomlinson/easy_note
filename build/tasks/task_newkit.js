@@ -9,7 +9,8 @@ module.exports = {
       let opt = webpackMerge(commonConfig, {
         entry: {
           'nk-core': './src/newkit/nk-core/index.ts',
-          'nk-shell': './src/newkit/nk-shell/index.ts'
+          'nk-shell': './src/newkit/nk-shell/index.ts',
+          'polyfills': './src/polyfills.ts'
         },
         output: {
           path: './dist',
