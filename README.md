@@ -6,6 +6,8 @@ Newkit是基于Angular2搭建的前端模块化开发框架。
 
 ## 安装
 
+**注意：要运行该程序，需要 ``node>=4.x``，建议安装 ``6.x``。**
+
 ```bash
 # 全局安装最新版本的newkit-cli
 npm i -g newkit-cli
@@ -49,6 +51,11 @@ modules: [
 # 运行
 npm start
 ```
+
+---
+
+以下是开发 ``Newkit2`` 框架所需要的步骤，业务开发可忽略。
+
 
 # 如何开发？
 
