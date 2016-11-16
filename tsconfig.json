@@ -7,7 +7,13 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": false
+    "sourceMap": false,
+    "noEmitOnError": false,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./",
+      "./typings"
+    ]
   },
   "compileOnSave": false,
   "buildOnSave": false,

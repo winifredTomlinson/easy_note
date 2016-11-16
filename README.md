@@ -72,3 +72,8 @@ $ npm run dev:vendor
 # start project
 $ npm run dev
 ```
+
+# 如何发布框架？
+
+```bash
+```

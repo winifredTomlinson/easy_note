@@ -20,7 +20,7 @@ export class AuthService {
       .then(res => {
         this._processLoginData(res);
         return Promise.resolve();
-      });
+      }).catch(reason => Promise.reject(reason));
   }
 
   getSystemConfigData() {
