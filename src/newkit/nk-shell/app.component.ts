@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private menuData: Array<any>;
 
   public currentIsNg1Module: boolean = false;
-  public ng1PageSrc: SafeResourceUrl;
+  public ng1PageSrc: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
   public iframeHeight: string;
 
   private isLogged: boolean = false;
@@ -163,7 +163,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   _init() {
-    this.ng1PageSrc = this.sanitizer.bypassSecurityTrustResourceUrl('');
     this.messageProcessor.init(this);
     window.addEventListener('message', evt => {
       this.messageProcessor.processMessage(evt);

@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 import { NegAuth, NegAjax, NegStorage } from 'newkit/core';
 
 @Injectable()
 export class AuthService {
+
+  private isFirstRoute: boolean = true;
 
   constructor(
     private negAuth: NegAuth,
@@ -35,7 +38,8 @@ export class AuthService {
       });
   }
 
-  autoLogin(token: string): Promise<any> {
+  autoLogin(): Promise<any> {
+    let token = '';
     // Step1: if authorize exists.
     let authorizeRes = this.negStorage.session.get('x-newkit-authorize');
     let newkitToken = this.negStorage.local.get('x-newkit-token');
@@ -51,6 +55,70 @@ export class AuthService {
         this._processLoginData(res);
         return Promise.resolve();
       });
+  }
+
+  
+  // _doLogin(): Promise<boolean> {
+  //   let p: Promise<any>; // Auth Promise
+  //   // If redirect by sso
+  //   let ssoToken = this.negUtil.getQuery('t');
+  //   if (ssoToken) {
+  //     p = this.authService.login(ssoToken);
+  //   } else {
+  //     let token = this.negStorage.local.get('x-newkit-token');
+  //     // No token
+  //     if (!token) {
+  //       p = Promise.reject('No token.');
+  //     }
+  //     // Auto login
+  //     p = this.authService.autoLogin(token);
+  //   }
+
+  //   return new Promise((resolve, reject) => {
+  //     p.then(() => {
+  //       return this.authService.getSystemConfigData()
+  //         .then(() => {
+  //           this.negEventBus.emit('global.loginSucceed');
+  //           resolve(true);
+  //         }).catch(reason => {
+  //           return Promise.reject('Get system config error.');
+  //         });
+  //     })
+  //       .catch(reason => {
+  //         let errorCount = (this.negStorage.local.get('login-error-count') || 0) + 1;
+  //         if (errorCount > 3) {
+  //           return console.log('login failed:', reason);
+  //         }
+  //         resolve(false);
+  //         let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
+  //         window.location.href = ssoLoginUrl;
+  //       });
+  //   });
+
+
+  //   //     this.negA
+  //   // x-newkit-token:8d34b453abfaf5726aa48fa726301c39
+  // }
+
+  requireAuth(to: RouterStateSnapshot, from: ActivatedRouteSnapshot, router: Router): Promise<boolean>{
+    let url: string = from.url.join('');
+    let toUrl: string = to.url;
+    console.log('from', url, 'to', toUrl);
+    let p: Promise<any>;
+    if(this.isFirstRoute){
+      p = this.autoLogin();
+    }
+    return Promise.resolve(true);
+    // if (this.isFirstRoute) {
+    //   this.isFirstRoute = false;
+    //   // return this._doLogin();
+    // }
+    // console.log('AuthGuard#canActivate called');
+    // if (this.negAuth.isAuthenticated()) {
+    //   return Promise.resolve(true);
+    // } else {
+    //   return Promise.resolve(false);
+    // }
   }
 
   _processLoginData(res) {
@@ -70,4 +138,5 @@ export class AuthService {
     this.negStorage.session.set('x-newkit-authorize', authData);
     this.negAuth.setAuthData(authData);
   }
+  
 }
