@@ -21,13 +21,8 @@ import {
 
 const loadModule = (moduleName) => {
   return () => {
-    // let moduleName = window.location.pathname.replace(/^\//, '').split('/')[0];
     return NegModuleLoader.load(moduleName);
   }
-};
-
-let modules = {
-
 };
 
 let dynamicRoutes = [];
@@ -54,15 +49,13 @@ const appRoutes: Routes = [{
     { path: '404', component: NotFoundComponent }
   ]
 },
-...dynamicRoutes,
-{
+...dynamicRoutes, {
   path: '', component: LayoutComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard],
   children: [
     { path: '', component: AboutComponent }
   ]
-},
-// { path: '**', redirectTo: '/system/404', canActivate: [AuthGuard] },
-{ path: '**', component: NotFoundComponent }
-];
+}, {
+  path: '**', component: NotFoundComponent
+}];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, { useHash: false });

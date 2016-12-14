@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-import { TranslateModule } from 'ng2-translate';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
@@ -21,7 +20,6 @@ const KendoModules = [
 
 @NgModule({
   exports: [
-    TranslateModule,
     ...KendoModules
   ]
 })

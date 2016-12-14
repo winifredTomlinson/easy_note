@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from 'newkit/core';
 
 import { NegEventBus, NegGlobalLoading, NegStorage, NegAuth, NegAjax, NegAlert, NegContext, NegProgress } from 'newkit/core';
 import { MenuComponent } from './components';

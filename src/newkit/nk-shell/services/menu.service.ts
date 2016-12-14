@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { NegAuth } from 'newkit/core';
 
 @Injectable()

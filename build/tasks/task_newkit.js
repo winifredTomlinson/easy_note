@@ -5,7 +5,13 @@ const commonConfig = require('./../webpack.common');
 const util = require('./../util');
 
 module.exports = (gulp, params) => {
-   gulp.task('build:newkit', done => {
+  gulp.task('build:types', done => {
+    cd('./src/newkit/nk-core');
+    exec('tsc');
+    done();
+  });
+
+  gulp.task('build:newkit', done => {
     let opt = webpackMerge(commonConfig, {
       entry: {
         'nk-core': './src/newkit/nk-core/index.ts',
@@ -20,6 +26,7 @@ module.exports = (gulp, params) => {
     });
     webpack(opt).watch(200, (err, stats) => {
       util.showWebpackError(err, stats);
+      gulp.series('bs-reload')();
       done();
     });
   });

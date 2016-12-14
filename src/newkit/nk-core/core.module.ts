@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ALL_COMPONENTS } from './components';
 
+import { TranslateModule } from 'ng2-translate';
 import { NkThirdPartyModule } from './third-party.module';
 
 
@@ -19,6 +20,7 @@ import { NkThirdPartyModule } from './third-party.module';
     CommonModule,
     HttpModule, JsonpModule,
     FormsModule,
+    TranslateModule,
     NkThirdPartyModule,
     ...ALL_COMPONENTS
   ]

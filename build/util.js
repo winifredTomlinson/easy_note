@@ -1,6 +1,6 @@
 const gutil = require('gulp-util');
 
-const showWebpackError = (err, stats, needReload) => {
+const showWebpackError = (err, stats) => {
   if (err) {
     throw new gutil.PluginError('webpack', err);
   }
@@ -25,10 +25,6 @@ const showWebpackError = (err, stats, needReload) => {
       source: false,
       errorDetails: false
     }));
-  }
-  if (needReload !== false) {
-    const gulp = require('gulp4');
-    gulp.series('bs-reload')();
   }
 };
 

@@ -53,7 +53,7 @@
 				</li>
 				<li class="dropdown user-info bg-light-blue">
 					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-						<img [src]="userInfo?.Avatar" alt="">
+						<img [src]="userInfo?.Avatar || '#'" alt="">
 						<span class="user-content">
               <small>Welcome,</small>
 							{{ userInfo?.FullName }}

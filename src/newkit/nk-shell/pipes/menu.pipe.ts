@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { TranslateService, LangChangeEvent } from 'ng2-translate';
+import { TranslateService, LangChangeEvent } from 'newkit/core';
 
 @Pipe({
   name: 'menuTranslate',

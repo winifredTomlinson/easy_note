@@ -3,15 +3,18 @@
     "target": "ES5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": false,
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": false,
     "noEmitOnError": false,
+    "baseUrl": "./",
     "typeRoots": [
-      "./node_modules/@types"
-    ]
+      "./../../../node_modules/@types"
+    ],
+    "declaration": true,
+    "declarationDir": "./../../../node_modules/@types/newkit/core",
+    "outDir": "./../../../dist"
   },
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,

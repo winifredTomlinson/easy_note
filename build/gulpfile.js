@@ -14,13 +14,8 @@ gulp.task('clean', done => {
   done();
 });
 
-gulp.task('build', gulp.series(
-  'clean',
-  gulp.parallel('build:vendor', 'build:newkit', 'build:modules')
-));
-
 gulp.task('serve', done => {
-  browserSync({
+  browserSync.init({
     server: {
       baseDir: './'
     },
@@ -30,6 +25,13 @@ gulp.task('serve', done => {
   });
   done();
 });
+
+gulp.task('build', gulp.series(
+  'clean',
+  gulp.parallel('build:vendor', 'build:newkit', 'build:modules'),
+  'serve'
+));
+
 
 gulp.task('bs-reload', done => {
   notifier.notify({ title: 'Newkit', message: 'Build successfully.' });

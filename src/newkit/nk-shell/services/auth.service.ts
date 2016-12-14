@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
-import { NegAuth, NegAjax, NegStorage } from 'newkit/core';
+import { NegAuth, NegAjax, NegStorage, NegUtil, NegEventBus } from 'newkit/core';
 
 @Injectable()
 export class AuthService {
@@ -11,20 +11,11 @@ export class AuthService {
   constructor(
     private negAuth: NegAuth,
     private negAjax: NegAjax,
-    private negStorage: NegStorage
+    private negStorage: NegStorage,
+    private negUtil: NegUtil,
+    private negEventBus: NegEventBus
   ) { }
 
-  login(ssoToken: string): Promise<any> {
-    let postData = {
-      SSOToken: ssoToken,
-      ApplicationIds: NewkitConf.Applications
-    };
-    return this.negAjax.post(`${NewkitConf.NewkitAPI}/login`, postData)
-      .then(res => {
-        this._processLoginData(res);
-        return Promise.resolve();
-      }).catch(reason => Promise.reject(reason));
-  }
 
   getSystemConfigData() {
     return Promise.all([
@@ -38,87 +29,68 @@ export class AuthService {
       });
   }
 
-  autoLogin(): Promise<any> {
-    let token = '';
-    // Step1: if authorize exists.
-    let authorizeRes = this.negStorage.session.get('x-newkit-authorize');
-    let newkitToken = this.negStorage.local.get('x-newkit-token');
-    if (authorizeRes && token) {
-      this.negAuth.setAuthData(authorizeRes);
-      this.negAjax.setToken(newkitToken);
-      return Promise.resolve();
-    }
-
-    // Step2: execute auto login
-    return this.negAjax.post(`${NewkitConf.NewkitAPI}/autologin`, null, { headers: { 'x-newkit-token': token } })
+  login(ssoToken: string): Promise<void> {
+    let postData = {
+      SSOToken: ssoToken,
+      ApplicationIds: NewkitConf.Applications
+    };
+    return this.negAjax.post(`${NewkitConf.NewkitAPI}/login`, postData)
       .then(res => {
         this._processLoginData(res);
         return Promise.resolve();
-      });
+      }).catch(reason => true);
   }
 
-  
-  // _doLogin(): Promise<boolean> {
-  //   let p: Promise<any>; // Auth Promise
-  //   // If redirect by sso
-  //   let ssoToken = this.negUtil.getQuery('t');
-  //   if (ssoToken) {
-  //     p = this.authService.login(ssoToken);
-  //   } else {
-  //     let token = this.negStorage.local.get('x-newkit-token');
-  //     // No token
-  //     if (!token) {
-  //       p = Promise.reject('No token.');
-  //     }
-  //     // Auto login
-  //     p = this.authService.autoLogin(token);
-  //   }
 
-  //   return new Promise((resolve, reject) => {
-  //     p.then(() => {
-  //       return this.authService.getSystemConfigData()
-  //         .then(() => {
-  //           this.negEventBus.emit('global.loginSucceed');
-  //           resolve(true);
-  //         }).catch(reason => {
-  //           return Promise.reject('Get system config error.');
-  //         });
-  //     })
-  //       .catch(reason => {
-  //         let errorCount = (this.negStorage.local.get('login-error-count') || 0) + 1;
-  //         if (errorCount > 3) {
-  //           return console.log('login failed:', reason);
-  //         }
-  //         resolve(false);
-  //         let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
-  //         window.location.href = ssoLoginUrl;
-  //       });
-  //   });
+  autoLogin(): Promise<void> {
+    let ssoToken = this.negUtil.getQuery('t');
+    if (ssoToken) {
+      return this.negAjax.post(`${NewkitConf.NewkitAPI}/autologin`, null, { headers: { 'x-newkit-token': ssoToken } })
+        .then(res => {
+          this._processLoginData(res);
+          return Promise.resolve();
+        }).catch(reason => true);
+    } else {
+      // 刷新
+      let authorizeRes = this.negStorage.local.get('x-newkit-authorize');
+      let newkitToken = this.negStorage.local.get('x-newkit-token');
+      if (authorizeRes && newkitToken) {
+        this.negAuth.setAuthData(authorizeRes);
+        this.negAjax.setToken(newkitToken);
+        return Promise.resolve();
+      }
+      return Promise.resolve();
+    }
+  }
 
-
-  //   //     this.negA
-  //   // x-newkit-token:8d34b453abfaf5726aa48fa726301c39
-  // }
-
-  requireAuth(to: RouterStateSnapshot, from: ActivatedRouteSnapshot, router: Router): Promise<boolean>{
+  requireAuth(to: RouterStateSnapshot, from: ActivatedRouteSnapshot, router: Router, isChild: boolean): Promise<boolean> {
+    if(isChild){
+      return Promise.resolve(true);
+    }
     let url: string = from.url.join('');
     let toUrl: string = to.url;
     console.log('from', url, 'to', toUrl);
-    let p: Promise<any>;
-    if(this.isFirstRoute){
-      p = this.autoLogin();
+    let p: Promise<any> = Promise.resolve(true);
+    let useLogin = false;
+    if (this.isFirstRoute) {
+      this.isFirstRoute = false;
+      useLogin = true;
+      let ssoToken = this.negUtil.getQuery('t');
+      // 通过ssoToken判断是登录还是自动登录
+      p = ssoToken ? this.login(ssoToken) : this.autoLogin();
     }
-    return Promise.resolve(true);
-    // if (this.isFirstRoute) {
-    //   this.isFirstRoute = false;
-    //   // return this._doLogin();
-    // }
-    // console.log('AuthGuard#canActivate called');
-    // if (this.negAuth.isAuthenticated()) {
-    //   return Promise.resolve(true);
-    // } else {
-    //   return Promise.resolve(false);
-    // }
+    return p.then(() => {
+      if (this.negAuth.isAuthenticated()) {
+        if(useLogin){
+          this.negEventBus.emit('global.loginSucceed');
+        }
+        return Promise.resolve(true);
+      } else {
+        let ssoLoginUrl = `${NewkitConf.SSOAddress}/login?redirect_url=${window.location.href}`;
+        window.location.href = ssoLoginUrl;
+        return Promise.resolve(false);
+      }
+    });
   }
 
   _processLoginData(res) {
@@ -138,5 +110,5 @@ export class AuthService {
     this.negStorage.session.set('x-newkit-authorize', authData);
     this.negAuth.setAuthData(authData);
   }
-  
+
 }

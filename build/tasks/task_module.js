@@ -24,12 +24,13 @@ module.exports = (gulp, params) => {
       output: {
         path: './dist',
         filename: 'modules/[name]/app.js',
-        library: ['ng2App', '[name]'],
+        library: ['newkit', '[name]'],
         chunkFilename: '[id].js'
       }
     });
     webpack(opt).watch(200, (err, stats) => {
       util.showWebpackError(err, stats);
+      gulp.series('bs-reload')();
       done();
     });
   });
