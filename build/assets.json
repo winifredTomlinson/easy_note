@@ -24,7 +24,8 @@
     "./node_modules/bootstrap/dist/css/bootstrap.css",
     "./node_modules/nprogress/nprogress.css",
     "./static/nk-style/nk.css",
-    "./node_modules/@telerik/kendo-theme-bootstrap/dist/all.css"
+    "./node_modules/@telerik/kendo-theme-default/dist/all.css",
+    "./src/newkit/nk-shell/css/layout.css"
   ],
   "vendor.fonts": [
     "./node_modules/font-awesome/fonts/*.*",

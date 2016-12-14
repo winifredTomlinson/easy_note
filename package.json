@@ -11,7 +11,6 @@
     "dev:modules": "gulp4 build:modules --gulpfile build/gulpfile.js --cwd ./",
     "dev": "gulp4 build --gulpfile build/gulpfile.js --cwd ./",
     "serve": "gulp4 serve --gulpfile build/gulpfile.js --cwd ./",
-    "watch": "gulp4 watch --gulpfile build/gulpfile.js --cwd ./",
     "release": "gulp4 release --gulpfile build/gulpfile.js --cwd ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -46,7 +45,7 @@
     "@progress/kendo-angular-sortable": "0.7.0",
     "@progress/kendo-angular-upload": "0.11.1",
     "@progress/kendo-data-query": "0.3.1",
-    "@telerik/kendo-theme-bootstrap": "0.10.0",
+    "@telerik/kendo-theme-default": "1.32.1",
     "bootstrap": "3.3.7",
     "core-js": "2.4.1",
     "font-awesome": "4.7.0",

@@ -107,7 +107,7 @@ export class AuthService {
       globalSearch: data.globalSearch,
       neweggPermission: data.NeweggPermission
     };
-    this.negStorage.session.set('x-newkit-authorize', authData);
+    this.negStorage.local.set('x-newkit-authorize', authData);
     this.negAuth.setAuthData(authData);
   }
 
