@@ -1,4 +1,4 @@
-import '!style!css!./css/layout.css';
+import '!style-loader!css-loader!./css/layout.css';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 

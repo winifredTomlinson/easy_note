@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ALL_COMPONENTS } from './components';
 
-import { NkThirdPartyCoreModule } from 'newkit/thirdparty';
+import { NkThirdPartyModule } from './third-party.module';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { NkThirdPartyCoreModule } from 'newkit/thirdparty';
     CommonModule,
     HttpModule, JsonpModule,
     FormsModule,
-    NkThirdPartyCoreModule,
+    NkThirdPartyModule,
     ...ALL_COMPONENTS
   ]
 })

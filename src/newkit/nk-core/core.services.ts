@@ -16,6 +16,7 @@ import { NegProgress } from './services/negProgress';
 import { NegAuth } from './services/negAuth';
 import { NegBreadcrumb } from './services/negBreadcrumb';
 import { NegStore } from './services/negStore';
+import { TranslateService, TranslateLoader, TranslateParser } from 'ng2-translate';
 
 // All services export 
 export {
@@ -35,7 +36,10 @@ export {
   NegProgress,
   NegAuth,
   NegBreadcrumb,
-  NegStore
+  NegStore,
+  TranslateService,
+  TranslateLoader,
+  TranslateParser
 };
 
 // Export all services
@@ -56,5 +60,8 @@ export const CORE_SERVICES = [
   NegProgress,
   NegAuth,
   NegBreadcrumb,
-  NegStore
+  NegStore,
+  TranslateService,
+  TranslateLoader,
+  TranslateParser
 ];

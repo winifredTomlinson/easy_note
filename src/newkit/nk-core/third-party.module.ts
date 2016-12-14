@@ -19,12 +19,12 @@ const KendoModules = [
   PopupModule, ScrollViewModule, SortableModule
 ];
 
-
 @NgModule({
   exports: [
     TranslateModule,
     ...KendoModules
   ]
 })
-export class NkThirdPartyCoreModule {
+export class NkThirdPartyModule {
+  
 }

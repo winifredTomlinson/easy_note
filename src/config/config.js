@@ -16,7 +16,7 @@ const config = {
   menus: [
     {
       Icon: 'fa-list', text: 'Newkit2 Kendo Demo', SubMenus: [
-        { Icon: 'fa-list', Url: '/nk-demo/buttons/button', text: 'Button' },
+        { Icon: 'fa-list', Url: '/nk-demo/buttons/button', text: 'Button', en: '', tw: '', zh: '' },
         { Icon: 'fa-list', Url: '/nk-demo/buttons/button-group', text: 'Button Group' },
         { Icon: 'fa-list', Url: '/nk-demo/charts/chart', text: 'Chart' },
         { Icon: 'fa-list', Url: '/nk-demo/dialogs/dialog', text: 'Dialog' },

@@ -10,13 +10,9 @@
     "sourceMap": false,
     "noEmitOnError": false,
     "typeRoots": [
-      "./node_modules/@types",
-      "./",
-      "./typings"
+      "./node_modules/@types"
     ]
   },
-  "compileOnSave": false,
-  "buildOnSave": false,
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
     "useWebpackText": true
