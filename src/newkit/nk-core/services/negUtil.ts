@@ -37,4 +37,19 @@ export class NegUtil {
     }
     return searchObj;
   }
+
+  addWatcher(obj: {}, property: string, watherFn: Function, defaultVal) {
+    let privateProperty = `__${property}`;
+    obj[privateProperty] = defaultVal;
+    Object.defineProperty(obj, property, {
+      get() {
+        return this[privateProperty];
+      },
+      set(val) {
+        let oldVal = this[property]
+        this[privateProperty] = val;
+        watherFn(val, oldVal);
+      }
+    });
+  }
 }

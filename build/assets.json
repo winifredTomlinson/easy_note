@@ -10,6 +10,8 @@
     "./static/layer/layer.js",
     "./static/vendor/html2canvas.min.js",
     "./static/vendor/neg-feedback.min.js",
+    "./static/HubSpot-messenger/js/messenger.js",
+    "./static/HubSpot-messenger/js/messenger-theme-flat.js",
     "./node_modules/@angular/core/bundles/core.umd.js",
     "./node_modules/@angular/compiler/bundles/compiler.umd.js",
     "./node_modules/@angular/common/bundles/common.umd.js",
@@ -25,6 +27,8 @@
     "./node_modules/nprogress/nprogress.css",
     "./static/nk-style/nk.css",
     "./node_modules/@telerik/kendo-theme-default/dist/all.css",
+    "./static/HubSpot-messenger/css/messenger.css",
+    "./static/HubSpot-messenger/css/messenger-theme-flat.css",
     "./src/newkit/nk-shell/css/layout.css"
   ],
   "vendor.fonts": [

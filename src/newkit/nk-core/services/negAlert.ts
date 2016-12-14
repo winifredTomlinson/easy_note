@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NegUtil } from './negUtil';
 
 let noop = function () { };
 
@@ -37,26 +38,18 @@ export interface LayerOptions {
   btn5?: Function;
 }
 
-let iconMap = {
-  'info': 0,
-  'success': 1,
-  'error': 2,
-  'question': 3,
-  'lock': 4,
-  'sad': 5,
-  'smile': 6
+const defaults = {
+  type: 'info',
+  theme: 'flat',
+  hideAfter: 3,
+  showCloseButton: true,
+  escapeText: true
 };
 
-let getIcon = (iconType) => {
-  let value = iconMap[iconType];
-  return value >= 0 ? value : -1;
-}
-
 let getOptions = (options: LayerOptions, defaults?: any) => {
-
   let opt = _.extend({}, defaults || {}, options);
   if (opt.icon !== undefined) {
-    opt.icon = getIcon(opt.icon);
+    
   }
   if (opt.time !== undefined) {
     opt.time *= 1000;
@@ -66,27 +59,53 @@ let getOptions = (options: LayerOptions, defaults?: any) => {
 
 @Injectable()
 export class NegAlert {
-  constructor() {
-    // 设置默认参数
-    layer.config({
-      shift: 4
+  private messageBox: any;
+  constructor(private negUtil: NegUtil) {
+    Messenger.options = {
+      extraClasses: 'messenger-fixed messenger-on-top',
+      theme: 'flat'
+    };
+    this.messageBox = Messenger();
+    window['t'] = this;
+  }
+
+  info(message: string, callback?: Function, userOpt = {}) {
+    let opt = Object.assign({}, userOpt, { type: 'info', callback, message });
+    return this._post(opt);
+  }
+
+  success(message: string, callback?: Function, userOpt = {}) {
+    let opt = Object.assign({}, userOpt, { type: 'success', callback, message });
+    return this._post(opt);
+  }
+
+  error(message: string, callback?: Function, userOpt = {}) {
+    let opt = Object.assign({}, userOpt, { type: 'error', callback, message });
+    return this._post(opt);
+  }
+
+  _post(options: any) {
+    let opt = Object.assign({}, defaults);
+    ['theme', 'closeButtonText', 'onClickClose', 'message'].forEach(p => {
+      opt[p] = options[p];
     });
-  }
-
-  info(msg: string, callback?: Function) {
-    return this.msg(msg, { icon: 'info' }, callback);
-  }
-
-  success(msg: string, callback?: Function) {
-    return this.msg(msg, { icon: 'success' }, callback);
-  }
-
-  error(msg: string, callback?: Function) {
-    return this.msg(msg, { icon: 'error' }, callback);
-  }
-
-  msg(msg: string, options?: LayerOptions, callback?: Function) {
-    return layer.msg(msg, getOptions(options), callback || noop);
+    if (options.showCloseButton === false) {
+      options.showCloseButton = false;
+    }
+    if (options.allowHtml) {
+      opt.escapeText = false;
+    }
+    if (options.seconds) {
+      opt.hideAfter = options.seconds;
+    }
+    console.log(opt);
+    let ins = this.messageBox.post(opt);
+    if (typeof options.callback === 'function') {
+      this.negUtil.addWatcher(ins, 'shown', newVal => {
+        options.callback(ins);
+      }, ins.shown);
+    }
+    return ins;
   }
 
   alert(content, options?: LayerOptions, okCallback?: Function) {
@@ -98,22 +117,6 @@ export class NegAlert {
       title: 'Confirm',
       icon: 'question'
     }), okCallback || noop, cancelCallback || noop)
-  }
-
-  prompt(content, options?: any, callback?: Function) {
-    options = options || {};
-    let opt: any = { title: 'Prompt', btn: ['OK', 'CANCEL'] };
-    opt.formType = this._getPromptType(options.type);
-    opt.value = content;
-    if (_.isNumber(options.maxlength)) {
-      opt.maxlength = options.maxlength;
-    }
-    if (_.isString(options.title)) {
-      opt.title = options.title;
-    }
-    return layer.prompt(opt, (value, index, elem) => {
-      (callback || noop)(index);
-    });
   }
 
   notice(content, options?: any, callback?: Function) {
@@ -138,25 +141,13 @@ export class NegAlert {
     return layer.open(opt);
   }
 
-  _getPromptType(type) {
-    switch (type) {
-      case 'password':
-        return 1;
-      case 'textarea':
-        return 2;
+  close(ins) {
+    if (ins && typeof ins.hide === 'function') {
+      ins.hide();
     }
-    return 0;
   }
 
-  close(index: number) {
-    layer.close(index);
-  }
-
-  closeAll(type: string) {
-    if (type) {
-      layer.closeAll(type);
-      return;
-    }
-    layer.closeAll();
+  closeAll() {
+    this.messageBox.hideAll();
   }
 };
