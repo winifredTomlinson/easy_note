@@ -10,7 +10,7 @@ module.exports = (gulp, params) => {
     cd('./src/newkit/nk-core');
     exec('tsc');
     cd('../../../'); // 退回到根目录
-    fs.writeFileSync('./node_modules/@types/newkit/index.d.ts', '', 'utf8');
+    fs.writeFileSync('./node_modules/@types/newkit/index.d.ts', 'export {};', 'utf8');
     done();
   });
 
