@@ -103,3 +103,11 @@ body {
   border-top-color: #b52c26;
   border-left-color: #b52c26;
 }
+
+
+/* Messanger Style */
+
+.messenger .messenger-actions>span[data-action]>a {
+  min-width: 60px;
+  text-align: center;
+}
