@@ -1,3 +1,4 @@
+const fs = require('fs');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 
@@ -8,6 +9,8 @@ module.exports = (gulp, params) => {
   gulp.task('build:types', done => {
     cd('./src/newkit/nk-core');
     exec('tsc');
+    cd('../../../'); // 退回到根目录
+    fs.writeFileSync('./node_modules/@types/newkit/index.d.ts', '', 'utf8');
     done();
   });
 

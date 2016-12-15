@@ -131,7 +131,7 @@ export class AppComponent implements OnInit, OnDestroy {
       },
       onAfterSend: function (result) { // 可选，邮件发送之后的回调。
         if (result.IsSendSuccess) {
-          self.negAlert.msg('Send feedback successfully.');
+          self.negAlert.success('Send feedback successfully.');
         } else {
           self.negAlert.error('Send feedback failed.');
         }

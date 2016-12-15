@@ -1,5 +1,9 @@
 {
   "vendor.js": [
+    "./static/vendor/Blob.js",
+    "./static/vendor/classList.js",
+    "./static/vendor/formdata.js",
+    "./static/vendor/es6-shim.js",
     "./node_modules/zone.js/dist/zone.js",
     "./node_modules/rxjs/bundles/Rx.js",
     "./node_modules/reflect-metadata/Reflect.js",
@@ -7,7 +11,6 @@
     "./node_modules/bootstrap/dist/js/bootstrap.js",
     "./node_modules/nprogress/nprogress.js",
     "./node_modules/lodash/lodash.js",
-    "./static/layer/layer.js",
     "./static/vendor/html2canvas.min.js",
     "./static/vendor/neg-feedback.min.js",
     "./static/HubSpot-messenger/js/messenger.js",
@@ -28,14 +31,13 @@
     "./static/nk-style/nk.css",
     "./node_modules/@telerik/kendo-theme-default/dist/all.css",
     "./static/HubSpot-messenger/css/messenger.css",
-    "./static/HubSpot-messenger/css/messenger-theme-flat.css",
-    "./src/newkit/nk-shell/css/layout.css"
+    "./static/HubSpot-messenger/css/messenger-theme-flat.css"
   ],
   "vendor.fonts": [
     "./node_modules/font-awesome/fonts/*.*",
     "./node_modules/bootstrap/dist/fonts/*.*"
   ],
   "vendor.static": [
-    "./static/layer/skin*/**/*"
+    "./palceholder1/**/*"
   ]
 }

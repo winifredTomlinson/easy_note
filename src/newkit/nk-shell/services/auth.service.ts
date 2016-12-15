@@ -56,7 +56,6 @@ export class AuthService {
       let newkitToken = this.negStorage.local.get('x-newkit-token');
       if (authorizeRes && newkitToken) {
         this.negAuth.setAuthData(authorizeRes);
-        this.negAjax.setToken(newkitToken);
         return Promise.resolve();
       }
       return Promise.resolve();
@@ -96,7 +95,6 @@ export class AuthService {
   _processLoginData(res) {
     let token = res.headers.get('x-newkit-token');
     this.negStorage.local.set('x-newkit-token', token, 1);
-    this.negAjax.setToken(token);
     let data = res.json();
     let authData = {
       userInfo: data.UserInfo,

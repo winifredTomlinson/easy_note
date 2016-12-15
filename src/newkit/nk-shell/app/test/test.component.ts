@@ -20,8 +20,8 @@ export class ServicesTestComponent implements OnInit {
   public file1: File;
   public fileUrl: string;
   public st = { storageType: 'cookie', storageName: 'test', storageValue: 'testvalue' };
-  private alert: { type: string, content: string, opt?: string } = {
-    type: 'msg', content: 'Hello', opt: JSON.stringify({
+  private alert: { type: string, message: string, opt?: string } = {
+    type: 'info', message: 'Hello', opt: JSON.stringify({
       icon: 'info',
       shift: 1,
       title: 'test'
@@ -54,25 +54,20 @@ export class ServicesTestComponent implements OnInit {
   }
 
   public testNegAlert() {
-    this.negAlert[this.alert.type](this.alert.content, JSON.parse(this.alert.opt), () => {
-      this.negAlert.msg('EN');
+    this.negAlert[this.alert.type](this.alert.message, JSON.parse(this.alert.opt), () => {
+      this.negAlert.info('EN');
     }, () => {
-      this.negAlert.msg('Not');
+      this.negAlert.error('Not');
       return false;
     });
   }
 
   public testNegAlertPrompt() {
-    this.negAlert.prompt('', { type: 'password', maxlength: 10 }, index => {
-      this.negAlert.success('OK');
-      this.negAlert.close(index);
-    })
+   alert('not support');
   }
 
   public testNegAlertNotice() {
-    this.negAlert.notice('abc', {}, () => {
-      this.negAlert.success('OK');
-    })
+    alert('not support');
   }
 
   public testGlobalConfig() {

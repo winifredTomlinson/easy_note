@@ -11,9 +11,6 @@
     "noEmitOnError": false,
     "typeRoots": [
       "./node_modules/@types"
-    ],
-    "types": [
-      "./src/declare.d.ts"
     ]
   },
   "awesomeTypescriptLoaderOptions": {

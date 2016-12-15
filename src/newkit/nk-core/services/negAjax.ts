@@ -4,14 +4,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class NegAjax {
 
-  private newkitToken: string;
-
   constructor(private http: Http) {
 
-  }
-
-  public setToken(value) {
-    this.newkitToken = value;
   }
 
   public get(url: string, options?: any): Promise<any> {
@@ -39,9 +33,6 @@ export class NegAjax {
     headers.append('Accept', 'application/json');
     if (type !== 'GET' && type !== 'DELETE') {
       headers.append('Content-Type', 'application/json');
-    }
-    if (this.newkitToken) {
-      headers.set('x-newkit-token', this.newkitToken);
     }
     if (options && options.headers && typeof options.headers === 'object') {
       Object.keys(options.headers).forEach(k => {
