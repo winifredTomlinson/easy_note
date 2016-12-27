@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { Observable } from 'rx';
 import {
   NkCoreModule, TranslateModule,
   CORE_SERVICES, CORE_PIPES,
-  NegModuleLoader, TranslateService
+  NegModuleLoader, TranslateService, TranslateLoader
 } from 'newkit/core';
 
 import { ALL_PAGES } from './app';
@@ -14,12 +15,21 @@ import { ALL_SERVICES } from './services';
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 
+class EmptyTranslateLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return Observable.of({});
+  }
+}
+
 @NgModule({
   imports: [
     BrowserModule,
     NkCoreModule,
     RouterModule,
-    TranslateModule.forRoot(),
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useClass: EmptyTranslateLoader
+    }),
     routing
   ],
   declarations: [AppComponent, ...ALL_PAGES, ...ALL_COMPONENTS, ...ALL_PIPES],
