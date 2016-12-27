@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { Observable } from 'rx';
+import { Observable } from 'rxjs';
 import {
   NkCoreModule, TranslateModule,
   CORE_SERVICES, CORE_PIPES,
@@ -34,7 +34,6 @@ class EmptyTranslateLoader implements TranslateLoader {
   ],
   declarations: [AppComponent, ...ALL_PAGES, ...ALL_COMPONENTS, ...ALL_PIPES],
   providers: [
-    TranslateService,
     ...CORE_SERVICES,
     ...CORE_PIPES,
     ...ALL_SERVICES

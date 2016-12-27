@@ -18,8 +18,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     console.log('AuthGuard#canActivateChild called');
-    // return this.canActivate(route, state, true);
-    return Promise.resolve(true);
+    return this.canActivate(route, state, true);
   }
 
   canDeactivate(): boolean {

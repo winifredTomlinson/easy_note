@@ -28,8 +28,8 @@
     "./node_modules/font-awesome/css/font-awesome.css",
     "./node_modules/bootstrap/dist/css/bootstrap.css",
     "./node_modules/nprogress/nprogress.css",
-    "./static/nk-style/nk.css",
     "./node_modules/@telerik/kendo-theme-default/dist/all.css",
+    "./static/nk-style/nk.css",
     "./static/HubSpot-messenger/css/messenger.css",
     "./static/HubSpot-messenger/css/messenger-theme-flat.css",
     "./src/newkit/nk-shell/css/layout.css"

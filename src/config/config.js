@@ -5,7 +5,8 @@ const config = {
   configServiceAddress: 'http://10.16.75.24:3000/eggkeeper/v1',
   DomainName: 'Newkit',
   SSOAddress: 'http://10.16.75.26:8501',
-  NewkitAPI: 'http://10.16.75.27:9031/newegg-central-2/v1',
+  // NewkitAPI: 'http://10.16.75.27:9031/newegg-central-2/v1',
+  NewkitAPI: 'http://localhost:8201/newegg-central-2/v1',
   Applications: ['1f48a705-b734-476c-b32b-29359177c122'],
   modules: [
     { path: 'nk-template', module: 'nk-template' },
@@ -14,6 +15,11 @@ const config = {
     { path: 'nk-demo', module: 'nk-demo' }
   ],
   menus: [
+    {
+      Icon: 'fa-cogs', text: 'Control Panel', SubMenus: [
+        {Icon: 'fa-user', text: 'Menu Settings', Url: '/system/menu'}
+      ]
+    },
     {
       Icon: 'fa-list', text: 'Newkit2 Kendo Demo', SubMenus: [
         { Icon: 'fa-list', Url: '/nk-demo/buttons/button', text: 'Button', en: '', tw: '', zh: '' },
