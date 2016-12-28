@@ -1,6 +1,6 @@
 <div class="neg-modal">
   <div class="modal animated" [ngClass]="animate">
-    <div class="modal-dialog" [ngClass]="size" [style.width]="(width ? (width + 'px'): 'auto')">
+    <div class="modal-dialog" [ngClass]="size" [style.width]="(width ? (width + 'px'): null)">
       <div class="modal-content">
         <div class="modal-header" [hidden]="!hasCustomHeader">
           <ng-content select="[slot=modal-header]"></ng-content>
