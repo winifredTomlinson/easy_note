@@ -7,7 +7,7 @@ const defaults = {
 };
 
 @Component({
-  selector: 'neg-modal',
+  selector: 'nk-modal',
   templateUrl: 'modal.component.html'
 })
 export class ModalComponent implements OnInit, AfterViewInit {

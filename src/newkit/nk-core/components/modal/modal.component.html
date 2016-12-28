@@ -20,8 +20,8 @@
           <ng-content select="[slot=modal-footer]"></ng-content>
         </div>
         <div class="modal-footer" [hidden]="hasCustomFooter">
-          <button type="button" class="btn btn-default" (click)="onCancelClick()">{{cancelText}}</button>
-          <button type="button" class="btn btn-primary" (click)="onOkClick()">{{okText}}</button>
+          <button type="button" class="btn btn-default btn-sm" (click)="onCancelClick()">{{cancelText}}</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="onOkClick()">{{okText}}</button>
         </div>
       </div>
     </div>

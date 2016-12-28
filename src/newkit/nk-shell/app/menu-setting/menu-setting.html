@@ -1,3 +1,8 @@
+<style lang="stylus">
+  .language-config .input-group{
+    margin-bottom: 5px;
+  }
+</style>
 <div class="menu-setting">
   {{isModalShown | json}}
   <kendo-grid [data]="menuData" [selectable]="true" [scrollable]="'virtual'" [height]="600">
@@ -23,16 +28,16 @@
     <kendo-grid-column title="Operate" [width]="130">
       <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
         <div class="btn-group btn-group-sm">
-          <button type="button" title="Edit Menu" class="btn btn-default" (click)="doMenuOperate($event, 'edit', dataItem)"><i class="fa fa-edit"></i></button>
-          <button type="button" title="Add Child Menu" class="btn btn-default" (click)="doMenuOperate($event, 'addChild', dataItem)"><i class="fa fa-plus"></i></button>
-          <button type="button" title="Delete Menu" class="btn btn-default" (click)="doMenuOperate($event, 'delete', dataItem)"><i class="fa fa-minus"></i></button>
+          <button type="button" title="Edit Menu" class="btn btn-white btn-sm btn-primary" (click)="doMenuOperate($event, 'edit', dataItem)"><i class="fa fa-edit"></i></button>
+          <button type="button" title="Add Child Menu" class="btn btn-white btn-sm btn-primary" (click)="doMenuOperate($event, 'addChild', dataItem)"><i class="fa fa-plus"></i></button>
+          <button type="button" title="Delete Menu" class="btn btn-white btn-sm btn-primary" (click)="doMenuOperate($event, 'delete', dataItem)"><i class="fa fa-minus"></i></button>
         </div>
       </template>
     </kendo-grid-column>
   </kendo-grid>
-  <neg-modal title="新增菜单" [(shown)]="isModalShown" [onOk]="saveMenu">
+  <nk-modal title="新增菜单" [(shown)]="isModalShown" [onOk]="saveMenu">
     <form class="form-horizontal clearfix " novalidate>
-      <div class="form-group">
+      <div class="form-group form-group-sm language-config">
         <label class="control-label col-md-3">Menu Name</label>
         <div class="col-md-9">
           <div class="input-group">
@@ -49,13 +54,13 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="control-label col-md-3">Url</label>
         <div class="col-md-9">
           <input type="text" class="form-control">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="control-label col-md-3">Newkit1 Module</label>
         <div class="col-md-3">
           <input type="checkbox">
@@ -65,13 +70,13 @@
           <input type="checkbox">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="control-label col-md-3">Description</label>
         <div class="col-md-9">
           <textarea rows="3" class="form-control"></textarea>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-sm">
         <label class="control-label col-md-3">Authorize Type</label>
         <div class="col-md-9">
           <label><input type="radio" name="authType">Public</label>
@@ -81,19 +86,19 @@
       </div>
       <!-- Newegg Permission System -->
       <div>
-        <div class="form-group">
+        <div class="form-group form-group-sm">
           <label class="control-label col-md-3">System</label>
           <div class="col-md-9">
             <input type="text" class="form-control">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-group-sm">
           <label class="control-label col-md-3">Module</label>
           <div class="col-md-9">
             <input type="text" class="form-control">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-group-sm">
           <label class="control-label col-md-3">Function Key</label>
           <div class="col-md-9">
             <input type="text" class="form-control">
@@ -102,13 +107,13 @@
       </div>
       <!-- Keystone -->
       <div>
-        <div class="form-group">
+        <div class="form-group form-group-sm">
           <label class="control-label col-md-3">Application</label>
           <div class="col-md-9">
             <input type="text" class="form-control">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-group-sm">
           <label class="control-label col-md-3">Auth Key</label>
           <div class="col-md-9">
             <input type="text" class="form-control">
@@ -116,5 +121,5 @@
         </div>
       </div>
     </form>
-  </neg-modal>
+  </nk-modal>
 </div>
