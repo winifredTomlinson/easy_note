@@ -1,0 +1,29 @@
+<div class="neg-modal">
+  <div class="modal animated" [ngClass]="animate">
+    <div class="modal-dialog" [ngClass]="size" [style.width]="(width ? (width + 'px'): 'auto')">
+      <div class="modal-content">
+        <div class="modal-header" [hidden]="!hasCustomHeader">
+          <ng-content select="[slot=modal-header]"></ng-content>
+        </div>
+        <div class="modal-header" [hidden]="hasCustomHeader">
+          <button type="button" class="close" (click)="hideModal()">
+            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">
+            {{title}}
+          </h4>
+        </div>
+        <div class="modal-body">
+          <ng-content></ng-content>
+        </div>
+        <div class="modal-footer" [hidden]="!hasCustomFooter">
+          <ng-content select="[slot=modal-footer]"></ng-content>
+        </div>
+        <div class="modal-footer" [hidden]="hasCustomFooter">
+          <button type="button" class="btn btn-default" (click)="onCancelClick()">{{cancelText}}</button>
+          <button type="button" class="btn btn-primary" (click)="onOkClick()">{{okText}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
