@@ -1,5 +1,11 @@
 import { Component, OnInit, Input, Output, ElementRef, AfterViewInit, EventEmitter } from '@angular/core';
 
+const defaults = {
+  backdrop: 'static',
+  show: false,
+  keyboard: false
+};
+
 @Component({
   selector: 'neg-modal',
   templateUrl: 'modal.component.html'
@@ -30,11 +36,14 @@ export class ModalComponent implements OnInit, AfterViewInit {
   @Input()
   private cancelText: string = 'Close';
 
-  @Output()
-  private onHidden: EventEmitter<any> = new EventEmitter();
+  @Input()
+  private options: { backdrop?: boolean | string, show?: boolean, keyboard?: boolean }
 
   @Input()
   private onOk: () => Promise<any>;
+
+  @Output()
+  private onHidden: EventEmitter<any> = new EventEmitter();
 
   @Output()
   private onCancel: EventEmitter<any> = new EventEmitter();
@@ -61,7 +70,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.$el = this.elementRef.nativeElement;
-    this.$modal = $(this.$el.querySelector('.modal'));
+    this.$modal = window['jQuery'](this.$el.querySelector('.modal'));
     this.hasCustomHeader = !!this.$el.querySelector('[slot=modal-header]');
     this.hasCustomFooter = !!this.$el.querySelector('[slot=modal-footer]')
   }
@@ -72,11 +81,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
   }
 
   private configModalOptions() {
-    this.$modal.modal({
-      backdrop: true,
-      show: false,
-      keyboard: true
-    });
+    this.$modal.modal(Object.assign({}, defaults, this.options));
   }
 
   private configModalEvents() {
@@ -107,10 +112,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
     if (!this.onOk) {
       return this.hideModal();
     }
-    Promise.resolve()
-      .then(() => {
-        return this.onOk();
-      })
+    Promise.resolve(this.onOk())
       .then(needClose => {
         if (needClose !== false) {
           this.hideModal();
