@@ -32,7 +32,7 @@ export class AuthService {
   login(ssoToken: string): Promise<void> {
     let postData = {
       SSOToken: ssoToken,
-      ApplicationIds: NewkitConf.Applications
+      ApplicationIds: NewkitConf.Applications.map(x => x.id)
     };
     return this.negAjax.post(`${NewkitConf.NewkitAPI}/login`, postData)
       .then(res => {
@@ -63,7 +63,7 @@ export class AuthService {
   }
 
   requireAuth(to: RouterStateSnapshot, from: ActivatedRouteSnapshot, router: Router, isChild: boolean): Promise<boolean> {
-    if(isChild){
+    if (isChild) {
       return Promise.resolve(true);
     }
     let url: string = from.url.join('');
@@ -80,7 +80,7 @@ export class AuthService {
     }
     return p.then(() => {
       if (this.negAuth.isAuthenticated()) {
-        if(useLogin){
+        if (useLogin) {
           this.negEventBus.emit('global.loginSucceed');
         }
         return Promise.resolve(true);

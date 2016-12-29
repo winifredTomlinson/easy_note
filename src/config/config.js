@@ -7,7 +7,9 @@ const config = {
   SSOAddress: 'http://10.16.75.26:8501',
   // NewkitAPI: 'http://10.16.75.27:9031/newegg-central-2/v1',
   NewkitAPI: 'http://localhost:8201/newegg-central-2/v1',
-  Applications: ['1f48a705-b734-476c-b32b-29359177c122'],
+  Applications: [{
+    id: '1f48a705-b734-476c-b32b-29359177c122', name: 'Newkit'
+  }],
   modules: [
     { path: 'nk-template', module: 'nk-template' },
     { path: 'nk-common', module: 'nk-common' },
@@ -17,7 +19,7 @@ const config = {
   menus: [
     {
       Icon: 'fa-cogs', text: 'Control Panel', SubMenus: [
-        {Icon: 'fa-user', text: 'Menu Settings', Url: '/system/menu'}
+        { Icon: 'fa-user', text: 'Menu Settings', Url: '/system/menu' }
       ]
     },
     {

@@ -63,13 +63,12 @@ export class NegAjax {
       default:
         throw new Error('Not Supported Method');
     }
-    return new Promise((resolve, reject) => {
-      p.toPromise()
-        .then(res => resolve(res))
-        .catch(err => {
-          this._handlerError(err);
-          reject(err);
-        });
-    });
+    return p.toPromise()
+      .then(res => {
+        return res;
+      }).catch(err => {
+        this._handlerError(err);
+        return Promise.reject(err);
+      });
   }
 };

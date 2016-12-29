@@ -1,0 +1,158 @@
+<style>
+  .menu-setting .level1{
+    padding-left: 20px;
+  }
+  .menu-setting .level2{
+    padding-left: 40px;
+  }
+  .menu-setting .level3{
+    padding-left: 60px;
+  }
+  .language-config .input-group{
+    margin-bottom: 5px;
+  }
+</style>
+<div class="menu-setting">
+  <button class="btn btn-xs btn-success" (click)="addRootMenu()">Add Root Menu</button>
+  <kendo-grid [data]="menuData" [selectable]="true" [scrollable]="'virtual'" [height]="600">
+    <kendo-grid-column title="Menu" [width]="300">
+      <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span [ngClass]="'level'+ dataItem.level">
+          <i [class]="dataItem.icon"></i> {{dataItem['en-us']}}
+        </span>
+      </template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Url" field="url" [width]="150"></kendo-grid-column>
+    <kendo-grid-column title="Is Newkit1" [width]="90">
+      <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <input type="checkbox" [checked]="dataItem.isNewkit1Page" disabled>
+      </template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Is Active" [width]="90">
+      <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <input type="checkbox" [checked]="dataItem.isActived" disabled>
+      </template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Auth Type" field="authorizeType"></kendo-grid-column>
+    <kendo-grid-column title="Operate" [width]="130">
+      <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <div class="btn-group btn-group-sm">
+          <button type="button" title="Edit Menu" class="btn btn-white btn-sm btn-primary" (click)="doMenuOperate($event, 'edit', dataItem)"><i class="fa fa-edit"></i></button>
+          <button *ngIf="dataItem.level < 2" type="button" title="Add Child Menu" class="btn btn-white btn-sm btn-primary" (click)="doMenuOperate($event, 'addChild', dataItem)"><i class="fa fa-plus"></i></button>
+          <button type="button" title="Delete Menu" class="btn btn-white btn-sm btn-primary" (click)="doMenuOperate($event, 'delete', dataItem)"><i class="fa fa-minus"></i></button>
+        </div>
+      </template>
+    </kendo-grid-column>
+  </kendo-grid>
+  <nk-modal [title]="menuModalTitle" [(shown)]="isModalShown" (onOk)="saveMenu()">
+    <form class="form-horizontal clearfix" name="menuForm" novalidate>
+      <div class="form-group form-group-sm language-config">
+        <label class="control-label col-md-3">Menu Name</label>
+        <div class="col-md-9">
+          <div class="input-group">
+            <div class="input-group-addon">English</div>
+            <input type="text" class="form-control" name="menuEn" [(ngModel)]="currentMenu['en-us']">
+          </div>
+          <div class="input-group">
+            <div class="input-group-addon">简体中文</div>
+            <input type="text" class="form-control" name="menuZh" [(ngModel)]="currentMenu['zh-cn']">
+          </div>
+          <div class="input-group">
+            <div class="input-group-addon">繁體中文</div>
+            <input type="text" class="form-control" name="menuTw" [(ngModel)]="currentMenu['zh-tw']">
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="control-label col-md-3">Url</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" name="menuUrl" [(ngModel)]="currentMenu.url">
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <div class="col-md-offset-3 col-md-4">
+          <nk-checkbox label="Is Newkit1 Module" name="isNewkit1Page" [(ngModel)]="currentMenu.isNewkit1Page"></nk-checkbox>
+        </div>
+        <div class="col-md-4">
+          <nk-checkbox label="Is Actived" name="isActived" [(ngModel)]="currentMenu.isActived"></nk-checkbox>
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="control-label col-md-3">Description</label>
+        <div class="col-md-9">
+          <textarea rows="3" class="form-control" name="description" [(ngModel)]="currentMenu.description"></textarea>
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="control-label col-md-3">Icon</label>
+        <div class="col-md-9">
+          <i [ngClass]="currentMenu.icon"></i>
+          <a href="javascript:void(0)" (click)="openIconSelectDialog()">Please select an icon</a>
+        </div>
+      </div>
+      <div class="form-group form-group-sm">
+        <label class="control-label col-md-3">Authorize Type</label>
+        <div class="col-md-9">
+          <nk-radio-group inline="true" [(ngModel)]="currentMenu.authorizeType" name="menuAuthType">
+            <nk-radio label="Public" value="public"></nk-radio>
+            <nk-radio label="Newegg Permission" value="newegg"></nk-radio>
+            <nk-radio label="Keystone" value="keystone"></nk-radio>
+          </nk-radio-group>
+        </div>
+      </div>
+      <!-- Newegg Permission System -->
+      <div [hidden]="currentMenu.authorizeType !== 'newegg'">
+        <div class="form-group form-group-sm">
+          <label class="control-label col-md-3">System</label>
+          <div class="col-md-9">
+            <select class="form-control" name="permissionSystemId" [(ngModel)]="currentMenu.permissionSystemId" (change)="onSystemChange()">
+              <option *ngFor="let sys of systemList" [value]="sys.SystemKey">{{sys.SystemName}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group form-group-sm" [hidden]="!currentMenu.permissionSystemId">
+          <label class="control-label col-md-3">Module</label>
+          <div class="col-md-9">
+            <select class="form-control" name="permissionModuleId" [(ngModel)]="currentMenu.permissionModuleId">
+              <option *ngFor="let mod of matchedModuleList" [value]="mod.ModuleKey">{{mod.ModuleName}}</option>
+            </select>
+            <input type="text" class="form-control" name="permissionModuleId" [(ngModel)]="currentMenu.permissionModuleId">
+          </div>
+        </div>
+        <div class="form-group form-group-sm">
+          <label class="control-label col-md-3">Function Key</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="functionKey" placeholder="Empty function means all functions can access." [(ngModel)]="currentMenu.functionKey">
+          </div>
+        </div>
+      </div>
+      <!-- Keystone -->
+      <div [hidden]="currentMenu.authorizeType !== 'keystone'">
+        <div class="form-group form-group-sm">
+          <label class="control-label col-md-3">Application</label>
+          <div class="col-md-9">
+            <select class="form-control" name="applicationId" [(ngModel)]="currentMenu.applicationId">
+              <option *ngFor="let app of applications" [value]="app.id">{{app.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group form-group-sm">
+          <label class="control-label col-md-3">Auth Key</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="authKey" [(ngModel)]="currentMenu.authKey">
+          </div>
+        </div>
+      </div>
+    </form>
+  </nk-modal>
+  <nk-modal title="Select A Menu Icon" size="modal-lg" [(shown)]="isIconSelectModalShown">
+    <div class="row">
+      <div *ngFor="let icon of menuIcons" class="col-md-1 text-center">
+        <a href="javascript:void(0)" [title]="'fa-' + icon" (click)="selectIcon(icon)">
+          <i class="fa fa-2x" [ngClass]="'fa-'+ icon"></i>
+        </a>
+      </div>
+    </div>
+    <div slot="modal-footer"></div>
+  </nk-modal>
+</div>

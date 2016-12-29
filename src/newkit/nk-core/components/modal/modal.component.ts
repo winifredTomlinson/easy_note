@@ -39,8 +39,8 @@ export class ModalComponent implements OnInit, AfterViewInit {
   @Input()
   private options: { backdrop?: boolean | string, show?: boolean, keyboard?: boolean }
 
-  @Input()
-  private onOk: () => Promise<any>;
+  @Output()
+  private onShown: EventEmitter<any> = new EventEmitter();
 
   @Output()
   private onHidden: EventEmitter<any> = new EventEmitter();
@@ -49,7 +49,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
   private onCancel: EventEmitter<any> = new EventEmitter();
 
   @Output()
-  private onShown: EventEmitter<any> = new EventEmitter();
+  private onOk: EventEmitter<any> = new EventEmitter();
 
   @Input()
   private set shown(val) {
@@ -109,16 +109,6 @@ export class ModalComponent implements OnInit, AfterViewInit {
   }
 
   onOkClick() {
-    if (!this.onOk) {
-      return this.hideModal();
-    }
-    Promise.resolve(this.onOk())
-      .then(needClose => {
-        if (needClose !== false) {
-          this.hideModal();
-        }
-      }).catch(() => {
-        this.hideModal();
-      });
+    this.onOk.emit();
   }
 }
