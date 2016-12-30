@@ -34,6 +34,7 @@
       </template>
     </kendo-grid-column>
     <kendo-grid-column title="Auth Type" field="authorizeType"></kendo-grid-column>
+    <kendo-grid-column title="Sort" field="sort" [width]="60"></kendo-grid-column>
     <kendo-grid-column title="Operate" [width]="130">
       <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
         <div class="btn-group btn-group-sm">
@@ -50,15 +51,15 @@
         <label class="control-label col-md-3">Menu Name</label>
         <div class="col-md-9">
           <div class="input-group">
-            <div class="input-group-addon">English</div>
+            <span class="input-group-addon" style="min-width: 81px;">English</span>
             <input type="text" class="form-control" name="menuEn" [(ngModel)]="currentMenu['en-us']">
           </div>
           <div class="input-group">
-            <div class="input-group-addon">简体中文</div>
+            <span class="input-group-addon">简体中文</span>
             <input type="text" class="form-control" name="menuZh" [(ngModel)]="currentMenu['zh-cn']">
           </div>
           <div class="input-group">
-            <div class="input-group-addon">繁體中文</div>
+            <span class="input-group-addon">繁體中文</span>
             <input type="text" class="form-control" name="menuTw" [(ngModel)]="currentMenu['zh-tw']">
           </div>
         </div>
@@ -73,8 +74,14 @@
         <div class="col-md-offset-3 col-md-4">
           <nk-checkbox label="Is Newkit1 Module" name="isNewkit1Page" [(ngModel)]="currentMenu.isNewkit1Page"></nk-checkbox>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2" style="padding: 0;">
           <nk-checkbox label="Is Actived" name="isActived" [(ngModel)]="currentMenu.isActived"></nk-checkbox>
+        </div>
+        <div class="col-md-1" style="padding: 0; text-align:right;">
+          <label class="control-label">Sort</label>
+        </div>
+        <div class="col-md-2">
+          <input type="number" name="sort" class="form-control input-sm" [(ngModel)]="currentMenu.sort">
         </div>
       </div>
       <div class="form-group form-group-sm">
@@ -116,7 +123,6 @@
             <select class="form-control" name="permissionModuleId" [(ngModel)]="currentMenu.permissionModuleId">
               <option *ngFor="let mod of matchedModuleList" [value]="mod.ModuleKey">{{mod.ModuleName}}</option>
             </select>
-            <input type="text" class="form-control" name="permissionModuleId" [(ngModel)]="currentMenu.permissionModuleId">
           </div>
         </div>
         <div class="form-group form-group-sm">

@@ -68,7 +68,6 @@ export class AuthService {
     }
     let url: string = from.url.join('');
     let toUrl: string = to.url;
-    console.log('from', url, 'to', toUrl);
     let p: Promise<any> = Promise.resolve(true);
     let useLogin = false;
     if (this.isFirstRoute) {

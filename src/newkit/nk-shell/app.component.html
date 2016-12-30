@@ -104,8 +104,9 @@
       <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
           <li *ngFor="let item of breadcrumbs; let i = index;" [ngClass]="{active: i === breadcrumbs.length - 1}">
-            <i class="ace-icon home-icon" :class="item.icon"></i>
-            <a *ngIf="i < breadcrumbs.length - 1" href="javascript:void(0);">{{item.text}}</a>
+            <a *ngIf="i < breadcrumbs.length - 1" href="javascript:void(0);">
+               <i class="ace-icon" [ngClass]="item.icon"></i> {{item | menuTranslate}}
+            </a>
             <span *ngIf="i === breadcrumbs.length - 1">{{ item | menuTranslate }}</span>
           </li>
         </ul>

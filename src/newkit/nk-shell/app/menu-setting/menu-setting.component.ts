@@ -42,12 +42,11 @@ export class MenuSettingComponent implements OnInit {
         let result = [];
         this.processMenuData(menus, result, '');
         this.menuData = result;
-        console.log(this.menuData);
-      })
+      });
   }
 
   processMenuData(source, target, parentId, level = 0): void {
-    let arr = source.filter(x => x.parentId === parentId);
+    let arr = source.filter(x => x.parentId === parentId).sort((x1, x2) => (x1.sort || 0) - (x2.sort || 0));
     arr.forEach(m => {
       m.level = level;
       target.push(m);
@@ -59,12 +58,10 @@ export class MenuSettingComponent implements OnInit {
     this.negAjax.get(`${NewkitConf.NewkitAPI}/permission/system`, this.ajaxOpt)
       .then(res => {
         this.systemList = res.json();
-        console.log(this.systemList);
       });
     this.negAjax.get(`${NewkitConf.NewkitAPI}/permission/module`, this.ajaxOpt)
       .then(res => {
         this.moduleList = res.json();
-        console.log(this.moduleList);
       });
   }
 
@@ -98,7 +95,8 @@ export class MenuSettingComponent implements OnInit {
       icon: 'fa fa-list',
       parentId: menu.id,
       isActived: true,
-      isNewkit1Page: false
+      isNewkit1Page: false,
+      sort: 0
     };
     this.isModalShown = true;
   }

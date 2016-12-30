@@ -1,18 +1,41 @@
+<style>
+  ul a{
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .menu-item-parent{
+    width: calc(100% - 40px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+</style>
 <ul class="nav nav-list">
   <li *ngFor="let m1 of menuData; let i = index;" (click)="menuClick($event, m1)" [ngClass]="{active: m1.active}">
-    <a href="javascript:void(0);" [attr.title]="m1 | menuTranslate" [ngClass]="{'dropdown-toggle': m1.SubMenus && m1.SubMenus.length > 0}">
-      <i class="menu-icon fa" [ngClass]="getIconClass(m1.Icon)"></i>
+    <a href="javascript:void(0);" [attr.title]="m1 | menuTranslate" [ngClass]="{'dropdown-toggle': m1.subMenus && m1.subMenus.length > 0}">
+      <i class="menu-icon" [ngClass]="m1.icon"></i>
       <span>{{ m1 | menuTranslate }}</span>
-      <b *ngIf="m1.SubMenus && m1.SubMenus.length > 0" class="arrow fa fa-angle-down"></b>
+      <b *ngIf="m1.subMenus && m1.subMenus.length > 0" class="arrow fa fa-angle-down"></b>
     </a>
     <b class="arrow"></b>
-    <ul class="submenu" *ngIf="m1.SubMenus && m1.SubMenus.length > 0" [ngStyle]="{'display': m1.open ? 'block': 'none'}">
-      <li *ngFor="let m2 of m1.SubMenus; let i2 = index;" (click)="menuClick($event, m2, m1)" [ngClass]="{active: m2.active}">
-        <a href="javascript:void(0)" [attr.title]="m2 | menuTranslate" [ngClass]="{'dropdown-toggle': m2.SubMenus && m2.SubMenus.length > 0}">
-          <i class="menu-icon fa" [ngClass]="getIconClass(m2.Icon)"></i>
+    <ul class="submenu" *ngIf="m1.subMenus && m1.subMenus.length > 0" [ngStyle]="{'display': m1.open ? 'block': 'none'}">
+      <li *ngFor="let m2 of m1.subMenus; let i2 = index;" (click)="menuClick($event, m2, m1)" [ngClass]="{active: m2.active}">
+        <a href="javascript:void(0)" [attr.title]="m2 | menuTranslate" [ngClass]="{'dropdown-toggle': m2.subMenus && m2.subMenus.length > 0}">
+          <i class="menu-icon" [ngClass]="m2.icon"></i>
           <span>{{ m2 | menuTranslate }}</span>
-          <b *ngIf="m2.SubMenus && m2.SubMenus.length > 0" class="arrow fa fa-angle-down"></b>
+          <b *ngIf="m2.subMenus && m2.subMenus.length > 0" class="arrow fa fa-angle-down"></b>
         </a>
+        <b class="arrow"></b>
+        <ul class="submenu" *ngIf="m2.subMenus && m2.subMenus.length > 0" [ngStyle]="{'display': m2.open ? 'block': 'none'}">
+          <li *ngFor="let m3 of m2.subMenus; let i3 = index;" (click)="menuClick($event, m3, m2, m1)" [ngClass]="{active: m3.active}">
+            <a href="javascript:void(0)" [attr.title]="m3 | menuTranslate" [ngClass]="{'dropdown-toggle': m3.subMenus && m3.subMenus.length > 0}">
+              <i class="menu-icon" [ngClass]="m3.icon"></i>
+              <span>{{ m3 | menuTranslate }}</span>
+              <b *ngIf="m3.subMenus && m3.subMenus.length > 0" class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+          </li>
+        </ul>
       </li>
     </ul>
   </li>

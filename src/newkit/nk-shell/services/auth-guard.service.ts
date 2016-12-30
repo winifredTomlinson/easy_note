@@ -22,11 +22,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canDeactivate(): boolean {
-    console.log('AuthGuard#canDeactivate called');
     return true;
   }
   canLoad(): boolean {
-    console.log('AuthGuard#canLoad called');
     return true;
   }
 }

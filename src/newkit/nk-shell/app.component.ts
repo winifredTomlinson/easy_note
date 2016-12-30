@@ -246,22 +246,22 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   _processMenuChanged(menu) {
-    this.currentIsNg1Module = (menu.isNg1 !== false);
+    this.currentIsNg1Module = (menu.isNewkit1Page !== false);
     if (this.currentIsNg1Module) {
       this.router.navigate(['/system/newkit1']);
       this.messageProcessor.sendMessageEvent('pageFaq');
-      this.negEventBus.emit('global.setCurrentMenu', menu.Url);
+      this.negEventBus.emit('global.setCurrentMenu', menu.url);
       setTimeout(() => {
-        window.location.hash = menu.Url;
+        window.location.hash = menu.url;
       }, 100);
       let timerId: any = setTimeout(() => {
-        let url = `http://10.16.85.170:8888${menu.Url}?theme=core`;
+        let url = `http://10.16.85.170:8888${menu.url}?theme=core`;
         this.ng1PageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
         this.negGlobalLoading.show();
       }, 100);
       let sub = this.negEventBus.on('postMessage.pageOk', data => {
         window.clearTimeout(timerId);
-        this.messageProcessor.sendMessageEvent('redirect', menu.Url);
+        this.messageProcessor.sendMessageEvent('redirect', menu.url);
         sub.unsubscribe();
         return;
       });

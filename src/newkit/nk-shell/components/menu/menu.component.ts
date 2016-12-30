@@ -5,10 +5,7 @@ import { NegEventBus, NegBreadcrumb } from 'newkit/core';
 
 @Component({
   selector: '[nk-menu]',
-  templateUrl: './menu.html',
-  styleUrls: [
-    './menu.css'
-  ]
+  templateUrl: './menu.html'
 })
 
 @Injectable()
@@ -18,6 +15,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   private menuData: Array<any>;
 
   private subs: any = [];
+  private breadcrumbMenus: Array<any> = [];
 
   constructor(
     private elementRef: ElementRef,
@@ -45,8 +43,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     menus = menus || this.menuData;
     menus.forEach(x => {
       x.active = false;
-      if (x.SubMenus && x.SubMenus.length > 0) {
-        this.clearMenuActive(x.SubMenus);
+      if (x.subMenus && x.subMenus.length > 0) {
+        this.clearMenuActive(x.subMenus);
       }
     });
   }
@@ -54,16 +52,17 @@ export class MenuComponent implements OnInit, OnDestroy {
   public setCurrentMenu(url: string) {
     if (_.isArray(this.menuData)) {
       this.isCurrentMenu(this.menuData, url);
+      this.negBreadcrumb.setBreadcrumbs(this.breadcrumbMenus);
     }
   }
 
   public menuClick(evt, menu: any, m2?: any, m3?: any): void {
     evt.preventDefault();
     evt.stopPropagation();
-    if (menu.SubMenus && menu.SubMenus.length > 0) {
+    if (menu.subMenus && menu.subMenus.length > 0) {
       this.menuCollapse(menu);
     } else {
-      let url = menu.Url;
+      let url = menu.url;
       let breadcrumbs = [menu];
       if (m2) {
         breadcrumbs.unshift(m2);
@@ -75,7 +74,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       this.negEventBus.emit('nkShell.menuChanged', menu);
       this.clearMenuActive();
       menu.active = true;
-      if (menu.isNg1 !== false) {
+      if (menu.isNewkit1Page !== false) {
         return;
       }
       if (url) {
@@ -84,32 +83,30 @@ export class MenuComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getIconClass(icon){
-    return (icon || '').replace('icon', 'fa');
-  }
-
   private isCurrentMenu(menus, url: string): boolean {
     for (let i = 0, len = menus.length; i < len; i++) {
-      if (menus[i].SubMenus && menus[i].SubMenus.length > 0) {
-        let find = this.isCurrentMenu(menus[i].SubMenus, url);
+      this.breadcrumbMenus.push(menus[i]);
+      if (menus[i].subMenus && menus[i].subMenus.length > 0) {
+        let find = this.isCurrentMenu(menus[i].subMenus, url);
         if (find) {
           menus[i].open = true;
           return find;
         }
       } else {
-        if (menus[i].Url === url) {
+        if (menus[i].url === url) {
           menus[i].active = true;
           return true;
         }
       }
+      this.breadcrumbMenus.pop();
     }
     return false;
   }
 
   private menuCollapse(menu: any, isOpen?: boolean): void {
     menu.open = isOpen === undefined ? !menu.open : isOpen;
-    if (menu.SubMenus && menu.SubMenus.length > 0 && !menu.open) {
-      menu.SubMenus.forEach(item => this.menuCollapse(item, menu.open));
+    if (menu.subMenus && menu.subMenus.length > 0 && !menu.open) {
+      menu.subMenus.forEach(item => this.menuCollapse(item, menu.open));
     }
   }
 }
