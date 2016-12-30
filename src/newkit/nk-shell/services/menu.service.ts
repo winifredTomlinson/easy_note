@@ -9,6 +9,6 @@ export class MenuService {
   ) { }
 
   public getMenuData() {
-    return this.negAuth.authData.menus;
+    return this.negAuth.getAuthData().menus;
   }
 }

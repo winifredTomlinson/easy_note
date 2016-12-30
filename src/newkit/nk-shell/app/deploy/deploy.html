@@ -1,3 +1,85 @@
 <div class="deploy">
-  Deploy
+  <ul class="nav nav-tabs padding-12 background-blue">
+    <li class="active">
+      <a data-toggle="tab" href="#deploy">Deploy module</a>
+    </li>
+    <li class="">
+      <a data-toggle="tab" href="#logs">Deployment logs</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div id="deploy" class="tab-pane active">
+      <form class="form-horizontal clearfix">
+        <div class="form-group form-group-sm">
+          <label class="control-label col-md-2">Module name</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group form-group-sm">
+          <label class="control-label col-md-2">Version NO.</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group form-group-sm">
+          <label class="control-label col-md-2">Memo(Description)</label>
+          <div class="col-md-6">
+            <textarea rows="3" class="form-control" style="resize: vertical;"></textarea>
+</div>
+</div>
+<div class="form-group form-group-sm">
+  <div class="col-md-offset-2 col-md-6">
+    <p class="text-danger">Please compress your folder as tar archive, and then upload with it.</p>
+    <label class="ace-file-input"><input type="file" neg-file-input="" ngf-select="" ngf-validate-async-fn="validateFile($file)" ng-model="module.file" class="ng-pristine ng-untouched ng-valid ng-empty"><span class="ace-file-container" data-title="Choose"><span class="ace-file-name" data-title="No File ..."><i class=" ace-icon fa fa-upload"></i></span></span><a class="remove" href="#"><i class=" ace-icon fa fa-times"></i></a></label>
+  </div>
+</div>
+<div class="form-group form-group-sm">
+  <div class="col-md-offset-2 col-md-6">
+    <button class="btn btn-primary btn-block btn-sm">Deploy Module</button>
+  </div>
+</div>
+</form>
+</div>
+<div id="logs" class="tab-pane">
+  <div class="input-group input-group-sm col-md-6" style="margin-bottom: 5px;">
+    <span class="input-group-addon">Module Name</span>
+    <input type="text" class="form-control">
+    <span class="input-group-btn">
+      <button class="btn btn-success btn-sm">
+        <i class="fa fa-search"></i> Search
+      </button>
+    </span>
+  </div>
+  <kendo-grid [selectable]="true" [scrollable]="'virtual'" [height]="500">
+    <kendo-grid-column title="Version NO." [width]="300">
+      <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span [ngClass]="'level'+ dataItem.level">
+          <i [class]="dataItem.icon"></i> {{dataItem['en-us']}}
+        </span>
+      </template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Deployment Time" field="url" [width]="150"></kendo-grid-column>
+    <kendo-grid-column title="Deploy User" [width]="90">
+      <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <input type="checkbox" [checked]="dataItem.isNewkit1Page" disabled>
+      </template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Memo" [width]="90">
+      <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <input type="checkbox" [checked]="dataItem.isActived" disabled>
+      </template>
+    </kendo-grid-column>
+    <kendo-grid-column title="" [width]="130">
+      <template kendoCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <div class="btn-group btn-group-sm">
+          <button type="button" title="Edit Menu" class="btn btn-white btn-sm btn-primary" (click)="doMenuOperate($event, 'edit', dataItem)"><i class="fa fa-edit"></i></button>
+          <button *ngIf="dataItem.level < 2" type="button" title="Add Child Menu" class="btn btn-white btn-sm btn-primary" (click)="doMenuOperate($event, 'addChild', dataItem)"><i class="fa fa-plus"></i></button>
+          <button type="button" title="Delete Menu" class="btn btn-white btn-sm btn-primary" (click)="doMenuOperate($event, 'delete', dataItem)"><i class="fa fa-minus"></i></button>
+        </div>
+      </template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>
+</div>
 </div>
