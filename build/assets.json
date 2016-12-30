@@ -35,6 +35,7 @@
     "./node_modules/nprogress/nprogress.css",
     "./node_modules/@telerik/kendo-theme-default/dist/all.css",
     "./static/ace/css/ace.min.css",
+    "./static/ace/css/ace-part2.min.css",
     "./static/ace/css/ace-skins.min.css",
     "./static/HubSpot-messenger/css/messenger.css",
     "./static/HubSpot-messenger/css/messenger-theme-flat.css",

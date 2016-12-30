@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './global-configuration.html'
 })
 export class GlobalConfigurationComponent implements OnInit {
+
+  private v:string = '10';
+
   constructor() { } 
 
   ngOnInit() { }

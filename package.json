@@ -37,8 +37,8 @@
     "@angular/router": "3.4.1",
     "@progress/kendo-angular-buttons": "0.14.2",
     "@progress/kendo-angular-charts": "0.10.4",
-    "@progress/kendo-angular-dialog": "0.13.1",
-    "@progress/kendo-angular-dropdowns": "0.21.1",
+    "@progress/kendo-angular-dialog": "0.13.2",
+    "@progress/kendo-angular-dropdowns": "0.22.0",
     "@progress/kendo-angular-grid": "0.8.2",
     "@progress/kendo-angular-inputs": "0.15.1",
     "@progress/kendo-angular-layout": "0.17.0",
@@ -47,7 +47,7 @@
     "@progress/kendo-angular-sortable": "0.7.0",
     "@progress/kendo-angular-upload": "0.11.1",
     "@progress/kendo-data-query": "0.3.4",
-    "@telerik/kendo-theme-default": "1.33.0",
+    "@telerik/kendo-theme-default": "1.33.2",
     "animate.css": "^3.5.2",
     "bootstrap": "3.3.7",
     "core-js": "2.4.1",
@@ -63,9 +63,9 @@
   "devDependencies": {
     "@types/chai": "3.4.34",
     "@types/core-js": "0.9.35",
-    "@types/lodash": "4.14.44",
-    "@types/node": "6.0.53",
-    "@types/rx": "2.5.34",
+    "@types/lodash": "4.14.45",
+    "@types/node": "6.0.55",
+    "@types/rx": "4.1.0",
     "angular2-template-loader": "0.6.0",
     "awesome-typescript-loader": "3.0.0-beta.17",
     "babel-eslint": "^7.1.1",
@@ -82,7 +82,7 @@
     "style-loader": "0.13.1",
     "stylus": "0.54.5",
     "typescript": "2.1.4",
-    "webpack": "2.1.0-beta.27",
+    "webpack": "2.2.0-rc.3",
     "webpack-merge": "2.0.0"
   }
 }

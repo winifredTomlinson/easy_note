@@ -1,0 +1,15 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" [ngClass]="{collapsed: !isActive}" data-toggle="collapse" [attr.data-parent]="'#' + accordion.accordionId" [href]="'#' + accordionItemId">
+        <i class="bigger-110 ace-icon fa fa-angle-down" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>{{title}}
+      </a>
+    </h4>
+  </div>
+
+  <div class="panel-collapse collapse" [ngClass]="{in: isActive}" [id]="accordionItemId">
+    <div class="panel-body">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
