@@ -42,7 +42,7 @@ export class NegTracker {
 
   _endTrack(key: string) {
     let track = trackerMap.get(key);
-    if(!track){
+    if (!track) {
       return;
     }
     track.EndDate = Date.now();

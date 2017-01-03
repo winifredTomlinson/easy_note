@@ -2,17 +2,14 @@ import { Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 
 interface Event {
-  source: Subject<any>,
-  observable: any
+  source: Subject<any>;
+  observable: any;
 }
 
 const eventMap: Map<string, Event> = new Map<string, Event>();
 
 @Injectable()
 export class NegEventBus {
-
-
-
   constructor() { }
 
   emit(eventName: string, data?: any): boolean {

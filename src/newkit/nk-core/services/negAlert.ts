@@ -99,7 +99,7 @@ export class NegAlert {
                 }
               });
           }
-        }
+        };
       });
     }
     let ins = this.messageBox.post(opt);

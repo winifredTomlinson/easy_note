@@ -1,4 +1,7 @@
 export class ComponentBase {
+  public constructor() {
+  }
+
   public watch(key: string, watchFn: (newVal, oldVal) => void | any = (newVal, oldVal) => { }) {
     let p = `$_$_${key}`;
     this[p] = this[key];

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core'
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class CrossDomainMessage {
@@ -50,4 +50,4 @@ export class CrossDomainMessage {
     };
     window.frames[0].postMessage(postMsg, '*');
   }
-} 
+}

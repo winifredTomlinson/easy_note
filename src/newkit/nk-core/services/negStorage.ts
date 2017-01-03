@@ -26,7 +26,7 @@ class CookieStorage implements IStorage {
     let cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
       let c = cookies[i];
-      while (c.charAt(0) == ' ') {
+      while (c.charAt(0) === ' ') {
         c = c.substring(1, c.length);
       }
       if (c.indexOf(nameEq) === 0) {
@@ -49,17 +49,16 @@ class CookieStorage implements IStorage {
     let path = opt.path !== undefined ? ';path=' + opt.path : ';path=/';
     let domain = opt.domain ? ';domain=' + opt.domain : '';
     let secure = opt.secure ? ';secure' : '';
-    //过期时间
+    // 过期时间
     if (expiresType === 'string' && expires !== '') {
       expires = new Date(expires);
-    }
-    else if (expiresType === 'number') {
+    } else if (expiresType === 'number') {
       expires = new Date(+new Date + 1000 * 60 * 60 * 24 * expires);
     }
     if (expires !== '' && 'toGMTString' in expires) {
       expires = ';expires=' + expires.toGMTString();
     }
-    document.cookie = name + '=' + this.negUtil.escape(value as string) + expires + path + domain + secure;   //转码并赋值    
+    document.cookie = name + '=' + this.negUtil.escape(value as string) + expires + path + domain + secure;   // 转码并赋值    
   }
 
   remove(name: string) {

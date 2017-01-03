@@ -93,7 +93,7 @@ export class ServicesTestComponent implements OnInit {
     this.negDfisUploader.upload(url, this.file1)
       .then(fileUrl => {
         this.fileUrl = fileUrl;
-      })
+      });
   }
 
   public testEmitEvent() {

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'nk-home',
@@ -6,8 +6,8 @@ import {Component} from '@angular/core';
 })
 
 export class HomeComponent {
-  private data:any = {a: 1, b: 2};
+  private data: any = { a: 1, b: 2 };
   constructor() {
     console.log('home init');
   }
-} 
+}

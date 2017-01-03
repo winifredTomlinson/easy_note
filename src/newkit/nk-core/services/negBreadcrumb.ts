@@ -10,7 +10,7 @@ export class NegBreadcrumb {
   ) { }
 
   setBreadcrumbs(breadcrumbs) {
-    if(!_.isArray(breadcrumbs)){
+    if (!_.isArray(breadcrumbs)) {
       return;
     }
     this.negEventBus.emit('global.setBreadcrumbs', breadcrumbs);

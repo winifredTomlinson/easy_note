@@ -22,7 +22,7 @@ import {
 const loadModule = (moduleName) => {
   return () => {
     return NegModuleLoader.load(moduleName);
-  }
+  };
 };
 
 let dynamicRoutes = [];

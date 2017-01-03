@@ -37,7 +37,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
   private cancelText: string = 'Close';
 
   @Input()
-  private options: { backdrop?: boolean | string, show?: boolean, keyboard?: boolean }
+  private options: { backdrop?: boolean | string, show?: boolean, keyboard?: boolean };
 
   @Output()
   private onShown: EventEmitter<any> = new EventEmitter();
@@ -72,7 +72,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
     this.$el = this.elementRef.nativeElement;
     this.$modal = window['jQuery'](this.$el.querySelector('.modal'));
     this.hasCustomHeader = !!this.$el.querySelector('[slot=modal-header]');
-    this.hasCustomFooter = !!this.$el.querySelector('[slot=modal-footer]')
+    this.hasCustomFooter = !!this.$el.querySelector('[slot=modal-footer]');
   }
 
   ngAfterViewInit() {

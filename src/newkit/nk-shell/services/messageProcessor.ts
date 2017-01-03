@@ -39,7 +39,7 @@ export class MessageProcessor {
       case 'resize':
         this._processResize(msgObj.data);
         break;
-      case 'pullContext': //拉取上下文信息（权限，UserProfile）
+      case 'pullContext': // 拉取上下文信息（权限，UserProfile）
         this._pushContext();
         break;
       case 'loading.show':
@@ -48,7 +48,7 @@ export class MessageProcessor {
         break;
       case 'progress.start':
       case 'progress.done':
-        this._processProgress(msgObj.eventName === 'progress.start')
+        this._processProgress(msgObj.eventName === 'progress.start');
         break;
       case 'redirect':
         this._processRedirect();

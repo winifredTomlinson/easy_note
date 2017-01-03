@@ -6,14 +6,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GlobalConfigurationComponent implements OnInit {
 
-  private v:string = '10';
+  private v: string = '10';
 
-  constructor() { } 
+  constructor() { }
 
   ngOnInit() { }
 
-  private onButtonClick(){
+  private onButtonClick() {
     alert('abc');
   }
-
 }

@@ -26,5 +26,4 @@ export class NegContext {
     this.lang = value;
     this.translateService.use(value);
   }
-
 }

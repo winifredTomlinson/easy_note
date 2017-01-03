@@ -46,7 +46,7 @@ export class NegUtil {
         return this[privateProperty];
       },
       set(val) {
-        let oldVal = this[property]
+        let oldVal = this[property];
         this[privateProperty] = val;
         watherFn(val, oldVal);
       }

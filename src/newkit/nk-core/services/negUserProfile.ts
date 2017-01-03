@@ -48,7 +48,7 @@ export class NegUserProfile {
       this.userProfile.Profiles.push({
         Key: key,
         Value: value
-      })
+      });
     }
   }
 

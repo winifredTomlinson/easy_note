@@ -8,13 +8,12 @@ let instance = null;
 @Injectable()
 export class NegModuleLoader {
 
+  public static load(moduleName) {
+    return instance.load(moduleName);
+  }
 
   constructor(private http: Http) {
     instance = this;
-  }
-
-  static load(moduleName) {
-    return instance.load(moduleName);
   }
 
   load(moduleName): Promise<any> {
@@ -32,7 +31,7 @@ export class NegModuleLoader {
 
   _DomEval(code, doc?) {
     doc = doc || document;
-    var script = doc.createElement("script");
+    let script = doc.createElement('script');
     script.text = code;
     doc.head.appendChild(script).parentNode.removeChild(script);
   }

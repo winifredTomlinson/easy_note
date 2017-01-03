@@ -24,5 +24,4 @@ const KendoModules = [
   ]
 })
 export class NkThirdPartyModule {
-  
 }
