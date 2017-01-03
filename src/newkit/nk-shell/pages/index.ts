@@ -1,7 +1,7 @@
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './404/notfound.component';
-import { ServicesTestComponent } from './test/test.component';
+import { ServicesTestComponent } from './testpage/test.component';
 import { MenuSettingComponent } from './menu-setting/menu-setting.component';
 import { GlobalConfigurationComponent } from './global-configuration/global-configuration.component';
 import { GlobalSearchComponent } from './global-search/global-search.component';

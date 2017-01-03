@@ -17,7 +17,7 @@ import {
   AboutComponent,
   LayoutComponent,
   Newkit1Component
-} from './app';
+} from './pages';
 
 const loadModule = (moduleName) => {
   return () => {

@@ -8,7 +8,7 @@ import {
   NegModuleLoader, TranslateService, TranslateLoader
 } from 'newkit/core';
 
-import { ALL_PAGES } from './app';
+import { ALL_PAGES } from './pages';
 import { ALL_COMPONENTS } from './components';
 import { ALL_PIPES } from './pipes';
 import { ALL_SERVICES } from './services';
