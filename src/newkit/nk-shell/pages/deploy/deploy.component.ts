@@ -5,8 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './deploy.html'
 })
 export class DeployComponent implements OnInit {
+
+  private selectIdx = 0;
+
   constructor() { }
 
   ngOnInit() { }
-
 }
