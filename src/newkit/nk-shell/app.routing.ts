@@ -16,7 +16,8 @@ import {
   ServicesTestComponent,
   AboutComponent,
   LayoutComponent,
-  Newkit1Component
+  Newkit1Component,
+  Test2Component
 } from './pages';
 
 const loadModule = (moduleName) => {
@@ -46,7 +47,8 @@ const appRoutes: Routes = [{
     { path: 'home', component: ServicesTestComponent },
     { path: 'about', component: AboutComponent },
     { path: 'newkit1', component: Newkit1Component },
-    { path: '404', component: NotFoundComponent }
+    { path: '404', component: NotFoundComponent },
+    { path: 'test2', component: Test2Component }
   ]
 },
 ...dynamicRoutes, {

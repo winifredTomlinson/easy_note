@@ -61,16 +61,19 @@ npm start
 
 ```bash
 # clone project
-$ git clone http://trgit2/backend_framework/newkit.git
+git clone http://trgit2/backend_framework/newkit.git
 
 # install dependencies
-$ npm i
+npm i
 
 # build vendor
-$ npm run dev:vendor
+npm run dev:vendor
 
 # start project
-$ npm run dev
+npm run dev
+
+# lint the newkit folder
+npm run lint
 ```
 
 # 如何发布框架？

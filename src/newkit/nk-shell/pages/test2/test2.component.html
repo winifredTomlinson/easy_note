@@ -1,0 +1,25 @@
+<div class="page-test2">
+  <input type="text" [(ngModel)]="v" name="v">
+  <nk-progress [value]="v" [isStriped]="true" [isActive]="true" size="mini" type="danger"></nk-progress>
+  <nk-accordion>
+    <nk-accordion-item title="我是Group1">
+      aaaaaaaaaaaaaa
+    </nk-accordion-item>
+    <nk-accordion-item title="我是Group2" [isActive]="true">
+      erer二二
+    </nk-accordion-item>
+    <nk-accordion-item title="我是Group3">
+      啊啊啊，三三
+    </nk-accordion-item>
+  </nk-accordion>
+  {{selectIndex}}
+  <nk-tabset [(selectIndex)]="selectIndex">
+    <nk-tab-item title="Tab1" active="true">
+      Page1
+      <button type="button" class="btn btn-default" (click)="testFn()">button</button>
+    </nk-tab-item>
+    <nk-tab-item title="Tab2">
+      Page 2
+    </nk-tab-item>
+  </nk-tabset>
+</div>

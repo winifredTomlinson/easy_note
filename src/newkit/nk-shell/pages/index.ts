@@ -8,6 +8,7 @@ import { GlobalSearchComponent } from './global-search/global-search.component';
 import { DeployComponent } from './deploy/deploy.component';
 import { LayoutComponent } from './layout/layout.component';
 import { Newkit1Component } from './newkit1/newkit1.component';
+import { Test2Component } from './test2/test2.component';
 
 export {
   HomeComponent,
@@ -19,7 +20,8 @@ export {
   DeployComponent,
   LayoutComponent,
   AboutComponent,
-  Newkit1Component
+  Newkit1Component,
+  Test2Component
 };
 
 export const ALL_PAGES = [
@@ -32,5 +34,6 @@ export const ALL_PAGES = [
   DeployComponent,
   LayoutComponent,
   AboutComponent,
-  Newkit1Component
+  Newkit1Component,
+  Test2Component
 ];

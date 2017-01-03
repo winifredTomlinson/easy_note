@@ -30,5 +30,7 @@ export const ALL_COMPONENTS = [
   RadioGroupComponent,
   ProgressComponent,
   AccordionComponent,
-  AccordionItemComponent
+  AccordionItemComponent,
+  TabsetComponent,
+  TabItemComponent
 ];
