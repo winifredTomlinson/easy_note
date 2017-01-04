@@ -6,6 +6,7 @@ import { TabItemComponent } from './tab-item.component';
   templateUrl: 'tabset.component.html'
 })
 export class TabsetComponent implements OnInit, AfterViewInit {
+  public _selectIndex: number;
   public tabItems: TabItemComponent[] = [];
 
   @Input()

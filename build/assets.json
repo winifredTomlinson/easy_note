@@ -38,8 +38,7 @@
     "./static/ace/css/ace-part2.min.css",
     "./static/ace/css/ace-skins.min.css",
     "./static/HubSpot-messenger/css/messenger.css",
-    "./static/HubSpot-messenger/css/messenger-theme-flat.css",
-    "./src/newkit/nk-shell/css/layout.css"
+    "./static/HubSpot-messenger/css/messenger-theme-flat.css"
   ],
   "vendor.fonts": [
     "./node_modules/font-awesome/fonts/*.*",

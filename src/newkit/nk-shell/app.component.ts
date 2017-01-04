@@ -11,8 +11,7 @@ declare let ace: any;
 
 @Component({
   selector: 'nk-app',
-  template: require('./app.component.html'),
-  styles: [require('./app.css')]
+  template: require('./app.component.html')
 })
 export class AppComponent implements OnInit, OnDestroy {
 

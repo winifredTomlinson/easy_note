@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const { CheckerPlugin } = require('awesome-typescript-loader');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-source-map',
@@ -27,7 +28,11 @@ module.exports = {
     rules: [
       { test: /\.ts$/, use: ['awesome-typescript-loader', 'angular2-template-loader'], exclude: /node_modules/ },
       { test: /\.html$/, loader: 'raw-loader' },
-      { test: /\.css$/, loader: 'raw-loader' }
+      { test: /\.css$/, loader: 'raw-loader' },
+      { test: /\.styl$/, loader: ExtractTextPlugin.extract({ loader: 'css-loader!stylus-loader' }) },
+      { test: /\.less$/, loader: ExtractTextPlugin.extract({ loader: 'css-loader!less-loader' }) },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract({ loader: 'css-loader!sass-loader' }) },
+      { test: /\.sass$/, loader: ExtractTextPlugin.extract({ loader: 'css-loader!sass-loader?indentedSyntax=true' }) }
     ]
   },
   plugins: [

@@ -1,16 +1,4 @@
-<style>
-  ul a{
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .menu-item-parent{
-    width: calc(100% - 40px);
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-</style>
-<ul class="nav nav-list">
+<ul class="nav nav-list nk-menu">
   <li *ngFor="let m1 of menuData; let i = index;" (click)="menuClick($event, m1)" [ngClass]="{active: m1.active}">
     <a href="javascript:void(0);" [attr.title]="m1 | menuTranslate" [ngClass]="{'dropdown-toggle': m1.subMenus && m1.subMenus.length > 0}">
       <i class="menu-icon" [ngClass]="m1.icon"></i>

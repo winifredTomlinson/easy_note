@@ -1,6 +1,7 @@
 const fs = require('fs');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const commonConfig = require('./../webpack.common');
 const util = require('./../util');
@@ -25,7 +26,10 @@ module.exports = (gulp, params) => {
         filename: 'newkit/[name].js',
         library: ['newkit', '[name]'],
         chunkFilename: '[id].js'
-      }
+      },
+      plugins: [
+        new ExtractTextPlugin({ filename: 'newkit/[name].css', disable: false, allChunks: true })
+      ]
     });
     webpack(opt).watch(200, (err, stats) => {
       util.showWebpackError(err, stats);
