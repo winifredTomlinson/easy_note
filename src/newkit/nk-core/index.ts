@@ -1,4 +1,4 @@
-require('./app.scss');
+require('./app.styl');
 
 export * from './core.services';
 export * from './core.pipes';
