@@ -11,7 +11,7 @@ import {
   GridComponent,
   SliderComponent,
   SwitchComponent
-} from './app';
+} from './pages';
 
 const appRoutes: Routes = [
   { path: 'buttons/button', component: ButtonComponent },

@@ -1,3 +1,3 @@
-require('./app.styl');
-
-export * from './app.module';
+module.exports = defineModule(['nk-common'], () => {
+  return require('./app.ts');
+});

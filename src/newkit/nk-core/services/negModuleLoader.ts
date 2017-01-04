@@ -12,6 +12,18 @@ export class NegModuleLoader {
     return instance.load(moduleName);
   }
 
+  public static defineModule(deps, callback){
+    let p = Promise.resolve();
+    if(deps && deps.length > 0){
+      let depArr = deps.map(dep=> instance.load(dep));
+      p = Promise.all(depArr);
+    }
+    return p.then(() => {
+      const mod =  callback();
+      return mod;
+    });
+  };
+
   constructor(private http: Http) {
     instance = this;
   }
@@ -25,7 +37,12 @@ export class NegModuleLoader {
         .then(res => {
           let code = res.text();
           this._DomEval(code);
-          resolve(window['newkit'][moduleName].AppModule);
+           window['newkit'][moduleName]
+           .then(mod => {
+              window['newkit'][moduleName] = mod;
+              let AppModule = mod.AppModule;
+              resolve(AppModule);
+           });
         }).catch(err => reject(err));
     });
   }

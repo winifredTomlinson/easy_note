@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { NkCoreModule } from 'newkit/core';
 
 import { routing } from './app.routing';
-import { ALL_COMPONENTS } from './app';
+import { ALL_COMPONENTS } from './pages';
 
 @NgModule({
   imports: [
@@ -14,5 +14,4 @@ import { ALL_COMPONENTS } from './app';
   providers: [],
 })
 export class AppModule {
-
 }

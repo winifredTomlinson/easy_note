@@ -11,7 +11,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js']
   },
-  externals: {
+  externals: [{
     'rxjs': 'Rx',
     '@angular/common': 'ng.common',
     '@angular/compiler': 'ng.compiler',
@@ -23,7 +23,13 @@ module.exports = {
     '@angular/forms': 'ng.forms',
 
     'newkit/core': 'newkit["nk-core"]'
-  },
+  }, function (context, request, callback) {
+    if (request.indexOf('newkit/') === 0) {
+      let key = request.split('/')[1];
+      return callback(null, `var newkit['${key}']`);
+    }
+    callback();
+  }],
   module: {
     rules: [
       { test: /\.ts$/, use: ['awesome-typescript-loader', 'angular2-template-loader'], exclude: /node_modules/ },
