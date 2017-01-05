@@ -1,7 +1,7 @@
 // 待导入的组件
 import { Page1Component } from './page1/page1.component'
 
-// 导出单个组件
+// 导出单个组件，方便路由使用
 export {
   Page1Component
 };

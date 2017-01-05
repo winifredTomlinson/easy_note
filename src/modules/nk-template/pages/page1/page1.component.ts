@@ -11,7 +11,6 @@ export class Page1Component implements OnInit {
   ) { }
 
   ngOnInit() { 
-    this.negAjax.get('http://localhost:10000');
+    alert('Page init');
   }
-
 }
