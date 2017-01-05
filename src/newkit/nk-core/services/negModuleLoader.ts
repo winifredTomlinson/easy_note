@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
-const moduleDepsMapping: Map<string, string[]> = new Map();
+const moduleDepsMapping: Map<string, string[]> = new Map<string, string[]>();
 
 let instance = null;
 
@@ -13,7 +13,7 @@ export class NegModuleLoader {
   }
 
   public static defineModule(name:string, deps: string[], callback: Function){
-    let p = Promise.resolve();
+    let p: Promise<any> = Promise.resolve();
     moduleDepsMapping.set(name, deps || []);
     if(deps && deps.length > 0){
       let depArr = deps.map(dep=> instance.load(dep, true));
@@ -66,12 +66,13 @@ export class NegModuleLoader {
     });
   }
 
-  _getModuleAndDeps(moduleName){
+  _getModuleAndDeps(moduleName: string): Array<any>{
     if(moduleName === 'system'){
       return [];
     }
     if(!moduleDepsMapping.has(moduleName)){
-      return console.error(`module ${moduleName} not found.`);
+      console.error(`module ${moduleName} not found.`);
+      return [];
     }
     let result = [moduleName];
     let deps = moduleDepsMapping.get(moduleName);

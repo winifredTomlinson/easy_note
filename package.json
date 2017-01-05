@@ -85,7 +85,6 @@
     "raw-loader": "0.5.1",
     "sass-loader": "^4.1.1",
     "shelljs": "0.7.5",
-    "style-loader": "0.13.1",
     "stylus": "0.54.5",
     "stylus-loader": "^2.4.0",
     "tslint": "^4.2.0",

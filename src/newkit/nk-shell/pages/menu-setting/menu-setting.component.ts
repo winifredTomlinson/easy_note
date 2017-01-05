@@ -1,3 +1,5 @@
+require('./menu.component.styl');
+
 import { Component, OnInit } from '@angular/core';
 import { NegAjax, NegAuth, NegAlert } from 'newkit/core';
 import { MenuIcons } from './menu-icons';

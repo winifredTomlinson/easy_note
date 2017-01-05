@@ -1,3 +1,5 @@
+require('./menu.styl');
+
 import { Component, Injectable, Input, ElementRef, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
