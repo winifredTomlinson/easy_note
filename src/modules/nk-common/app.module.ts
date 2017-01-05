@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { routing } from './app.routing';
-import { ALL_PAGES } from './app';
+import { ALL_PAGES } from './pages';
 
 
 @NgModule({

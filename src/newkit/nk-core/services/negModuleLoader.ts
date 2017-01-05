@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
-const loadedModules: Set<string> = new Set<string>();
+const moduleDepsMapping: Map<string, string[]> = new Map();
 
 let instance = null;
 
@@ -12,10 +12,11 @@ export class NegModuleLoader {
     return instance.load(moduleName);
   }
 
-  public static defineModule(deps, callback){
+  public static defineModule(name:string, deps: string[], callback: Function){
     let p = Promise.resolve();
+    moduleDepsMapping.set(name, deps || []);
     if(deps && deps.length > 0){
-      let depArr = deps.map(dep=> instance.load(dep));
+      let depArr = deps.map(dep=> instance.load(dep, true));
       p = Promise.all(depArr);
     }
     return p.then(() => {
@@ -28,7 +29,7 @@ export class NegModuleLoader {
     instance = this;
   }
 
-  load(moduleName): Promise<any> {
+  load(moduleName, isDepModule = false): Promise<any> {
     return new Promise((resolve, reject) => {
       let path = `/dist/modules/${moduleName}/app.js`;
       this._loadCss(moduleName);
@@ -37,21 +38,47 @@ export class NegModuleLoader {
         .then(res => {
           let code = res.text();
           this._DomEval(code);
-           window['newkit'][moduleName]
-           .then(mod => {
-              window['newkit'][moduleName] = mod;
-              let AppModule = mod.AppModule;
-              resolve(AppModule);
-           });
-        }).catch(err => reject(err));
+          return window['newkit'][moduleName];           
+        })
+        .then(mod => {
+          let AppModule = mod.AppModule;
+          // route change will call useModuleStyles function.
+          // this.useModuleStyles(moduleName, isDepModule);
+          resolve(AppModule);
+        })
+        .catch(err => reject(err));
     });
   }
 
   useModuleStyles(moduleName: string) :void {
     let newkitModuleStyles = [].slice.apply(document.querySelectorAll('.newkit-module-style'));
+    let moduleDeps = this._getModuleAndDeps(moduleName);
     newkitModuleStyles.forEach(link => {
-      link.disabled = link.className.indexOf(moduleName) < 0;
+      let disabled = true;
+      for(let i = moduleDeps.length - 1; i >= 0;i--){
+        if(link.className.indexOf(moduleDeps[i]) >= 0){
+          disabled = false;
+          moduleDeps.splice(i, 1);
+          break;
+        }
+      }
+      link.disabled = disabled;
     });
+  }
+
+  _getModuleAndDeps(moduleName){
+    if(moduleName === 'system'){
+      return [];
+    }
+    if(!moduleDepsMapping.has(moduleName)){
+      return console.error(`module ${moduleName} not found.`);
+    }
+    let result = [moduleName];
+    let deps = moduleDepsMapping.get(moduleName);
+    deps.forEach(dep => {
+      result.push(...this._getModuleAndDeps(dep));
+    });
+    return result;
   }
 
   _loadCss(moduleName: string): void {
@@ -61,7 +88,6 @@ export class NegModuleLoader {
     link.setAttribute('href', cssPath);
     link.setAttribute('class', `newkit-module-style ${moduleName}`);
     document.querySelector('head').appendChild(link);
-    this.useModuleStyles(moduleName);
   }
 
   _DomEval(code, doc?) {

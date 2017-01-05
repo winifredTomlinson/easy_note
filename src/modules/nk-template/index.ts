@@ -1,1 +1,3 @@
-export * from './app.module';
+module.exports = defineModule(['nk-template'], () => {
+  return require('./app.ts');
+});
